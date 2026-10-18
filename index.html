@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Starbucks Rewards Vietnam · Real-time Inventory &amp; Store Load – MIS Project</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="assets/common.js"></script>
+</head>
+<body class="bg-sb-cream text-slate-700">
+<div id="site-header"></div>
+
+<!-- HERO -->
+<section class="relative overflow-hidden bg-gradient-to-br from-sb-dark via-sb-mid to-sb-green text-white">
+  <div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-sb-neon/10 blur-3xl"></div>
+  <div class="absolute -left-24 bottom-0 w-80 h-80 rounded-full bg-white/10 blur-3xl"></div>
+  <div class="relative max-w-7xl mx-auto px-4 py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center">
+    <div>
+      <button data-info="mis" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-xs font-bold uppercase tracking-widest hover:bg-white/20 transition">
+        <span class="w-2 h-2 rounded-full bg-sb-neon animate-pulse"></span> Đồ án MIS · Nhấn để xem tổng quan
+      </button>
+      <h1 class="mt-5 text-4xl md:text-5xl font-black leading-[1.1] tracking-tight">
+        Hết "Tồn kho ảo".<br>Hết đơn bị hủy phút chót.
+      </h1>
+      <p class="mt-5 text-lg text-white/80 max-w-xl">
+        Hệ thống tồn kho thời gian thực + kiểm soát tải trọng cửa hàng giúp khách biết <b>món nào còn</b> và <b>bao lâu nữa được nhận</b> — còn Barista có màn hình KDS tách rõ đơn Walk-in và đơn App.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="customer-app.html" class="px-6 py-3 rounded-full bg-white text-sb-green font-bold hover:bg-sb-light transition">Xem App khách hàng →</a>
+        <a href="kds.html" class="px-6 py-3 rounded-full bg-sb-neon/20 ring-1 ring-sb-neon/60 font-bold hover:bg-sb-neon/30 transition">Màn hình Barista</a>
+        <a href="roi.html" class="px-6 py-3 rounded-full bg-white/10 font-bold hover:bg-white/20 transition">Bảng ROI</a>
+      </div>
+    </div>
+
+    <!-- live store card -->
+    <div class="sb-float">
+      <div role="button" tabindex="0" data-info="live" class="clickable glass rounded-3xl p-6 text-white">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs uppercase tracking-widest text-white/60">Cửa hàng · Chi nhánh X</p>
+            <p class="text-xl font-extrabold mt-1">Tải trọng hiện tại</p>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-amber-400 text-black text-xs font-extrabold">ĐÔNG</span>
+        </div>
+        <div class="mt-5 h-3 rounded-full bg-white/10 overflow-hidden"><div class="h-full w-[78%] bg-gradient-to-r from-sb-neon to-amber-400 rounded-full"></div></div>
+        <div class="mt-5 grid grid-cols-3 gap-3 text-center">
+          <div class="rounded-2xl bg-white/10 p-3"><p class="text-2xl font-black">23</p><p class="text-[11px] text-white/60">Đơn đang mở</p></div>
+          <div class="rounded-2xl bg-white/10 p-3"><p class="text-2xl font-black">3/4</p><p class="text-[11px] text-white/60">Quầy hoạt động</p></div>
+          <div class="rounded-2xl bg-white/10 p-3"><p class="text-2xl font-black">15'</p><p class="text-[11px] text-white/60">Chờ dự kiến</p></div>
+        </div>
+        <div class="mt-4 flex items-center gap-2 text-sm bg-amber-400/15 text-amber-200 rounded-2xl px-4 py-3">
+          <span>🍵</span> Matcha Latte: <b>tạm hết</b> — app đã tự khóa món
+        </div>
+        <p class="mt-3 text-xs text-white/50 text-center">Nhấn để xem cách tính →</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="max-w-7xl mx-auto px-4">
+
+  <!-- DELIVERABLES -->
+  <section class="-mt-10 relative z-10 grid md:grid-cols-3 gap-5">
+    <a href="customer-app.html" class="clickable bg-white rounded-3xl p-6 shadow-lg border border-black/5 block">
+      <div class="w-12 h-12 rounded-2xl bg-sb-light grid place-items-center text-2xl">📱</div>
+      <h3 class="mt-4 text-lg font-extrabold text-sb-dark">1 · App khách hàng</h3>
+      <p class="mt-2 text-sm text-slate-600">Banner thời gian chờ động &amp; cảnh báo hết nguyên liệu ngay tại màn Thanh toán.</p>
+      <p class="mt-4 text-sm font-bold text-sb-green">Mở giao diện →</p>
+    </a>
+    <a href="kds.html" class="clickable bg-white rounded-3xl p-6 shadow-lg border border-black/5 block">
+      <div class="w-12 h-12 rounded-2xl bg-sb-dark text-sb-neon grid place-items-center text-2xl">🖥️</div>
+      <h3 class="mt-4 text-lg font-extrabold text-sb-dark">2 · Màn hình Barista (KDS)</h3>
+      <p class="mt-2 text-sm text-slate-600">Dark mode, 2 cột 50/50: Walk-in và Mobile Order, bộ đếm màu theo độ khẩn.</p>
+      <p class="mt-4 text-sm font-bold text-sb-green">Mở giao diện →</p>
+    </a>
+    <a href="roi.html" class="clickable bg-white rounded-3xl p-6 shadow-lg border border-black/5 block">
+      <div class="w-12 h-12 rounded-2xl bg-sb-gold/20 grid place-items-center text-2xl">📈</div>
+      <h3 class="mt-4 text-lg font-extrabold text-sb-dark">3 · ROI 3 năm (100 cửa hàng)</h3>
+      <p class="mt-2 text-sm text-slate-600">CAPEX / OPEX / lợi ích, hoàn vốn, NPV — chỉnh được giả định và xem lại ngay.</p>
+      <p class="mt-4 text-sm font-bold text-sb-green">Mở bảng tính →</p>
+    </a>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="mt-20">
+    <p class="text-sm font-bold uppercase tracking-widest text-sb-green">Vấn đề</p>
+    <h2 class="mt-2 text-3xl font-black text-sb-dark">"Phantom Inventory" — app nói còn, quầy nói hết</h2>
+    <p class="mt-3 max-w-3xl text-slate-600">Nhấn từng thẻ để xem chuỗi nguyên nhân và hậu quả. (Số liệu minh họa theo giả định dùng trong bảng ROI.)</p>
+    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div role="button" tabindex="0" data-info="p1" class="clickable bg-white rounded-3xl p-6 border border-black/5">
+        <p class="text-4xl font-black text-sb-green">4,0%</p><p class="mt-2 font-bold text-sb-dark">Đơn app bị hủy</p><p class="text-sm text-slate-500">do hết món / chờ quá lâu</p>
+      </div>
+      <div role="button" tabindex="0" data-info="p2" class="clickable bg-white rounded-3xl p-6 border border-black/5">
+        <p class="text-4xl font-black text-amber-500">~60</p><p class="mt-2 font-bold text-sb-dark">Đơn app / cửa hàng / ngày</p><p class="text-sm text-slate-500">cạnh tranh với đơn tại quầy</p>
+      </div>
+      <div role="button" tabindex="0" data-info="p3" class="clickable bg-white rounded-3xl p-6 border border-black/5">
+        <p class="text-4xl font-black text-red-500">2 luồng</p><p class="mt-2 font-bold text-sb-dark">Đơn lẫn lộn trên 1 màn hình</p><p class="text-sm text-slate-500">Barista khó ưu tiên</p>
+      </div>
+      <div role="button" tabindex="0" data-info="p4" class="clickable bg-white rounded-3xl p-6 border border-black/5">
+        <p class="text-4xl font-black text-sb-dark">3%</p><p class="mt-2 font-bold text-sb-dark">COGS bị lãng phí</p><p class="text-sm text-slate-500">thiếu theo dõi nguyên liệu</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section class="mt-20">
+    <p class="text-sm font-bold uppercase tracking-widest text-sb-green">Giải pháp</p>
+    <h2 class="mt-2 text-3xl font-black text-sb-dark">Luồng dữ liệu thời gian thực</h2>
+    <div class="mt-8 grid md:grid-cols-5 gap-3 items-stretch">
+      <div role="button" tabindex="0" data-info="f1" class="clickable bg-white rounded-3xl p-5 border border-black/5 text-center"><div class="text-3xl">📦</div><p class="mt-2 font-bold text-sb-dark">Kho / WMS</p><p class="text-xs text-slate-500">Tồn kho nguyên liệu</p></div>
+      <div role="button" tabindex="0" data-info="f2" class="clickable bg-sb-green text-white rounded-3xl p-5 text-center"><div class="text-3xl">⚡</div><p class="mt-2 font-bold">API thời gian thực</p><p class="text-xs text-white/70">&lt; 5 giây</p></div>
+      <div role="button" tabindex="0" data-info="f3" class="clickable bg-white rounded-3xl p-5 border border-black/5 text-center"><div class="text-3xl">🧠</div><p class="mt-2 font-bold text-sb-dark">Bộ điều khiển tải</p><p class="text-xs text-slate-500">4 mức kiểm soát</p></div>
+      <a href="customer-app.html" class="clickable bg-white rounded-3xl p-5 border border-black/5 text-center block"><div class="text-3xl">📱</div><p class="mt-2 font-bold text-sb-dark">App khách hàng</p><p class="text-xs text-sb-green font-semibold">Mở demo →</p></a>
+      <a href="kds.html" class="clickable bg-sb-dark text-white rounded-3xl p-5 text-center block"><div class="text-3xl">🖥️</div><p class="mt-2 font-bold">KDS Barista</p><p class="text-xs text-sb-neon font-semibold">Mở demo →</p></a>
+    </div>
+  </section>
+
+  <!-- REQUIREMENTS -->
+  <section class="mt-20">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-widest text-sb-green">Yêu cầu</p>
+        <h2 class="mt-2 text-3xl font-black text-sb-dark">11 chức năng · 9 phi chức năng</h2>
+      </div>
+      <a href="requirements.html" class="px-5 py-2.5 rounded-full bg-sb-green text-white font-bold hover:bg-sb-mid">Xem tất cả →</a>
+    </div>
+    <div class="mt-8 grid md:grid-cols-3 gap-5">
+      <div role="button" tabindex="0" data-info="g1" class="clickable bg-white rounded-3xl p-6 border border-black/5"><span class="text-xs font-extrabold text-sb-green">FR-01 → FR-03</span><h3 class="mt-2 font-extrabold text-sb-dark">Tích Sao &amp; Hồ sơ khách hàng</h3><p class="mt-2 text-sm text-slate-500">Quy tắc cấu hình, sổ cái thời gian thực, hồ sơ hợp nhất.</p></div>
+      <div role="button" tabindex="0" data-info="g2" class="clickable bg-white rounded-3xl p-6 border border-black/5"><span class="text-xs font-extrabold text-sb-green">FR-04 → FR-07</span><h3 class="mt-2 font-extrabold text-sb-dark">Cá nhân hóa ưu đãi</h3><p class="mt-2 text-sm text-slate-500">Chọn ưu đãi, gửi có giới hạn tần suất, đổi thưởng realtime, dự báo đơn.</p></div>
+      <div role="button" tabindex="0" data-info="g3" class="clickable bg-sb-dark text-white rounded-3xl p-6"><span class="text-xs font-extrabold text-sb-neon">FR-08 → FR-11</span><h3 class="mt-2 font-extrabold">Kiểm soát tải trọng cửa hàng</h3><p class="mt-2 text-sm text-white/70">Giám sát, 4 mức kiểm soát, tự khôi phục, ghi timestamp. <b class="text-sb-neon">Trọng tâm demo.</b></p></div>
+      <div role="button" tabindex="0" data-info="n1" class="clickable bg-white rounded-3xl p-6 border border-black/5"><span class="text-xs font-extrabold text-sb-gold">NFR-01 → NFR-03</span><h3 class="mt-2 font-extrabold text-sb-dark">Hiệu năng &amp; tốc độ</h3><p class="mt-2 text-sm text-slate-500">Số dư Sao &lt; 5s, tải trọng ≤ 10s, ưu đãi &lt; 300ms.</p></div>
+      <div role="button" tabindex="0" data-info="n2" class="clickable bg-white rounded-3xl p-6 border border-black/5"><span class="text-xs font-extrabold text-sb-gold">NFR-04 → NFR-06</span><h3 class="mt-2 font-extrabold text-sb-dark">Mở rộng &amp; sẵn sàng</h3><p class="mt-2 text-sm text-slate-500">36 triệu thành viên, 41.000 cửa hàng, 99,95%/tháng.</p></div>
+      <div role="button" tabindex="0" data-info="n3" class="clickable bg-white rounded-3xl p-6 border border-black/5"><span class="text-xs font-extrabold text-sb-gold">NFR-07 → NFR-09</span><h3 class="mt-2 font-extrabold text-sb-dark">Chính xác, bảo mật &amp; kiểm toán</h3><p class="mt-2 text-sm text-slate-500">Exactly-once, PCI DSS, truy xuất nguồn gốc quyết định.</p></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mt-20 rounded-[2rem] bg-gradient-to-r from-sb-green to-sb-mid text-white p-8 md:p-12 flex flex-wrap items-center justify-between gap-6">
+    <div>
+      <h2 class="text-2xl md:text-3xl font-black">Thử phối hợp App ⇄ KDS</h2>
+      <p class="mt-2 text-white/80 max-w-xl">Mở hai trang ở hai tab: đổi mức tải hoặc báo hết nguyên liệu trên KDS — App khách hàng sẽ cập nhật theo.</p>
+    </div>
+    <div class="flex gap-3">
+      <a href="kds.html" target="_blank" class="px-6 py-3 rounded-full bg-white text-sb-green font-bold">Mở KDS</a>
+      <a href="customer-app.html" target="_blank" class="px-6 py-3 rounded-full bg-sb-dark font-bold">Mở App</a>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+SB.header('home');
+SB.footer();
+
+const go = (label, href) => ({ label, href, primary: true });
+
+SB.info = {
+  mis: {
+    icon: '🎓', title: 'Tổng quan đồ án MIS',
+    html: `<p>Đề xuất cho Starbucks Vietnam gồm 3 sản phẩm bàn giao:</p>
+    <ol class="list-decimal ml-5 mt-2 space-y-1"><li>Giao diện app: cảnh báo hết nguyên liệu + thời gian chờ động.</li><li>Giao diện KDS Barista tách đơn Walk-in / App.</li><li>Bảng ROI 3 năm cho 100 cửa hàng.</li></ol>
+    <p class="mt-3 text-slate-500">Mọi thẻ trên trang đều nhấn được để xem thêm hoặc chuyển tới khu vực liên quan. Nhấn logo Starbucks bất kỳ lúc nào để quay về trang chủ.</p>`,
+    actions: [go('Xem yêu cầu', 'requirements.html')]
+  },
+  live: {
+    icon: '📊', title: 'Tải trọng cửa hàng được tính thế nào?',
+    html: `<p>Tín hiệu làm mới <b>mỗi 10 giây</b> (NFR-02) từ ba nguồn:</p>
+    <ul class="list-disc ml-5 mt-2 space-y-1"><li><b>Đơn đang mở:</b> Walk-in + Mobile Order chưa hoàn thành.</li><li><b>Nhân viên ca trực:</b> số Barista đang chấm công.</li><li><b>Trạng thái quầy:</b> quầy bar, quầy lạnh, quầy bánh.</li></ul>
+    <div class="mt-3 p-3 rounded-xl bg-sb-light text-sb-dark font-mono text-xs">Tải = Đơn mở ÷ (Quầy hoạt động × 3 đơn/quầy)</div>
+    <p class="mt-3">Kết quả quyết định thời gian chờ hiển thị trên app và mức kiểm soát (FR-09).</p>`,
+    actions: [go('Xem trên App', 'customer-app.html'), { label: 'Xem trên KDS', href: 'kds.html' }]
+  },
+  p1: {
+    icon: '❌', title: 'Đơn app bị hủy ~4%',
+    html: `<p>Khách chọn món trên app → thanh toán → quán báo hết nguyên liệu hoặc chờ quá 20 phút → khách hủy.</p>
+    <p class="mt-2">Hậu quả: mất doanh thu đơn đó, hoàn tiền thủ công, trải nghiệm xấu và khách ngại đặt lại.</p>
+    <p class="mt-2 text-slate-500">Giả định ROI: giảm còn 1,8% sau triển khai.</p>`,
+    actions: [go('Xem ROI', 'roi.html')]
+  },
+  p2: {
+    icon: '📲', title: 'Đơn app chen lấn với đơn tại quầy',
+    html: `<p>Khi giờ cao điểm, đơn app đổ vào đúng lúc quầy đông nhất. Không có tín hiệu tải, app vẫn hứa "5 phút" và khách đến thấy chưa có gì.</p>
+    <p class="mt-2">Giải pháp: thời gian chờ động + tiết chế nhận đơn khi quá tải.</p>`,
+    actions: [go('Xem banner thời gian chờ', 'customer-app.html')]
+  },
+  p3: {
+    icon: '🧾', title: 'Một màn hình, hai luồng đơn',
+    html: `<p>Đơn Walk-in cần làm ngay vì khách đứng chờ; đơn App có giờ hẹn. Trộn chung khiến Barista ưu tiên sai.</p>
+    <p class="mt-2">Giải pháp: KDS chia 2 cột 50/50, bộ đếm màu xanh / vàng / đỏ.</p>`,
+    actions: [go('Xem KDS', 'kds.html')]
+  },
+  p4: {
+    icon: '🗑️', title: 'Lãng phí nguyên liệu ~3% COGS',
+    html: `<p>Không biết chính xác còn bao nhiêu → đặt dư, hết hạn, hoặc pha hỏng không ghi nhận.</p>
+    <p class="mt-2">Theo dõi realtime cắt giảm ~20% lượng lãng phí (giả định).</p>`,
+    actions: [go('Xem ROI', 'roi.html')]
+  },
+  f1: { icon: '📦', title: 'Kho / WMS', html: '<p>Nguồn sự thật về tồn kho nguyên liệu (bột matcha, syrup, sữa…). Mỗi lần Barista báo hết hoặc nhập kho đều phát ra một sự kiện.</p>' },
+  f2: { icon: '⚡', title: 'API tồn kho thời gian thực', html: '<p>Tích hợp WMS với CRM / app. Sự kiện tồn kho được đẩy tới app trong <b>dưới 5 giây</b> (NFR-02) nên món hết hàng bị khóa gần như lập tức.</p><p class="mt-2 text-slate-500">Đây là hạng mục CAPEX lớn nhất trong bảng ROI.</p>', actions: [go('Xem CAPEX', 'roi.html')] },
+  f3: {
+    icon: '🧠', title: 'Bộ điều khiển tải – 4 mức',
+    html: `<ol class="space-y-2">
+      <li><b>Mức 0 · Bình thường:</b> chờ ~5 phút.</li>
+      <li><b>Mức 1 · Đông:</b> tăng thời gian chờ hiển thị (~15 phút).</li>
+      <li><b>Mức 2 · Quá tải:</b> trì hoãn ưu đãi, tiết chế đơn di động (~25 phút).</li>
+      <li><b>Mức 3 · Tạm dừng:</b> ngừng nhận đơn app.</li></ol>
+    <p class="mt-3">Mọi thay đổi đều ghi log; quản lý có quyền ghi đè; tự khôi phục khi tải giảm (FR-09, FR-10).</p>`,
+    actions: [go('Thử trên KDS', 'kds.html')]
+  },
+  g1: { icon: '⭐', title: 'Tích Sao & Hồ sơ khách hàng', html: '<ul class="list-disc ml-5 space-y-1"><li>FR-01: Điều kiện tích Sao theo quy tắc cấu hình (hạng, thanh toán, khuyến mãi).</li><li>FR-02: Một sổ cái thời gian thực cho app, thẻ, cửa hàng.</li><li>FR-03: Hồ sơ hợp nhất: lịch sử, sở thích, tiến độ hạng, đồng thuận.</li></ul>', actions: [go('Chi tiết', 'requirements.html?g=g1')] },
+  g2: { icon: '🎁', title: 'Cá nhân hóa ưu đãi', html: '<ul class="list-disc ml-5 space-y-1"><li>FR-04: Chọn ưu đãi riêng, ghi log yếu tố.</li><li>FR-05: Gửi qua app &amp; email trong giới hạn tần suất.</li><li>FR-06: Xác thực đổi thưởng thời gian thực.</li><li>FR-07: Dự báo số đơn trước chương trình.</li></ul>', actions: [go('Chi tiết', 'requirements.html?g=g2')] },
+  g3: { icon: '🚦', title: 'Kiểm soát tải trọng cửa hàng', html: '<ul class="list-disc ml-5 space-y-1"><li>FR-08: Giám sát đơn mở, nhân viên, quầy.</li><li>FR-09: Kiểm soát tự động theo mức + log + quản lý ghi đè.</li><li>FR-10: Tự khôi phục khi tải giảm.</li><li>FR-11: Ghi timestamp cải thiện dự báo.</li></ul>', actions: [go('Chi tiết', 'requirements.html?g=g3'), { label: 'Demo KDS', href: 'kds.html' }] },
+  n1: { icon: '⚡', title: 'Hiệu năng & tốc độ', html: '<ul class="list-disc ml-5 space-y-1"><li>NFR-01: Số dư Sao &lt; 5s, hồ sơ &lt; 60s (P95).</li><li>NFR-02: Tải trọng làm mới ≤ 10s, đến app ≤ 5s.</li><li>NFR-03: Quyết định ưu đãi &lt; 300ms.</li></ul>', actions: [go('Chi tiết', 'requirements.html?g=n1')] },
+  n2: { icon: '📈', title: 'Mở rộng & sẵn sàng', html: '<ul class="list-disc ml-5 space-y-1"><li>NFR-04: 36 triệu thành viên (x2), đỉnh gấp 3 ngày hội viên.</li><li>NFR-05: 41.000+ cửa hàng không cần thiết lập từng nơi.</li><li>NFR-06: 99,95%/tháng, xếp hàng giao dịch offline.</li></ul>', actions: [go('Chi tiết', 'requirements.html?g=n2')] },
+  n3: { icon: '🔒', title: 'Chính xác, bảo mật & kiểm toán', html: '<ul class="list-disc ml-5 space-y-1"><li>NFR-07: Cộng Sao đúng một lần, đối soát hàng ngày.</li><li>NFR-08: Quyền riêng tư, PCI DSS, giới hạn lưu trữ.</li><li>NFR-09: Truy xuất ưu đãi / hành động tới đầu vào &amp; quy tắc.</li></ul>', actions: [go('Chi tiết', 'requirements.html?g=n3')] }
+};
+</script>
+</body>
+</html>

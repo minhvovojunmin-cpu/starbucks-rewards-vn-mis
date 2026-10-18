@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barista KDS · Starbucks Rewards Vietnam</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+  <script src="assets/common.js"></script>
+  <style>
+    .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+    .kds-bg{background:radial-gradient(900px 500px at 10% -10%,rgba(0,112,74,.55),transparent 60%),radial-gradient(700px 500px at 100% 110%,rgba(43,238,155,.18),transparent 60%),#07140f}
+  </style>
+</head>
+<body class="bg-[#050d0a] text-white">
+<div id="site-header"></div>
+
+<main class="max-w-[1500px] mx-auto px-3 sm:px-6 py-6">
+  <p class="text-sm text-white/50 mb-3 px-1">Giao diện tablet (landscape) · Mọi ticket, nút và chỉ số đều nhấn được.</p>
+
+  <!-- tablet bezel -->
+  <div class="rounded-[2.2rem] bg-slate-800 p-3 shadow-[0_40px_90px_-30px_rgba(0,0,0,.9)] ring-1 ring-white/10">
+    <div class="kds-bg rounded-[1.7rem] overflow-hidden flex flex-col h-[820px] min-h-[640px]">
+
+      <!-- top bar -->
+      <div class="glass !rounded-none !border-x-0 !border-t-0 px-5 py-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+        <a href="index.html" class="flex items-center gap-3" title="Về trang chủ" aria-label="Starbucks – về trang chủ">
+          <span id="kdsLogo"></span>
+          <span class="leading-tight"><span class="block font-extrabold">Barista Station</span><span class="block text-xs text-white/50">Chi nhánh X · Nguyễn Huệ</span></span>
+        </a>
+
+        <div class="flex-1 flex flex-wrap items-center gap-2 justify-center" id="stats"></div>
+
+        <div class="flex items-center gap-2">
+          <button id="btnLegend" class="hidden xl:flex items-center gap-2 px-3 py-2 rounded-xl glass text-xs font-semibold hover:bg-white/10">
+            <i class="w-2.5 h-2.5 rounded-full bg-emerald-400"></i><i class="w-2.5 h-2.5 rounded-full bg-amber-400"></i><i class="w-2.5 h-2.5 rounded-full bg-red-400"></i> Chú thích
+          </button>
+          <button id="btnStock" class="px-3.5 py-2 rounded-xl glass text-sm font-bold hover:bg-white/10">📦 Tồn kho</button>
+          <button id="btnLoad" class="px-3.5 py-2 rounded-xl text-sm font-extrabold flex items-center gap-2"></button>
+          <span id="clock" class="mono text-lg font-extrabold tabular-nums w-[72px] text-right">--:--</span>
+        </div>
+      </div>
+
+      <!-- columns -->
+      <div class="flex-1 min-h-0 grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+        <section class="min-h-0 flex flex-col rounded-3xl glass overflow-hidden" aria-label="Đơn tại quầy">
+          <div class="px-5 py-4 flex items-center justify-between border-b border-white/10">
+            <div class="flex items-center gap-3">
+              <span class="w-10 h-10 rounded-xl bg-white/10 grid place-items-center text-xl">🏪</span>
+              <div><h2 class="font-black tracking-wide">ĐƠN TẠI QUẦY <span class="text-white/50 font-bold">(WALK-IN)</span></h2><p id="subWalk" class="text-xs text-white/50"></p></div>
+            </div>
+            <span id="cntWalk" class="mono text-2xl font-extrabold text-sb-neon"></span>
+          </div>
+          <div id="colWalk" class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-3"></div>
+        </section>
+
+        <section class="min-h-0 flex flex-col rounded-3xl glass overflow-hidden ring-1 ring-sb-neon/25" aria-label="Đơn App">
+          <div class="px-5 py-4 flex items-center justify-between border-b border-white/10 bg-sb-green/20">
+            <div class="flex items-center gap-3">
+              <span class="w-10 h-10 rounded-xl bg-sb-green grid place-items-center text-xl">📱</span>
+              <div><h2 class="font-black tracking-wide">ĐƠN APP <span class="text-white/50 font-bold">(MOBILE ORDER)</span></h2><p id="subApp" class="text-xs text-white/50"></p></div>
+            </div>
+            <span id="cntApp" class="mono text-2xl font-extrabold text-sb-neon"></span>
+          </div>
+          <div id="colApp" class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-3"></div>
+        </section>
+      </div>
+
+      <!-- bottom bar -->
+      <div class="px-5 py-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-white/60">
+        <span>Tự cập nhật mỗi 10 giây · Sắp xếp: đơn chờ lâu nhất lên đầu</span>
+        <div class="flex gap-2">
+          <button id="btnNew" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 font-semibold text-white">＋ Mô phỏng đơn mới</button>
+          <a href="customer-app.html" class="px-3 py-1.5 rounded-lg bg-sb-green hover:bg-sb-mid font-semibold text-white">Xem phía App →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+
+<script>
+SB.header('kds', true);
+SB.footer();
+document.getElementById('kdsLogo').innerHTML = SB.logo(40);
+
+/* ---------- data ---------- */
+const ago = (m, s = 0) => Date.now() - (m * 60 + s) * 1000;
+let tickets = [
+  { id: 'W-099', src: 'walk', name: 'Thu Hà',      start: ago(11, 40), status: 'making', where: 'Tại quầy',  items: [{ q: 1, n: 'Caramel Macchiato', s: 'Grande', m: ['Ít ngọt', 'Sữa đậu nành'] }, { q: 1, n: 'Croissant bơ', s: '', m: ['Hâm nóng'] }] },
+  { id: 'W-101', src: 'walk', name: 'Quốc Bảo',    start: ago(5, 30),  status: 'new',    where: 'Dùng tại chỗ', items: [{ q: 2, n: 'Americano', s: 'Tall', m: ['Thêm 1 shot'] }] },
+  { id: 'W-102', src: 'walk', name: 'Minh Anh',    start: ago(2, 10),  status: 'new',    where: 'Mang đi',   items: [{ q: 1, n: 'Cold Brew Cream', s: 'Grande', m: ['Ít đá', 'Ít ngọt'] }, { q: 1, n: 'Latte', s: 'Tall', m: ['Sữa yến mạch'] }] },
+  { id: 'W-103', src: 'walk', name: 'Lan Phương',  start: ago(0, 45),  status: 'new',    where: 'Mang đi',   items: [{ q: 1, n: 'Matcha Latte', s: 'Grande', m: ['Không đường'] }] },
+  { id: 'M-884', src: 'app',  name: 'Đức Trí',     start: ago(12, 5),  status: 'making', where: 'Hẹn 11:30', pickup: 'Hẹn lấy 11:30', items: [{ q: 2, n: 'Frappuccino Mocha', s: 'Grande', m: ['Không kem', 'Thêm sốt'] }] },
+  { id: 'M-886', src: 'app',  name: 'Phương Thảo', start: ago(6, 20),  status: 'new',    where: 'Hẹn 11:40', pickup: 'Hẹn lấy 11:40', items: [{ q: 1, n: 'Caramel Macchiato', s: 'Grande', m: ['Ít ngọt', 'Sữa đậu nành'] }, { q: 1, n: 'Croissant bơ', s: '', m: [] }] },
+  { id: 'M-889', src: 'app',  name: 'Hoàng Nam',   start: ago(1, 50),  status: 'new',    where: 'Ngay khi sẵn sàng', pickup: 'Ngay khi sẵn sàng', items: [{ q: 1, n: 'Cold Brew Cream', s: 'Tall', m: ['Ít đá'] }] },
+  { id: 'M-890', src: 'app',  name: 'Bảo Châu',    start: ago(0, 20),  status: 'new',    where: 'Hẹn 11:55', pickup: 'Hẹn lấy 11:55', items: [{ q: 2, n: 'Latte', s: 'Grande', m: ['Sữa yến mạch', 'Nóng'] }] }
+];
+let done = 14, seq = { W: 104, M: 891 };
+const CAPACITY = 12;               // 4 quầy × 3 đơn
+const TONE = {
+  g: { bar: 'bg-emerald-400', chip: 'bg-emerald-400/15 text-emerald-300 ring-emerald-400/40', name: 'Xanh · dưới 4 phút' },
+  y: { bar: 'bg-amber-400',   chip: 'bg-amber-400/15 text-amber-300 ring-amber-400/40',       name: 'Vàng · 4–10 phút' },
+  r: { bar: 'bg-red-500',     chip: 'bg-red-500/20 text-red-300 ring-red-400/60 sb-pulse-red', name: 'Đỏ · trên 10 phút' }
+};
+const LV = [
+  { n: 'Mức 0 · Bình thường', short: 'BÌNH THƯỜNG', btn: 'bg-emerald-500/20 text-emerald-300 ring-1 ring-emerald-400/50', desc: 'Không có can thiệp. Thời gian chờ hiển thị ~5 phút.' },
+  { n: 'Mức 1 · Đông',        short: 'ĐÔNG',         btn: 'bg-amber-400/20 text-amber-300 ring-1 ring-amber-400/50',     desc: 'Tăng thời gian chờ hiển thị trên app (~15 phút).' },
+  { n: 'Mức 2 · Quá tải',     short: 'QUÁ TẢI',      btn: 'bg-orange-500/25 text-orange-300 ring-1 ring-orange-400/60',  desc: 'Trì hoãn ưu đãi, tiết chế nhận đơn di động (~25 phút).' },
+  { n: 'Mức 3 · Tạm dừng',    short: 'TẠM DỪNG',     btn: 'bg-red-500/25 text-red-300 ring-1 ring-red-400/60 sb-pulse-red', desc: 'Tạm dừng nhận đơn di động cho đến khi tải giảm.' }
+];
+
+/* ---------- helpers ---------- */
+const secs = t => Math.floor((Date.now() - t.start) / 1000);
+const tone = s => s < 240 ? 'g' : s < 600 ? 'y' : 'r';
+const fmt = s => String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function autoLevel() { const r = tickets.length / CAPACITY; return r < 0.5 ? 0 : r < 0.8 ? 1 : r < 1.1 ? 2 : 3; }
+function log(level, actor, reason) {
+  const st = SB.state.get();
+  const logs = [{ at: new Date().toISOString(), level, actor, reason, open: tickets.length, staff: '3/4', counters: '3/4', rule: 'LOAD-RULE v1.4' }].concat(st.logs).slice(0, 20);
+  SB.state.set({ logs });
+}
+
+/* ---------- render ---------- */
+function ticketHTML(t) {
+  const s = secs(t), k = TONE[tone(s)];
+  return `
+  <article role="button" tabindex="0" data-t="${t.id}" class="clickable relative rounded-2xl bg-[#0c1f18]/80 ring-1 ring-white/10 overflow-hidden hover:ring-sb-neon/40">
+    <span data-bar="${t.id}" class="absolute left-0 top-0 bottom-0 w-1.5 ${k.bar}"></span>
+    <div class="pl-5 pr-4 py-3.5">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2"><span class="mono text-xl font-extrabold">#${t.id}</span>
+            ${t.status === 'making' ? '<span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-sb-neon text-sb-dark">ĐANG LÀM</span>' : ''}</div>
+          <p class="text-sm text-white/80 font-semibold">${esc(t.name)} <span class="text-white/40 font-normal">· ${esc(t.where)}</span></p>
+        </div>
+        <span data-timer="${t.id}" class="mono text-lg font-extrabold px-3 py-1.5 rounded-xl ring-1 ${k.chip}">⏱ ${fmt(s)}</span>
+      </div>
+      <ul class="mt-3 space-y-2">
+        ${t.items.map(i => `<li class="flex gap-2.5">
+          <b class="mono w-6 text-sb-neon">${i.q}×</b>
+          <div class="flex-1"><p class="font-bold leading-tight">${esc(i.n)} <span class="text-white/40 font-medium">${esc(i.s)}</span></p>
+          ${i.m.length ? `<div class="mt-1 flex flex-wrap gap-1.5">${i.m.map(m => `<span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-white/10 text-white/80">${esc(m)}</span>`).join('')}</div>` : ''}</div></li>`).join('')}
+      </ul>
+      <div class="mt-3 flex gap-2">
+        <button data-act="${t.status === 'making' ? 'done' : 'start'}" data-id="${t.id}" class="flex-1 py-2 rounded-xl text-sm font-extrabold transition ${t.status === 'making' ? 'bg-sb-neon text-sb-dark hover:brightness-110' : 'bg-white/10 hover:bg-white/20'}">${t.status === 'making' ? '✓ Hoàn thành' : '▶ Bắt đầu làm'}</button>
+      </div>
+    </div>
+  </article>`;
+}
+
+function render() {
+  const sorter = (a, b) => a.start - b.start;
+  const walk = tickets.filter(t => t.src === 'walk').sort(sorter);
+  const app = tickets.filter(t => t.src === 'app').sort(sorter);
+  const empty = '<div class="h-full grid place-items-center text-white/30 text-sm py-10">Không có đơn đang chờ ✨</div>';
+  document.getElementById('colWalk').innerHTML = walk.map(ticketHTML).join('') || empty;
+  document.getElementById('colApp').innerHTML = app.map(ticketHTML).join('') || empty;
+  document.getElementById('cntWalk').textContent = walk.length;
+  document.getElementById('cntApp').textContent = app.length;
+  const avg = l => l.length ? fmt(Math.round(l.reduce((a, t) => a + secs(t), 0) / l.length)) : '--:--';
+  document.getElementById('subWalk').textContent = 'Chờ trung bình ' + avg(walk);
+  document.getElementById('subApp').textContent = 'Chờ trung bình ' + avg(app) + ' · có giờ hẹn';
+  renderBar();
+}
+
+function renderBar() {
+  const st = SB.state.get(), L = LV[st.load];
+  const avgAll = tickets.length ? fmt(Math.round(tickets.reduce((a, t) => a + secs(t), 0) / tickets.length)) : '--:--';
+  const late = tickets.filter(t => secs(t) >= 600).length;
+  document.getElementById('stats').innerHTML = [
+    ['open', tickets.length, 'Đơn mở', 'text-white'],
+    ['avg', avgAll, 'Chờ TB', 'text-white'],
+    ['late', late, 'Quá 10 phút', late ? 'text-red-300' : 'text-emerald-300'],
+    ['done', done, 'Đã xong hôm nay', 'text-sb-neon']
+  ].map(([k, v, l, c]) => `<button data-stat="${k}" class="px-3.5 py-1.5 rounded-xl glass hover:bg-white/10 text-center min-w-[84px]"><span class="mono block text-lg font-extrabold ${c}">${v}</span><span class="block text-[10px] uppercase tracking-wider text-white/50">${l}</span></button>`).join('');
+  const b = document.getElementById('btnLoad');
+  b.className = 'px-3.5 py-2 rounded-xl text-sm font-extrabold flex items-center gap-2 ' + L.btn;
+  b.innerHTML = `<span class="w-2 h-2 rounded-full bg-current"></span> TẢI: ${L.short} <span class="text-[10px] opacity-70 font-bold">${st.mode === 'manual' ? '· GHI ĐÈ' : '· TỰ ĐỘNG'}</span>`;
+}
+
+/* timers tick every second without re-rendering the whole list */
+function tick() {
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+  tickets.forEach(t => {
+    const s = secs(t), k = TONE[tone(s)];
+    const el = document.querySelector(`[data-timer="${t.id}"]`);
+    if (el) { el.textContent = '⏱ ' + fmt(s); el.className = 'mono text-lg font-extrabold px-3 py-1.5 rounded-xl ring-1 ' + k.chip; }
+    const bar = document.querySelector(`[data-bar="${t.id}"]`);
+    if (bar) bar.className = 'absolute left-0 top-0 bottom-0 w-1.5 ' + k.bar;
+  });
+}
+
+/* ---------- automatic load control (FR-08..FR-10) ---------- */
+function evaluateLoad() {
+  const st = SB.state.get();
+  if (st.mode === 'manual') return;
+  const lvl = autoLevel();
+  if (lvl !== st.load) {
+    const dir = lvl > st.load ? 'Tăng mức kiểm soát' : 'Tự khôi phục nhận đơn';
+    SB.state.set({ load: lvl });
+    log(lvl, 'Tự động', `${dir}: ${tickets.length}/${CAPACITY} đơn so với năng lực quầy`);
+    SB.toast(`${dir} → ${LV[lvl].n}`, lvl > 1 ? 'warn' : undefined);
+  }
+}
+
+/* ---------- modals ---------- */
+function ticketModal(id) {
+  const t = tickets.find(x => x.id === id); if (!t) return;
+  const s = secs(t), k = tone(s);
+  SB.modal({
+    dark: true, icon: t.src === 'app' ? '📱' : '🏪', title: `#${t.id} · ${esc(t.name)}`,
+    html: `
+    <div class="grid grid-cols-3 gap-2 text-center">
+      <div class="rounded-xl bg-white/5 p-3"><p class="mono text-xl font-extrabold ${k === 'r' ? 'text-red-300' : k === 'y' ? 'text-amber-300' : 'text-emerald-300'}">${fmt(s)}</p><p class="text-[11px] text-white/50">Đã chờ</p></div>
+      <div class="rounded-xl bg-white/5 p-3"><p class="font-extrabold">${t.src === 'app' ? 'App' : 'Walk-in'}</p><p class="text-[11px] text-white/50">Nguồn đơn</p></div>
+      <div class="rounded-xl bg-white/5 p-3"><p class="font-extrabold">${t.status === 'making' ? 'Đang làm' : 'Chờ làm'}</p><p class="text-[11px] text-white/50">Trạng thái</p></div>
+    </div>
+    <p class="mt-4 text-white/60 text-xs uppercase tracking-wider font-bold">Món &amp; tùy chỉnh</p>
+    <ul class="mt-2 space-y-2">${t.items.map(i => `<li class="p-3 rounded-xl bg-white/5"><b>${i.q}× ${esc(i.n)}</b> <span class="text-white/50">${esc(i.s)}</span>${i.m.length ? `<div class="mt-1.5 flex flex-wrap gap-1.5">${i.m.map(m => `<span class="text-xs px-2 py-0.5 rounded-md bg-sb-green/30 text-sb-neon">${esc(m)}</span>`).join('')}</div>` : '<p class="text-xs text-white/40 mt-1">Không tùy chỉnh</p>'}</li>`).join('')}</ul>
+    <div class="mt-4 text-sm text-white/70 space-y-1">
+      <p>📍 ${esc(t.where)}</p>
+      ${t.src === 'app' ? '<p>⭐ Thành viên Gold · Sao sẽ ghi sổ sau khi hoàn thành</p><p>🕒 Mức ưu tiên: theo giờ hẹn của khách</p>' : '<p>👤 Khách đang đứng chờ tại quầy – ưu tiên làm nhanh</p>'}
+    </div>`,
+    actions: [
+      { label: '⚠️ Báo hết nguyên liệu', onClick: stockModal },
+      t.status === 'making'
+        ? { label: '✓ Hoàn thành', primary: true, onClick: () => finish(id) }
+        : { label: '▶ Bắt đầu làm', primary: true, onClick: () => start(id) }
+    ]
+  });
+}
+
+function stockModal() {
+  const st = SB.state.get();
+  const rows = [['matcha', '🍵', 'Matcha Latte', 'Bột matcha'], ['caramel', '☕', 'Caramel Macchiato', 'Syrup caramel'], ['cold', '🧊', 'Cold Brew Cream', 'Cold brew'], ['croissant', '🥐', 'Croissant bơ', 'Bánh croissant']];
+  SB.modal({
+    dark: true, icon: '📦', title: 'Tồn kho nguyên liệu · Chi nhánh X',
+    html: `<p class="text-white/60">Đánh dấu hết nguyên liệu → API đẩy tới app trong &lt; 5 giây, món bị khóa kèm cảnh báo.</p>
+    <div class="mt-3 space-y-2">${rows.map(([id, ico, n, ing]) => `
+      <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 cursor-pointer">
+        <span class="text-2xl">${ico}</span><span class="flex-1"><b>${n}</b><br><span class="text-xs text-white/50">${ing}</span></span>
+        <span class="text-xs font-bold" id="lab-${id}">${st.oos[id] ? 'HẾT HÀNG' : 'Còn hàng'}</span>
+        <input type="checkbox" data-oos="${id}" ${st.oos[id] ? 'checked' : ''} class="w-5 h-5 accent-red-500"></label>`).join('')}</div>`,
+    actions: [{ label: 'Xem trên App', href: 'customer-app.html', primary: true }],
+    onOpen: el => el.querySelectorAll('[data-oos]').forEach(c => c.addEventListener('change', () => {
+      const oos = Object.assign({}, SB.state.get().oos);
+      if (c.checked) oos[c.dataset.oos] = true; else delete oos[c.dataset.oos];
+      SB.state.set({ oos });
+      el.querySelector('#lab-' + c.dataset.oos).textContent = c.checked ? 'HẾT HÀNG' : 'Còn hàng';
+      SB.toast(c.checked ? 'Đã báo hết – app sẽ khóa món' : 'Đã báo còn hàng');
+    }))
+  });
+}
+
+function loadModal() {
+  const st = SB.state.get();
+  const logs = st.logs;
+  SB.modal({
+    dark: true, wide: true, icon: '🚦', title: 'Kiểm soát tải trọng cửa hàng',
+    html: `
+    <div class="grid sm:grid-cols-3 gap-2 text-center">
+      <div class="rounded-xl bg-white/5 p-3"><p class="mono text-xl font-extrabold">${tickets.length}</p><p class="text-[11px] text-white/50">Đơn đang mở</p></div>
+      <div class="rounded-xl bg-white/5 p-3"><p class="mono text-xl font-extrabold">3/4</p><p class="text-[11px] text-white/50">Barista ca trực</p></div>
+      <div class="rounded-xl bg-white/5 p-3"><p class="mono text-xl font-extrabold">${Math.round(tickets.length / CAPACITY * 100)}%</p><p class="text-[11px] text-white/50">Tải = đơn mở ÷ năng lực</p></div>
+    </div>
+    <p class="mt-4 text-xs uppercase tracking-wider font-bold text-white/50">Quản lý ghi đè mức kiểm soát</p>
+    <div class="mt-2 grid sm:grid-cols-2 gap-2">${LV.map((l, i) => `
+      <button data-lv="${i}" class="text-left p-3 rounded-xl ${st.load === i ? 'ring-2 ring-sb-neon bg-sb-green/20' : 'bg-white/5 hover:bg-white/10'}"><b>${l.n}</b><br><span class="text-xs text-white/60">${l.desc}</span></button>`).join('')}</div>
+    <button data-lv="auto" class="mt-2 w-full p-3 rounded-xl ${st.mode === 'auto' ? 'ring-2 ring-sb-neon bg-sb-green/20' : 'bg-white/5 hover:bg-white/10'} font-bold">↺ Quay về chế độ tự động (tự khôi phục khi tải giảm)</button>
+    <p class="mt-5 text-xs uppercase tracking-wider font-bold text-white/50">Nhật ký kiểm soát (truy xuất nguồn gốc)</p>
+    <div class="mt-2 space-y-1.5 max-h-48 overflow-y-auto">${logs.length ? logs.map(l => `
+      <div class="p-2.5 rounded-lg bg-white/5 text-xs"><b>${new Date(l.at).toLocaleTimeString('vi-VN')}</b> · ${LV[l.level].n} · <span class="text-sb-neon">${l.actor}</span><br><span class="text-white/60">${esc(l.reason)} · đơn mở ${l.open} · quầy ${l.counters} · ${l.rule}</span></div>`).join('') : '<p class="text-white/40 text-xs">Chưa có hành động nào.</p>'}</div>`,
+    onOpen: el => el.querySelectorAll('[data-lv]').forEach(b => b.addEventListener('click', () => {
+      const v = b.dataset.lv;
+      if (v === 'auto') { SB.state.set({ mode: 'auto' }); log(autoLevel(), 'Quản lý', 'Trở lại chế độ tự động'); evaluateLoad(); SB.toast('Đã bật chế độ tự động'); }
+      else { SB.state.set({ load: +v, mode: 'manual' }); log(+v, 'Quản lý ghi đè', 'Quản lý đặt mức thủ công'); SB.toast('Đã áp dụng ' + LV[+v].n); }
+      renderBar(); loadModal();
+    }))
+  });
+}
+
+function statModal(k) {
+  const late = tickets.filter(t => secs(t) >= 600);
+  const info = {
+    open: ['📋', 'Đơn đang mở', `<p>${tickets.filter(t => t.src === 'walk').length} đơn Walk-in và ${tickets.filter(t => t.src === 'app').length} đơn App. Đây là đầu vào chính của chỉ số tải trọng (FR-08).</p>`],
+    avg: ['⏳', 'Thời gian chờ trung bình', '<p>Tính từ lúc đơn tạo đến hiện tại. Timestamp được ghi lại để cải thiện mô hình dự báo (FR-11).</p>'],
+    late: ['🔴', 'Đơn quá 10 phút', late.length ? `<p>Cần ưu tiên: ${late.map(t => '<b>#' + t.id + '</b>').join(', ')}.</p>` : '<p>Không có đơn nào quá 10 phút. 👍</p>'],
+    done: ['✅', 'Đã hoàn thành hôm nay', `<p>${done} đơn đã hoàn thành trong ca. Mỗi đơn hoàn thành kích hoạt ghi Sao một lần duy nhất (NFR-07).</p>`]
+  }[k];
+  SB.modal({ dark: true, icon: info[0], title: info[1], html: info[2] });
+}
+
+/* ---------- actions ---------- */
+function start(id) { const t = tickets.find(x => x.id === id); if (t) { t.status = 'making'; render(); } }
+function finish(id) {
+  const i = tickets.findIndex(x => x.id === id); if (i < 0) return;
+  tickets.splice(i, 1); done++; render(); SB.toast('Hoàn thành #' + id); evaluateLoad(); renderBar();
+}
+function newOrder() {
+  const app = Math.random() > .5, p = app ? 'M' : 'W';
+  const menu = [['Latte', ['Sữa yến mạch']], ['Americano', ['Thêm 1 shot']], ['Matcha Latte', ['Ít ngọt']], ['Frappuccino Mocha', ['Không kem']], ['Cold Brew Cream', ['Ít đá']], ['Caramel Macchiato', ['Ít ngọt', 'Sữa đậu nành']]];
+  const m = menu[Math.floor(Math.random() * menu.length)];
+  const names = ['Khánh Linh', 'Gia Bảo', 'Mai Anh', 'Tuấn Kiệt', 'Ngọc Hân', 'Việt Anh'];
+  const id = p + '-' + (seq[p]++);
+  tickets.push({ id, src: app ? 'app' : 'walk', name: names[Math.floor(Math.random() * names.length)], start: Date.now(), status: 'new', where: app ? 'Ngay khi sẵn sàng' : 'Mang đi', items: [{ q: 1 + Math.floor(Math.random() * 2), n: m[0], s: 'Grande', m: m[1] }] });
+  render(); evaluateLoad();
+}
+
+document.addEventListener('click', e => {
+  const act = e.target.closest('[data-act]');
+  if (act && !e.target.closest('#sb-modal')) { e.stopPropagation(); act.dataset.act === 'done' ? finish(act.dataset.id) : start(act.dataset.id); return; }
+  const t = e.target.closest('[data-t]'); if (t) { ticketModal(t.dataset.t); return; }
+  const s = e.target.closest('[data-stat]'); if (s) statModal(s.dataset.stat);
+});
+document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-t]')) { e.preventDefault(); ticketModal(e.target.dataset.t); } });
+document.getElementById('btnLoad').addEventListener('click', loadModal);
+document.getElementById('btnStock').addEventListener('click', stockModal);
+document.getElementById('btnNew').addEventListener('click', () => { newOrder(); SB.toast('Có đơn mới'); });
+document.getElementById('btnLegend').addEventListener('click', () => SB.modal({
+  dark: true, icon: '🎨', title: 'Chú thích màu bộ đếm',
+  html: `<div class="space-y-2">${Object.values(TONE).map(k => `<div class="flex items-center gap-3 p-3 rounded-xl bg-white/5"><span class="w-3 h-8 rounded ${k.bar}"></span><b>${k.name}</b></div>`).join('')}</div><p class="mt-3 text-white/60">Barista nên làm đơn đỏ trước, rồi vàng. Đơn Walk-in luôn có khách đứng chờ.</p>`
+}));
+
+/* start-up */
+SB.state.set({});   // ensure defaults exist
+evaluateLoad(); render(); tick();
+setInterval(tick, 1000);
+setInterval(() => { evaluateLoad(); render(); }, 10000);
+window.addEventListener('storage', e => { if (e.key === SB.state.key) renderBar(); });
+</script>
+</body>
+</html>
