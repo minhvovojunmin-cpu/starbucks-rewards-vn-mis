@@ -26,7 +26,7 @@
       <div class="glass !rounded-none !border-x-0 !border-t-0 px-5 py-3 flex flex-wrap items-center gap-x-5 gap-y-2">
         <a href="index.html" class="flex items-center gap-3" title="Về trang chủ" aria-label="Starbucks – về trang chủ">
           <span id="kdsLogo"></span>
-          <span class="leading-tight"><span class="block font-extrabold">Barista Station</span><span class="block text-xs text-white/50">Chi nhánh X · Nguyễn Huệ</span></span>
+          <span class="leading-tight"><span class="block font-extrabold">Barista Station</span><span class="block text-xs text-white/50">Chi nhánh Nguyễn Huệ · Q.1, TP.HCM</span></span>
         </a>
 
         <div class="flex-1 flex flex-wrap items-center gap-2 justify-center" id="stats"></div>
@@ -237,7 +237,7 @@ function stockModal() {
   const st = SB.state.get();
   const rows = [['matcha', '🍵', 'Matcha Latte', 'Bột matcha'], ['caramel', '☕', 'Caramel Macchiato', 'Syrup caramel'], ['cold', '🧊', 'Cold Brew Cream', 'Cold brew'], ['croissant', '🥐', 'Croissant bơ', 'Bánh croissant']];
   SB.modal({
-    dark: true, icon: '📦', title: 'Tồn kho nguyên liệu · Chi nhánh X',
+    dark: true, icon: '📦', title: 'Tồn kho nguyên liệu · Chi nhánh Nguyễn Huệ',
     html: `<p class="text-white/60">Đánh dấu hết nguyên liệu → API đẩy tới app trong &lt; 5 giây, món bị khóa kèm cảnh báo.</p>
     <div class="mt-3 space-y-2">${rows.map(([id, ico, n, ing]) => `
       <label class="flex items-center gap-3 p-3 rounded-xl bg-white/5 cursor-pointer">

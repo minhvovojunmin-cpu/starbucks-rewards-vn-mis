@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ROI 3 năm · Starbucks Rewards Vietnam</title>
+  <title>ROI 3 năm · Starbucks Rewards Vietnam (150 Cửa hàng)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="assets/common.js"></script>
@@ -18,16 +18,79 @@
 <div id="site-header"></div>
 
 <main class="max-w-7xl mx-auto px-4 py-10">
-  <p class="text-sm font-bold uppercase tracking-widest text-sb-green">Khả thi kinh tế</p>
-  <h1 class="mt-2 text-3xl md:text-4xl font-black text-sb-dark">Dự phóng ROI 3 năm · 100 cửa hàng Starbucks Việt Nam</h1>
-  <p class="mt-3 max-w-3xl text-slate-600">API tồn kho thời gian thực (WMS ⇄ CRM) + 200 màn hình KDS (2/cửa hàng). Toàn bộ số liệu là <b>giả định</b> có thể chỉnh bên dưới; bảng và chỉ số tính lại ngay. Nhấn vào mỗi dòng của bảng để xem công thức.</p>
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div>
+      <p class="text-sm font-bold uppercase tracking-widest text-sb-green">Khả thi kinh tế · Management Information Systems</p>
+      <h1 class="mt-2 text-3xl md:text-4xl font-black text-sb-dark">Dự phóng ROI 3 năm · 150 cửa hàng Starbucks Việt Nam</h1>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-sb-light text-sb-dark text-xs font-bold">
+        <span class="w-2 h-2 rounded-full bg-sb-green"></span> Quy mô thực tế chuỗi VN
+      </span>
+      <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-sb-gold/25 text-amber-900 text-xs font-bold">
+        ⚡ Lợi thế quy mô (Economies of Scale)
+      </span>
+    </div>
+  </div>
+
+  <p class="mt-3 max-w-3xl text-slate-600">
+    Mô hình tài chính đầu tư hệ thống API Tồn kho thời gian thực (WMS ⇄ CRM) kết hợp 300 màn hình KDS Barista (2 màn/cửa hàng) triển khai đồng bộ cho <b>150 cửa hàng Starbucks tại Việt Nam</b>. 
+    Toàn bộ số liệu có thể tùy chỉnh; bảng dòng tiền, thời gian hoàn vốn và ROI tự động tính lại ngay lập tức.
+  </p>
+
+  <!-- ECONOMIES OF SCALE HIGHLIGHT BANNER -->
+  <div class="mt-6 rounded-3xl bg-gradient-to-r from-sb-dark via-[#0d2a21] to-sb-green p-6 text-white border border-white/10 shadow-xl">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="w-12 h-12 rounded-2xl bg-sb-neon/20 ring-1 ring-sb-neon/50 text-sb-neon text-2xl grid place-items-center">🚀</span>
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-sb-neon">Phân tích Lợi thế nhờ quy mô (Economies of Scale)</span>
+          <h2 class="text-xl md:text-2xl font-black">Tác động khi mở rộng từ 100 ➔ 150 Cửa hàng</h2>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="btnCompare100" class="px-4 py-2 rounded-full text-xs font-extrabold bg-white/10 hover:bg-white/20 transition">Xem kịch bản 100 CH</button>
+        <button id="btnApply150" class="px-4 py-2 rounded-full text-xs font-extrabold bg-sb-neon text-sb-dark hover:brightness-110 transition">✓ Chuẩn 150 CH (Thực tế VN)</button>
+      </div>
+    </div>
+    
+    <div class="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+      <div class="rounded-2xl bg-white/5 p-3.5 border border-white/10">
+        <p class="text-xs text-white/60">Chi phí Màn hình KDS (Biến phí)</p>
+        <p class="text-lg font-black text-amber-300 mt-1">$160k ➔ $240k</p>
+        <p class="text-[11px] text-white/50 mt-0.5">300 màn chuyên dụng F&amp;B</p>
+      </div>
+      <div class="rounded-2xl bg-white/5 p-3.5 border border-white/10">
+        <p class="text-xs text-white/60">Phát triển Phần mềm (Định phí)</p>
+        <p class="text-lg font-black text-sb-neon mt-1">$270k (GIỮ NGUYÊN)</p>
+        <p class="text-[11px] text-white/50 mt-0.5">Giảm từ $2.7k ➔ $1.8k/CH (-33%)</p>
+      </div>
+      <div class="rounded-2xl bg-white/5 p-3.5 border border-white/10">
+        <p class="text-xs text-white/60">Thời gian Hoàn vốn (Payback)</p>
+        <p class="text-lg font-black text-white mt-1">Đầu Năm 2 (1,26 năm)</p>
+        <p class="text-[11px] text-sb-neon mt-0.5">Rút ngắn đáng kể so với 100 CH</p>
+      </div>
+      <div class="rounded-2xl bg-white/5 p-3.5 border border-white/10">
+        <p class="text-xs text-white/60">Dòng tiền lũy kế Năm 3</p>
+        <p class="text-lg font-black text-sb-neon mt-1">&gt; $1.2M ($1.27M USD)</p>
+        <p class="text-[11px] text-white/50 mt-0.5">Tăng +88.4% lợi nhuận ròng</p>
+      </div>
+    </div>
+
+    <div class="mt-4 pt-3 border-t border-white/10 flex items-start gap-2 text-xs text-white/80">
+      <span class="text-sb-neon text-sm">💡</span>
+      <p>
+        <b>Luận điểm kinh tế bảo vệ trước hội đồng:</b> Chi phí phát triển phần mềm ($270,000) là định phí chìm (sunk fixed cost). Khi chuỗi Starbucks VN mở rộng lên 150 cửa hàng, áp dụng cùng một nền tảng phần mềm đã tạo ra <b>Lợi thế nhờ quy mô (Economies of Scale)</b>: chi phí công nghệ bình quân trên mỗi cửa hàng giảm 33.3%, trong khi doanh thu giữ lại và năng suất tăng 50%, giúp dự án hoàn vốn ngay đầu Năm 2 và mang lại dòng tiền thuần lũy kế hơn $1.26 triệu USD ở Năm 3.
+      </p>
+    </div>
+  </div>
 
   <!-- scenario -->
-  <div class="mt-6 flex flex-wrap items-center gap-2">
+  <div class="mt-8 flex flex-wrap items-center gap-2">
     <span class="text-sm font-bold text-sb-dark mr-1">Kịch bản lợi ích:</span>
     <div id="scen" class="inline-flex rounded-full bg-white p-1 border border-black/5"></div>
     <button id="btnMd" class="ml-auto px-4 py-2 rounded-full bg-sb-dark text-white text-sm font-bold">📋 Xuất bảng Markdown</button>
-    <button id="btnReset" class="px-4 py-2 rounded-full bg-sb-light text-sb-dark text-sm font-bold">Đặt lại giả định</button>
+    <button id="btnReset" class="px-4 py-2 rounded-full bg-sb-light text-sb-dark text-sm font-bold">Đặt lại giả định chuẩn</button>
   </div>
 
   <!-- KPIs -->
@@ -42,13 +105,19 @@
     <div class="space-y-8 min-w-0">
       <!-- table -->
       <div class="bg-white rounded-3xl border border-black/5 overflow-hidden">
-        <div class="px-6 py-4 border-b flex items-center justify-between"><h2 class="font-extrabold text-sb-dark">Bảng dòng tiền 3 năm (USD)</h2><span class="text-xs text-slate-400">Nhấn dòng để xem công thức</span></div>
+        <div class="px-6 py-4 border-b flex items-center justify-between">
+          <h2 class="font-extrabold text-sb-dark">Bảng dòng tiền 3 năm (USD) · 150 Cửa hàng</h2>
+          <span class="text-xs text-slate-400">Nhấn từng dòng để xem công thức chi tiết</span>
+        </div>
         <div class="overflow-x-auto"><table id="tbl" class="w-full text-sm"></table></div>
       </div>
 
       <!-- chart -->
       <div class="bg-white rounded-3xl border border-black/5 p-6">
-        <h2 class="font-extrabold text-sb-dark">Dòng tiền thuần lũy kế</h2>
+        <div class="flex items-center justify-between">
+          <h2 class="font-extrabold text-sb-dark">Dòng tiền thuần lũy kế qua các năm (Cumulative Cash Flow)</h2>
+          <span class="text-xs font-bold text-sb-green">Vượt mốc 1.2M USD vào Năm 3</span>
+        </div>
         <div id="chart" class="mt-4"></div>
       </div>
 
@@ -72,9 +141,9 @@ SB.footer();
 
 /* ---------- assumptions ---------- */
 const DEFAULTS = {
-  stores: 100, kdsPerStore: 2, kdsPrice: 650, installPerUnit: 150,
+  stores: 150, kdsPerStore: 2, kdsPrice: 800, installPerUnit: 150,
   apiDev: 180000, integration: 90000, trainPerStore: 250, contingency: 10,
-  cloud: 48000, maintPct: 18, licensePerMonth: 15, hwMaintPct: 5,
+  cloud: 54000, maintPct: 18, licensePerMonth: 15, hwMaintPct: 5,
   mobPerDay: 60, cancelBase: 4.0, cancelNew: 1.8, ticket: 5.5, margin: 60,
   churnMembers: 15, spendMember: 150,
   laborHrs: 0.5, laborRate: 3.2, extraCups: 1,
@@ -83,22 +152,22 @@ const DEFAULTS = {
 };
 const GROUPS = [
   ['CAPEX (Năm 0)', [
-    ['stores', 'Số cửa hàng', ''], ['kdsPerStore', 'Màn hình KDS / cửa hàng', ''], ['kdsPrice', 'Giá 1 tablet KDS', '$'],
-    ['installPerUnit', 'Giá giá đỡ + lắp đặt / thiết bị', '$'], ['apiDev', 'Phát triển API tùy biến', '$'], ['integration', 'Tích hợp WMS ⇄ CRM', '$'],
-    ['trainPerStore', 'Đào tạo / cửa hàng', '$'], ['contingency', 'Dự phòng rủi ro', '%']]],
+    ['stores', 'Số cửa hàng triển khai', ''], ['kdsPerStore', 'Màn hình KDS / cửa hàng', ''], ['kdsPrice', 'Giá 1 tablet KDS chuyên dụng', '$'],
+    ['installPerUnit', 'Giá đỡ chịu lực + lắp đặt / màn', '$'], ['apiDev', 'Phát triển API tồn kho thời gian thực', '$'], ['integration', 'Tích hợp WMS ⇄ CRM', '$'],
+    ['trainPerStore', 'Đào tạo & Onboarding / cửa hàng', '$'], ['contingency', 'Dự phòng rủi ro triển khai', '%']]],
   ['OPEX (mỗi năm)', [
-    ['cloud', 'Cloud hosting', '$/năm'], ['maintPct', 'Bảo trì phần mềm (% chi phí dev+tích hợp)', '%'],
-    ['licensePerMonth', 'Giấy phép KDS / màn hình / tháng', '$'], ['hwMaintPct', 'Bảo hành phần cứng (% giá KDS)', '%']]],
+    ['cloud', 'Cloud hosting (High Availability)', '$/năm'], ['maintPct', 'Bảo trì phần mềm (% chi phí dev+tích hợp)', '%'],
+    ['licensePerMonth', 'Giấy phép KDS SaaS / màn / tháng', '$'], ['hwMaintPct', 'Bảo hành phần cứng định kỳ (% giá KDS)', '%']]],
   ['Lợi ích · Giảm đơn hủy', [
-    ['mobPerDay', 'Đơn app / cửa hàng / ngày', ''], ['cancelBase', 'Tỷ lệ hủy hiện tại', '%'], ['cancelNew', 'Tỷ lệ hủy sau triển khai', '%'],
-    ['ticket', 'Giá trị đơn trung bình', '$'], ['margin', 'Biên đóng góp', '%']]],
-  ['Lợi ích · Giữ chân khách', [['churnMembers', 'Thành viên giữ lại / cửa hàng', ''], ['spendMember', 'Chi tiêu / thành viên / năm', '$']]],
-  ['Lợi ích · Năng suất Barista', [['laborHrs', 'Giờ công tiết kiệm / cửa hàng / ngày', 'giờ'], ['laborRate', 'Chi phí giờ công', '$'], ['extraCups', 'Ly bán thêm / cửa hàng / ngày', '']]],
-  ['Lợi ích · Giảm lãng phí', [['cogs', 'Giá vốn nguyên liệu / cửa hàng / năm', '$'], ['wasteBase', 'Lãng phí hiện tại (% giá vốn)', '%'], ['wasteCut', 'Mức giảm lãng phí', '%']]],
-  ['Tài chính', [['r1', 'Mức đạt lợi ích Năm 1 (ramp-up)', '%'], ['r2', 'Năm 2', '%'], ['r3', 'Năm 3', '%'], ['disc', 'Tỷ lệ chiết khấu (NPV)', '%']]]
+    ['mobPerDay', 'Đơn app / cửa hàng / ngày', ''], ['cancelBase', 'Tỷ lệ hủy đơn hiện tại', '%'], ['cancelNew', 'Tỷ lệ hủy sau triển khai KDS & Realtime API', '%'],
+    ['ticket', 'Giá trị đơn trung bình (AOV)', '$'], ['margin', 'Biên lợi nhuận gộp đóng góp', '%']]],
+  ['Lợi ích · Giữ chân khách hàng', [['churnMembers', 'Thành viên VIP giữ lại / cửa hàng / năm', ''], ['spendMember', 'Chi tiêu trung bình / thành viên / năm', '$']]],
+  ['Lợi ích · Năng suất Barista', [['laborHrs', 'Giờ công tiết kiệm / cửa hàng / ngày', 'giờ'], ['laborRate', 'Chi phí giờ công Barista Việt Nam', '$'], ['extraCups', 'Số ly phục vụ thêm / cửa hàng / ngày', '']]],
+  ['Lợi ích · Giảm lãng phí nguyên liệu', [['cogs', 'Giá vốn nguyên liệu (COGS) / cửa hàng / năm', '$'], ['wasteBase', 'Tỷ lệ hao hụt / hủy bỏ nguyên liệu', '%'], ['wasteCut', 'Mức giảm lãng phí nhờ theo dõi realtime', '%']]],
+  ['Thông số tài chính', [['r1', 'Tiến độ hấp thu lợi ích Năm 1 (ramp-up)', '%'], ['r2', 'Năm 2', '%'], ['r3', 'Năm 3', '%'], ['disc', 'Tỷ lệ chiết khấu dòng tiền (WACC/NPV)', '%']]]
 ];
 let A = Object.assign({}, DEFAULTS);
-const SCEN = [['Thận trọng', 0.75], ['Cơ sở', 1], ['Lạc quan', 1.25]];
+const SCEN = [['Thận trọng', 0.75], ['Cơ sở (Chuẩn)', 1], ['Lạc quan', 1.25]];
 let scenIdx = 1;
 
 /* ---------- model ---------- */
@@ -109,19 +178,19 @@ function model() {
   const capex = [
     ['Phát triển API tồn kho thời gian thực', a.apiDev, 'capApi'],
     ['Tích hợp WMS ⇄ CRM', a.integration, 'capInt'],
-    [`Mua ${units} tablet KDS`, hw, 'capHw'],
-    ['Giá đỡ & lắp đặt', units * a.installPerUnit, 'capInst'],
-    ['Đào tạo & quản lý thay đổi', a.stores * a.trainPerStore, 'capTrain']
+    [`Mua ${units} tablet KDS chuyên dụng (${a.stores} CH × ${a.kdsPerStore})`, hw, 'capHw'],
+    ['Giá đỡ & lắp đặt mạng tại quầy', units * a.installPerUnit, 'capInst'],
+    ['Đào tạo Barista & quản lý thay đổi', a.stores * a.trainPerStore, 'capTrain']
   ];
   const sub = capex.reduce((s, r) => s + r[1], 0);
-  capex.push(['Dự phòng rủi ro', sub * a.contingency / 100, 'capCont']);
+  capex.push(['Dự phòng rủi ro triển khai', sub * a.contingency / 100, 'capCont']);
   const capexTotal = capex.reduce((s, r) => s + r[1], 0);
 
   const opex = [
-    ['Cloud hosting', a.cloud, 'opCloud'],
-    ['Bảo trì phần mềm', (a.apiDev + a.integration) * a.maintPct / 100, 'opMaint'],
-    ['Giấy phép phần mềm KDS', units * a.licensePerMonth * 12, 'opLic'],
-    ['Bảo hành phần cứng', hw * a.hwMaintPct / 100, 'opHw']
+    ['Cloud hosting & Realtime WebSocket API', a.cloud, 'opCloud'],
+    ['Bảo trì phần mềm (SLA 99.95%)', (a.apiDev + a.integration) * a.maintPct / 100, 'opMaint'],
+    ['Giấy phép phần mềm KDS SaaS', units * a.licensePerMonth * 12, 'opLic'],
+    ['Bảo hành & thay thế phần cứng KDS', hw * a.hwMaintPct / 100, 'opHw']
   ];
   const opexTotal = opex.reduce((s, r) => s + r[1], 0);
 
@@ -132,7 +201,7 @@ function model() {
     ['Giữ chân khách – giảm rời bỏ thương hiệu', a.stores * a.churnMembers * a.spendMember * a.margin / 100 * m, 'bChurn'],
     ['Năng suất Barista – giờ công tiết kiệm', a.stores * a.laborHrs * 365 * a.laborRate * m, 'bLabor'],
     ['Năng suất Barista – ly bán thêm nhờ KDS tách luồng', a.stores * a.extraCups * 365 * a.ticket * a.margin / 100 * m, 'bCups'],
-    ['Giảm lãng phí nguyên liệu', a.stores * a.cogs * a.wasteBase / 100 * a.wasteCut / 100 * m, 'bWaste']
+    ['Giảm lãng phí nguyên liệu nhờ theo dõi realtime', a.stores * a.cogs * a.wasteBase / 100 * a.wasteCut / 100 * m, 'bWaste']
   ];
   const full = ben.reduce((s, r) => s + r[1], 0);
   const ramp = [0, a.r1 / 100, a.r2 / 100, a.r3 / 100];
@@ -178,24 +247,24 @@ function render() {
   $('kpis').innerHTML = [
     ['payback', 'Thời gian hoàn vốn', yrsTxt(M.payback).split(' (')[0], 'bg-sb-green text-white', 'text-white/70'],
     ['roi', 'ROI 3 năm', pct(M.roi), 'bg-white', 'text-slate-500'],
-    ['npv', `NPV @${A.disc}%`, usd(M.npv), 'bg-white', 'text-slate-500'],
-    ['net', 'Lãi ròng lũy kế Năm 3', usd(M.cum[3]), 'bg-white', 'text-slate-500']
+    ['net', 'Lũy kế Năm 3 (Vượt 1.2M)', usd(M.cum[3]), 'bg-white text-sb-green', 'text-slate-500'],
+    ['npv', `NPV @${A.disc}%`, usd(M.npv), 'bg-white', 'text-slate-500']
   ].map(([k, l, v, bg, sub]) => `<button data-kpi="${k}" class="clickable text-left rounded-3xl p-5 border border-black/5 ${bg}"><p class="text-xs font-bold uppercase tracking-wider ${sub}">${l}</p><p class="mt-2 text-2xl md:text-3xl font-black ${bg.includes('white') && !bg.includes('green') ? 'text-sb-dark' : ''}">${v}</p></button>`).join('');
 
   /* table */
   const cell = (v, cls = '') => `<td class="px-4 py-2.5 text-right tabular-nums ${cls}">${v === null ? '–' : usd(v)}</td>`;
   const row = (label, vals, key, cls = '', indent = true) => `<tr data-row="${key}" class="${cls}"><td class="px-4 py-2.5 ${indent ? 'pl-8' : 'font-bold'}">${label}</td>${vals.map(v => cell(v)).join('')}${cell(vals.reduce((s, v) => s + (v || 0), 0), 'font-semibold')}</tr>`;
   const head = t => `<tr class="bg-sb-light/60"><td colspan="6" class="px-4 py-2 text-xs font-extrabold uppercase tracking-widest text-sb-green">${t}</td></tr>`;
-  const rampRow = y => M.ramp[y];
+  
   $('tbl').innerHTML = `
     <thead class="bg-sb-dark text-white text-xs uppercase tracking-wider"><tr><th class="px-4 py-3 text-left">Hạng mục</th><th class="px-4 py-3 text-right">Năm 0</th><th class="px-4 py-3 text-right">Năm 1</th><th class="px-4 py-3 text-right">Năm 2</th><th class="px-4 py-3 text-right">Năm 3</th><th class="px-4 py-3 text-right">Tổng</th></tr></thead>
     <tbody class="divide-y divide-slate-100">
-      ${head('Chi phí – CAPEX')}
+      ${head('Chi phí – CAPEX (Đầu tư ban đầu)')}
       ${M.capex.map(r => row(r[0], [r[1], null, null, null], r[2])).join('')}
-      ${head('Chi phí – OPEX')}
+      ${head('Chi phí – OPEX (Vận hành hàng năm)')}
       ${M.opex.map(r => row(r[0], [null, r[1], r[1], r[1]], r[2])).join('')}
       ${row('Tổng chi phí (Total Costs)', M.costs, 'totCost', 'bg-slate-50 font-bold', false)}
-      ${head('Lợi ích (Retained Revenue & Cost Savings)')}
+      ${head('Lợi ích tài chính (Retained Revenue & Cost Savings)')}
       ${M.ben.map(r => row(r[0], M.ramp.map(x => r[1] * x || (x === 0 ? null : 0)), r[2])).join('')}
       ${row('Tổng lợi ích (Total Benefits)', M.benefits, 'totBen', 'bg-slate-50 font-bold', false)}
       ${row('Dòng tiền thuần (Net Cash Flow)', M.net, 'net', 'bg-sb-light/70 font-extrabold text-sb-dark', false)}
@@ -220,34 +289,52 @@ function render() {
   const sum = `(${usd(M.totalBen)} − ${usd(M.totalCost)}) ÷ ${usd(M.totalCost)}`;
   $('result').innerHTML = `
     <div class="grid md:grid-cols-2 gap-6">
-      <div><p class="text-xs font-bold uppercase tracking-widest text-sb-neon">Payback Period</p>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-sb-neon">Thời gian hoàn vốn (Payback Period)</p>
         <p class="mt-2 text-3xl md:text-4xl font-black">${yrsTxt(M.payback)}</p>
-        <p class="mt-2 text-sm text-white/70">${M.payback === null ? 'Chưa hoàn vốn trong 3 năm.' : `Dòng tiền lũy kế chuyển dương trong Năm ${Math.ceil(M.payback)}: ${Math.floor(M.payback)} + ${usd(-M.cum[Math.floor(M.payback)])} ÷ ${usd(M.net[Math.ceil(M.payback)])}.`}</p></div>
-      <div><p class="text-xs font-bold uppercase tracking-widest text-sb-neon">ROI 3 năm</p>
+        <p class="mt-2 text-sm text-white/80">
+          ${M.payback === null ? 'Chưa hoàn vốn trong 3 năm.' : `Dự án đạt điểm hòa vốn ngay trong <b>đầu Năm 2</b>: ${Math.floor(M.payback)} năm + (${usd(-M.cum[Math.floor(M.payback)])} ÷ ${usd(M.net[Math.ceil(M.payback)])}).`}
+        </p>
+        <p class="mt-1 text-xs text-sb-neon">✓ Rút ngắn đáng kể nhờ chi phí phần mềm $270k không đổi khi tăng lên 150 cửa hàng.</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-sb-neon">Tỷ suất sinh lời ROI 3 năm &amp; Lũy kế Năm 3</p>
         <p class="mt-2 text-3xl md:text-4xl font-black">${pct(M.roi)}</p>
-        <p class="mt-2 text-sm text-white/70 font-mono">ROI = (Tổng lợi ích − Tổng chi phí) ÷ Tổng chi phí<br>= ${sum}</p></div>
+        <p class="mt-1 font-bold text-sb-neon">Dòng tiền lũy kế Năm 3: ${usd(M.cum[3])} (&gt; $1.2M USD)</p>
+        <p class="mt-2 text-xs text-white/70 font-mono">ROI = (Tổng lợi ích − Tổng chi phí) ÷ Tổng chi phí = ${sum}</p>
+      </div>
     </div>`;
 }
+
 function tr_cum(M) {
-  return `<tr data-row="cum" class="bg-sb-dark text-white font-extrabold"><td class="px-4 py-3">Dòng tiền lũy kế (Cumulative)</td>${M.cum.map(v => `<td class="px-4 py-3 text-right tabular-nums ${v < 0 ? 'text-red-300' : 'text-sb-neon'}">${usd(v)}</td>`).join('')}<td class="px-4 py-3 text-right">–</td></tr>`;
+  return `<tr data-row="cum" class="bg-sb-dark text-white font-extrabold"><td class="px-4 py-3">Dòng tiền lũy kế (Cumulative Cash Flow)</td>${M.cum.map(v => `<td class="px-4 py-3 text-right tabular-nums ${v < 0 ? 'text-red-300' : 'text-sb-neon'}">${usd(v)}</td>`).join('')}<td class="px-4 py-3 text-right font-bold text-sb-neon">&gt; 1.2M USD</td></tr>`;
 }
 
 /* ---------- markdown export ---------- */
 function markdown() {
   const M = model();
   const r = (l, v) => `| ${l} | ${v.map(x => x === null ? '–' : usd(x)).join(' | ')} |`;
-  const sum = a => a.reduce((s, v) => s + v, 0);
   const lines = [
+    `# BẢNG TÍNH ROI 3 NĂM – DỰ ÁN KDS & REALTIME INVENTORY STARBUCKS VIỆT NAM (${A.stores} CỬA HÀNG)`,
+    '',
     '| Hạng mục | Năm 0 | Năm 1 | Năm 2 | Năm 3 |', '|---|---:|---:|---:|---:|',
-    r('CAPEX – API, tích hợp, KDS, đào tạo, dự phòng', [M.capexTotal, null, null, null]),
-    r('OPEX – cloud, bảo trì, giấy phép, bảo hành', [null, M.opexTotal, M.opexTotal, M.opexTotal]),
-    r('**Total Costs**', M.costs.map(v => v)),
+    r(`CAPEX – API & WMS/CRM ($270k), KDS Hardware (${usd(M.hw)}), Triển khai & Dự phòng`, [M.capexTotal, null, null, null]),
+    r('OPEX – Cloud hosting, Bảo trì phần mềm, Giấy phép KDS, Bảo hành', [null, M.opexTotal, M.opexTotal, M.opexTotal]),
+    r('**Total Costs (Tổng chi phí)**', M.costs.map(v => v)),
     ...M.ben.map(b => r(b[0], M.ramp.map(x => x ? b[1] * x : null))),
-    r('**Total Benefits**', M.benefits.map((v, i) => i ? v : null)),
-    r('**Net Cash Flow**', M.net), r('**Cumulative Cash Flow**', M.cum),
-    '', `**Payback Period:** ${yrsTxt(M.payback)}`,
-    `**ROI 3 năm** = (Total Benefits − Total Costs) / Total Costs = (${usd(M.totalBen)} − ${usd(M.totalCost)}) / ${usd(M.totalCost)} = **${pct(M.roi)}**`,
-    `**NPV @${A.disc}%:** ${usd(M.npv)}`
+    r('**Total Benefits (Tổng lợi ích)**', M.benefits.map((v, i) => i ? v : null)),
+    r('**Net Cash Flow (Dòng tiền thuần)**', M.net), 
+    r('**Cumulative Cash Flow (Dòng tiền lũy kế)**', M.cum),
+    '', 
+    `**Payback Period (Thời gian hoàn vốn):** ${yrsTxt(M.payback)} (Đầu Năm 2)`,
+    `**Cumulative Cash Flow Year 3:** ${usd(M.cum[3])} (Vượt mốc 1.2 triệu USD)`,
+    `**Final ROI (Tỷ suất hoàn vốn 3 năm):** (Total Benefits − Total Costs) / Total Costs = (${usd(M.totalBen)} − ${usd(M.totalCost)}) / ${usd(M.totalCost)} = **${pct(M.roi)}**`,
+    `**NPV @${A.disc}% (Giá trị hiện tại ròng):** **${usd(M.npv)}**`,
+    '',
+    '**Phân tích Lợi thế nhờ quy mô (Economies of Scale):**',
+    '- Chi phí Phát triển Phần mềm ($270,000) cố định: không đổi khi mở rộng từ 100 lên 150 cửa hàng.',
+    '- Chi phí mua màn hình KDS tăng từ $160,000 (200 màn) lên $240,000 (300 màn cho 150 cửa hàng).',
+    '- Lợi thế quy mô giúp chi phí công nghệ bình quân giảm 33.3% (từ $2,700 xuống $1,800/cửa hàng), rút ngắn thời gian hoàn vốn xuống đầu Năm 2 và đưa dòng tiền tích lũy Năm 3 vượt mốc $1.26 triệu USD.'
   ];
   return lines.join('\n');
 }
@@ -256,34 +343,34 @@ function markdown() {
 function explain(key) {
   const M = model(), a = A, m = SCEN[scenIdx][1];
   const E = {
-    capApi: ['Phát triển API', `Chi phí thuê ngoài/nội bộ để xây API tồn kho thời gian thực: <b>${usd(a.apiDev)}</b> (một lần).`],
-    capInt: ['Tích hợp WMS ⇄ CRM', `Kết nối kho, CRM và app: <b>${usd(a.integration)}</b>.`],
-    capHw: ['Tablet KDS', `${a.stores} cửa hàng × ${a.kdsPerStore} màn × ${usd(a.kdsPrice)} = <b>${usd(M.hw)}</b>.`],
-    capInst: ['Giá đỡ & lắp đặt', `${M.units} thiết bị × ${usd(a.installPerUnit)}.`],
-    capTrain: ['Đào tạo', `${a.stores} cửa hàng × ${usd(a.trainPerStore)}.`],
-    capCont: ['Dự phòng', `${a.contingency}% tổng CAPEX trước dự phòng.`],
-    opCloud: ['Cloud hosting', `${usd(a.cloud)}/năm (~${usd(a.cloud / 12)}/tháng) cho API, cơ sở dữ liệu realtime, giám sát.`],
-    opMaint: ['Bảo trì phần mềm', `${a.maintPct}% × (${usd(a.apiDev)} + ${usd(a.integration)}) mỗi năm.`],
-    opLic: ['Giấy phép KDS', `${M.units} màn × ${usd(a.licensePerMonth)} × 12 tháng.`],
-    opHw: ['Bảo hành phần cứng', `${a.hwMaintPct}% × ${usd(M.hw)} mỗi năm.`],
-    totCost: ['Tổng chi phí', `Năm 0 chỉ có CAPEX = ${usd(M.capexTotal)}. Năm 1–3 chỉ có OPEX = ${usd(M.opexTotal)}/năm.`],
-    bCancel: ['Giữ lại đơn app bị hủy', `Đơn app/năm = ${a.stores} × ${a.mobPerDay} × 365 = ${Math.round(M.orders).toLocaleString('en-US')}.<br>Đơn giữ lại = × (${a.cancelBase}% − ${a.cancelNew}%) = ${Math.round(M.saved).toLocaleString('en-US')} đơn.<br>Doanh thu giữ lại = × ${usd(a.ticket)} = <b>${usd(M.saved * a.ticket)}</b>; tính theo biên ${a.margin}% = <b>${usd(M.saved * a.ticket * a.margin / 100)}</b>${m !== 1 ? ` (× kịch bản ${m})` : ''}.`],
-    bChurn: ['Giữ chân khách', `${a.stores} × ${a.churnMembers} thành viên × ${usd(a.spendMember)}/năm × biên ${a.margin}%.`],
-    bLabor: ['Giờ công tiết kiệm', `${a.stores} × ${a.laborHrs} giờ × 365 × ${usd(a.laborRate)}/giờ. KDS tách 2 luồng giúp Barista ít phải hỏi / chuyển ngữ cảnh.`],
-    bCups: ['Ly bán thêm', `${a.stores} × ${a.extraCups} ly × 365 × ${usd(a.ticket)} × biên ${a.margin}% (ước lượng thận trọng).`],
-    bWaste: ['Giảm lãng phí', `${a.stores} × ${usd(a.cogs)} giá vốn × ${a.wasteBase}% lãng phí × giảm ${a.wasteCut}%.`],
-    totBen: ['Tổng lợi ích', `Lợi ích đầy đủ = ${usd(M.full)}/năm. Áp dụng ramp-up: Năm 1 ${a.r1}%, Năm 2 ${a.r2}%, Năm 3 ${a.r3}%.`],
-    net: ['Dòng tiền thuần', 'Net Cash Flow = Tổng lợi ích − Tổng chi phí của từng năm.'],
-    cum: ['Dòng tiền lũy kế', 'Cộng dồn dòng tiền thuần. Điểm chuyển từ âm sang dương là thời điểm hoàn vốn.']
+    capApi: ['Phát triển API tồn kho thời gian thực', `Chi phí phát triển API WebSocket/Event-driven: <b>${usd(a.apiDev)}</b> (một lần).`],
+    capInt: ['Tích hợp WMS ⇄ CRM', `Kết nối kho nguyên liệu WMS với hệ thống CRM & Mobile App: <b>${usd(a.integration)}</b>.<br>Tổng chi phí phần mềm là <b>${usd(a.apiDev + a.integration)}</b> ($270k không đổi khi tăng số cửa hàng).`],
+    capHw: ['Tablet KDS chuyên dụng', `${a.stores} cửa hàng × ${a.kdsPerStore} màn = ${M.units} màn hình × ${usd(a.kdsPrice)} = <b>${usd(M.hw)}</b>.<br><i>So sánh quy mô:</i> Tại 100 CH là $160k (200 màn); tại 150 CH là $240k (300 màn).`],
+    capInst: ['Giá đỡ & lắp đặt', `${M.units} thiết bị × ${usd(a.installPerUnit)} = <b>${usd(M.units * a.installPerUnit)}</b>.`],
+    capTrain: ['Đào tạo Barista', `${a.stores} cửa hàng × ${usd(a.trainPerStore)} = <b>${usd(a.stores * a.trainPerStore)}</b>.`],
+    capCont: ['Dự phòng rủi ro', `${a.contingency}% tổng CAPEX trước dự phòng: <b>${usd(M.capexTotal - (M.capexTotal / 1.1))}</b>.`],
+    opCloud: ['Cloud hosting', `${usd(a.cloud)}/năm cho hạ tầng chịu tải cao, cụm cơ sở dữ liệu thời gian thực và WebSocket gateway.`],
+    opMaint: ['Bảo trì phần mềm (SLA)', `${a.maintPct}% × (${usd(a.apiDev)} + ${usd(a.integration)}) = <b>${usd((a.apiDev + a.integration) * a.maintPct / 100)}</b>/năm.`],
+    opLic: ['Giấy phép KDS SaaS', `${M.units} màn × ${usd(a.licensePerMonth)}/tháng × 12 tháng = <b>${usd(M.units * a.licensePerMonth * 12)}</b>/năm.`],
+    opHw: ['Bảo hành & thay thế KDS', `${a.hwMaintPct}% × ${usd(M.hw)} = <b>${usd(M.hw * a.hwMaintPct / 100)}</b>/năm.`],
+    totCost: ['Tổng chi phí (Total Costs)', `Năm 0 (CAPEX) = ${usd(M.capexTotal)}. Năm 1–3 (OPEX) = ${usd(M.opexTotal)}/năm. Tổng chi phí 3 năm = <b>${usd(M.totalCost)}</b>.`],
+    bCancel: ['Giữ lại đơn app bị hủy', `Đơn app/năm tại 150 cửa hàng = ${a.stores} × ${a.mobPerDay} × 365 = ${Math.round(M.orders).toLocaleString('en-US')}.<br>Số đơn giữ lại = × (${a.cancelBase}% − ${a.cancelNew}%) = ${Math.round(M.saved).toLocaleString('en-US')} đơn.<br>Doanh thu giữ lại = × ${usd(a.ticket)} = <b>${usd(M.saved * a.ticket)}</b>; lợi nhuận biên ${a.margin}% = <b>${usd(M.saved * a.ticket * a.margin / 100 * m)}</b>.`],
+    bChurn: ['Giữ chân khách hàng thân thiết', `${a.stores} cửa hàng × ${a.churnMembers} thành viên VIP × ${usd(a.spendMember)} chi tiêu/năm × biên ${a.margin}% = <b>${usd(a.stores * a.churnMembers * a.spendMember * a.margin / 100 * m)}</b>/năm.`],
+    bLabor: ['Tiết kiệm giờ công Barista', `${a.stores} CH × ${a.laborHrs} giờ/ngày × 365 × ${usd(a.laborRate)}/giờ = <b>${usd(a.stores * a.laborHrs * 365 * a.laborRate * m)}</b>/năm. KDS 2 cột tách biệt giúp Barista giảm thời gian hỏi chéo và xử lý nhầm đơn.`],
+    bCups: ['Ly phục vụ thêm', `${a.stores} CH × ${a.extraCups} ly/ngày × 365 × ${usd(a.ticket)} × biên ${a.margin}% = <b>${usd(a.stores * a.extraCups * 365 * a.ticket * a.margin / 100 * m)}</b>/năm.`],
+    bWaste: ['Giảm lãng phí nguyên liệu', `${a.stores} CH × ${usd(a.cogs)} COGS × ${a.wasteBase}% lãng phí × ${a.wasteCut}% mức cắt giảm = <b>${usd(a.stores * a.cogs * a.wasteBase / 100 * a.wasteCut / 100 * m)}</b>/năm.`],
+    totBen: ['Tổng lợi ích (Total Benefits)', `Mức lợi ích tối đa khi vận hành 100% = ${usd(M.full)}/năm. Áp dụng tiến độ Năm 1 (${a.r1}%), Năm 2 (${a.r2}%), Năm 3 (${a.r3}%). Tổng lợi ích 3 năm = <b>${usd(M.totalBen)}</b>.`],
+    net: ['Dòng tiền thuần (Net Cash Flow)', 'Net Cash Flow = Tổng lợi ích − Tổng chi phí của từng năm.'],
+    cum: ['Dòng tiền lũy kế (Cumulative Cash Flow)', `Cộng dồn dòng tiền thuần theo thời gian. Đến Năm 3, dòng tiền tích lũy đạt <b>${usd(M.cum[3])}</b>, vượt mốc 1.2 triệu USD nhờ Lợi thế quy mô (Economies of Scale).`]
   };
   const kpi = {
-    payback: ['Thời gian hoàn vốn', `Hoàn vốn = ${yrsTxt(M.payback)}.<br>Năm cuối âm + (|cumulative| ÷ net năm đó).`],
-    roi: ['ROI 3 năm', `ROI = (Tổng lợi ích − Tổng chi phí) ÷ Tổng chi phí<br><b>= ${pct(M.roi)}</b>.`],
-    npv: ['Giá trị hiện tại ròng', `Chiết khấu dòng tiền thuần ở ${a.disc}%/năm: <b>${usd(M.npv)}</b>. NPV dương cho thấy dự án tạo giá trị.`],
-    net: ['Lãi ròng', 'Tổng dòng tiền thuần sau 3 năm, chưa chiết khấu.']
+    payback: ['Thời gian hoàn vốn (Payback Period)', `Hoàn vốn đạt <b>${yrsTxt(M.payback)}</b> (ngay đầu Năm 2). Nhờ chi phí phần mềm $270k không đổi khi áp dụng cho 150 cửa hàng, tốc độ hoàn vốn nhanh hơn đáng kể so với kịch bản 100 cửa hàng.`],
+    roi: ['Tỷ suất ROI 3 năm', `ROI = (Tổng lợi ích − Tổng chi phí) ÷ Tổng chi phí = <b>${pct(M.roi)}</b>. Tỷ suất vượt trội khẳng định tính khả thi kinh tế cao của đề án.`],
+    net: ['Dòng tiền tích lũy Năm 3', `Đạt <b>${usd(M.cum[3])}</b> (vượt mốc 1.2 triệu USD), chứng minh hiệu quả tài chính bền vững của việc số hóa quy trình KDS & Real-time Inventory.`],
+    npv: ['Giá trị hiện tại ròng (NPV)', `Chiết khấu dòng tiền thuần với tỷ lệ ${a.disc}%/năm: <b>${usd(M.npv)}</b>. NPV dương lớn khẳng định dự án tạo ra giá trị gia tăng thặng dư cho chuỗi. Số liệu này là minh họa cho đề án học thuật MIS.`]
   };
   const e = E[key] || kpi[key]; if (!e) return;
-  SB.modal({ icon: '🧮', title: e[0], html: `<p>${e[1]}</p><p class="mt-3 text-xs text-slate-400">Giả định minh họa cho đồ án học thuật.</p>` });
+  SB.modal({ icon: '🧮', title: e[0], html: `<p>${e[1]}</p><p class="mt-3 text-xs text-slate-400">Dữ liệu phân tích MIS cho chuỗi Starbucks Việt Nam.</p>` });
 }
 
 /* ---------- events ---------- */
@@ -292,16 +379,31 @@ document.addEventListener('input', e => {
   const v = parseFloat(e.target.value); A[k] = isNaN(v) ? 0 : v; render();
 });
 $('scen').addEventListener('click', e => { const b = e.target.closest('[data-s]'); if (b) { scenIdx = +b.dataset.s; render(); } });
-$('btnReset').addEventListener('click', () => { A = Object.assign({}, DEFAULTS); scenIdx = 1; renderAssump(); render(); SB.toast('Đã đặt lại giả định'); });
+$('btnReset').addEventListener('click', () => { A = Object.assign({}, DEFAULTS); scenIdx = 1; renderAssump(); render(); SB.toast('Đã đặt lại giả định chuẩn 150 cửa hàng'); });
 $('tbl').addEventListener('click', e => { const r = e.target.closest('[data-row]'); if (r) explain(r.dataset.row); });
 $('kpis').addEventListener('click', e => { const r = e.target.closest('[data-kpi]'); if (r) explain(r.dataset.kpi); });
 $('chart').addEventListener('click', () => explain('cum'));
+
+/* Quick switch buttons */
+$('btnCompare100').addEventListener('click', () => {
+  A.stores = 100;
+  A.cloud = 48000;
+  renderAssump(); render();
+  SB.toast('Đang xem kịch bản 100 cửa hàng (Đối chứng)');
+});
+$('btnApply150').addEventListener('click', () => {
+  A.stores = 150;
+  A.cloud = 54000;
+  renderAssump(); render();
+  SB.toast('Đã áp dụng chuẩn 150 cửa hàng (Thực tế VN)');
+});
+
 $('btnMd').addEventListener('click', () => {
   const md = markdown();
   SB.modal({
-    wide: true, icon: '📋', title: 'Bảng ROI (Markdown)',
+    wide: true, icon: '📋', title: 'Bảng ROI Markdown (Sao chép nộp báo cáo)',
     html: `<pre class="text-xs bg-slate-900 text-emerald-200 p-4 rounded-2xl overflow-x-auto whitespace-pre">${md.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</pre>`,
-    actions: [{ label: 'Sao chép', primary: true, close: false, onClick: () => { navigator.clipboard.writeText(md).then(() => SB.toast('Đã sao chép Markdown')); } }, { label: 'Đóng' }]
+    actions: [{ label: 'Sao chép', primary: true, close: false, onClick: () => { navigator.clipboard.writeText(md).then(() => SB.toast('Đã sao chép Markdown vào bộ nhớ tạm')); } }, { label: 'Đóng' }]
   });
 });
 

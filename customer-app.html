@@ -17,7 +17,7 @@
   <aside class="space-y-5 order-2 lg:order-1">
     <div class="bg-white rounded-3xl p-5 border border-black/5">
       <h2 class="font-extrabold text-sb-dark">🎛️ Bảng điều khiển demo</h2>
-      <p class="text-xs text-slate-500 mt-1">Chỉ áp dụng cho Chi nhánh X. Cũng có thể đổi từ màn KDS ở tab khác.</p>
+      <p class="text-xs text-slate-500 mt-1">Áp dụng cho Chi nhánh Nguyễn Huệ (Live). Cũng có thể đổi từ màn KDS ở tab khác.</p>
       <p class="mt-4 text-xs font-bold uppercase tracking-widest text-slate-400">Mức tải trọng</p>
       <div id="ctl-load" class="mt-2 grid grid-cols-2 gap-2"></div>
       <label class="mt-4 flex items-center justify-between gap-3 p-3 rounded-2xl bg-sb-cream cursor-pointer">
@@ -154,14 +154,17 @@ const LEVELS = [
   { key: 'pause', label: 'Tạm dừng',    wait: null, open: 58, staff: '2/4', counters: '1/4', msg: 'Cửa hàng tạm ngưng nhận đơn di động. Vui lòng thử lại sau ít phút', cls: 'from-red-50 to-red-100 border-red-300 text-red-900', ico: 'bg-red-500' }
 ];
 const STORES = [
-  { id: 'X', name: 'Chi nhánh X · Nguyễn Huệ, Q.1', short: 'chi nhánh X', dist: '350 m', live: true },
-  { id: 'B', name: 'Chi nhánh Landmark 81, Bình Thạnh', short: 'chi nhánh Landmark 81', dist: '1,2 km', load: 0, oos: {} },
-  { id: 'C', name: 'Chi nhánh Đồng Khởi, Q.1', short: 'chi nhánh Đồng Khởi', dist: '600 m', load: 1, oos: {} }
+  { id: 'X', name: 'Chi nhánh Nguyễn Huệ · Phố đi bộ, Q.1', short: 'chi nhánh Nguyễn Huệ', dist: '350 m', live: true },
+  { id: 'NW', name: 'Chi nhánh New World · Cửa hàng đầu tiên VN (2013)', short: 'chi nhánh New World', dist: '850 m', load: 0, oos: {} },
+  { id: 'B', name: 'Chi nhánh Landmark 81 · Vinhomes Central Park', short: 'chi nhánh Landmark 81', dist: '1,2 km', load: 0, oos: {} },
+  { id: 'HN', name: 'Chi nhánh Nhà Thờ · Hoàn Kiếm, Hà Nội', short: 'chi nhánh Nhà Thờ', dist: 'Hà Nội', load: 1, oos: {} },
+  { id: 'DN', name: 'Chi nhánh Bà Nà Hills · Đà Nẵng', short: 'chi nhánh Bà Nà Hills', dist: 'Đà Nẵng', load: 0, oos: {} }
 ];
 const ITEMS = [
   { id: 'caramel',   name: 'Caramel Macchiato', opt: 'Grande · Nóng · Ít ngọt',  price: 85000, ico: '☕', bg: 'from-amber-200 to-amber-400' },
   { id: 'matcha',    name: 'Matcha Latte',      opt: 'Grande · Đá · Sữa tươi',   price: 79000, ico: '🍵', bg: 'from-lime-200 to-emerald-400', ing: 'Bột matcha' },
-  { id: 'croissant', name: 'Croissant bơ',      opt: 'Hâm nóng',                 price: 55000, ico: '🥐', bg: 'from-orange-200 to-amber-300' }
+  { id: 'coldbrew',  name: 'Dolce Misto / Phin Cold Brew', opt: 'Grande · Đá · Sữa đặc', price: 82000, ico: '🧊', bg: 'from-amber-700 to-amber-900' },
+  { id: 'croissant', name: 'Croissant bơ Pháp', opt: 'Hâm nóng giòn',            price: 55000, ico: '🥐', bg: 'from-orange-200 to-amber-300' }
 ];
 const PAYS = [
   { id: 'card', name: 'Thẻ Starbucks', sub: 'Số dư 250.000đ', mult: 2, ico: '💳' },
