@@ -8,36 +8,34 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="assets/common.js"></script>
 </head>
-<body class="bg-sb-cream text-slate-700">
+<body class="bg-[#E4ECE8] text-slate-700">
 <div id="site-header"></div>
 
-<main class="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-[300px_420px_1fr] gap-8 items-start justify-center">
+<main id="main" class="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-[290px_410px_1fr] gap-8 items-start justify-center">
 
   <!-- LEFT: demo control -->
-  <aside class="space-y-5 order-2 lg:order-1">
-    <div class="bg-white rounded-3xl p-5 border border-black/5">
-      <h2 class="font-extrabold text-sb-dark">🎛️ Bảng điều khiển demo</h2>
-      <p class="text-xs text-slate-500 mt-1">Áp dụng cho Chi nhánh Nguyễn Huệ (Live). Cũng có thể đổi từ màn KDS ở tab khác.</p>
+  <aside class="embed-hide space-y-5 order-2 lg:order-1">
+    <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm">
+      <h2 class="font-extrabold text-sb-dark">🎛️ Điều khiển demo</h2>
+      <p class="text-xs text-slate-500 mt-1">Áp dụng cho chi nhánh Nguyễn Huệ (kết nối KDS). Đổi ở đây hoặc trên màn KDS đều đồng bộ.</p>
       <p class="mt-4 text-xs font-bold uppercase tracking-widest text-slate-400">Mức tải trọng</p>
       <div id="ctl-load" class="mt-2 grid grid-cols-2 gap-2"></div>
-      <label class="mt-4 flex items-center justify-between gap-3 p-3 rounded-2xl bg-sb-cream cursor-pointer">
-        <span class="text-sm font-semibold text-sb-dark">🍵 Matcha Latte hết nguyên liệu</span>
-        <input id="ctl-oos" type="checkbox" class="w-5 h-5 accent-[#00704A]">
-      </label>
+      <button id="ctl-auto" class="mt-2 w-full px-3 py-2 rounded-xl text-sm font-bold"></button>
+      <p class="mt-4 text-xs font-bold uppercase tracking-widest text-slate-400">Nguyên liệu (nhấn để báo hết / còn)</p>
+      <div id="ctl-ing" class="mt-2 flex flex-wrap gap-1.5"></div>
       <div class="mt-4 flex gap-2">
         <a href="kds.html" target="_blank" class="flex-1 text-center px-3 py-2.5 rounded-full bg-sb-dark text-white text-sm font-bold">Mở KDS ↗</a>
-        <button id="ctl-reset" class="px-3 py-2.5 rounded-full bg-sb-light text-sb-dark text-sm font-bold">Reset</button>
+        <button id="ctl-reset" class="px-3 py-2.5 rounded-full bg-sb-light text-sb-dark text-sm font-bold">Reset demo</button>
       </div>
     </div>
-
-    <div class="bg-white rounded-3xl p-5 border border-black/5">
+    <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm">
       <h2 class="font-extrabold text-sb-dark">Yêu cầu thể hiện ở màn này</h2>
       <div class="mt-3 flex flex-wrap gap-2">
         <button data-info="r-fr09" class="px-3 py-1.5 rounded-full bg-sb-green text-white text-xs font-bold">FR-09</button>
         <button data-info="r-fr01" class="px-3 py-1.5 rounded-full bg-sb-light text-sb-dark text-xs font-bold">FR-01</button>
         <button data-info="r-fr04" class="px-3 py-1.5 rounded-full bg-sb-light text-sb-dark text-xs font-bold">FR-04</button>
-        <button data-info="r-nfr02" class="px-3 py-1.5 rounded-full bg-sb-gold/25 text-sb-dark text-xs font-bold">NFR-02</button>
-        <button data-info="r-nfr03" class="px-3 py-1.5 rounded-full bg-sb-gold/25 text-sb-dark text-xs font-bold">NFR-03</button>
+        <button data-info="r-nfr02" class="px-3 py-1.5 rounded-full bg-sb-gold/30 text-sb-dark text-xs font-bold">NFR-02</button>
+        <button data-info="r-nfr03" class="px-3 py-1.5 rounded-full bg-sb-gold/30 text-sb-dark text-xs font-bold">NFR-03</button>
       </div>
     </div>
   </aside>
@@ -46,93 +44,63 @@
   <section class="order-1 lg:order-2 flex justify-center">
     <div class="relative w-[390px] h-[800px] rounded-[48px] bg-slate-900 p-[10px] shadow-[0_40px_80px_-20px_rgba(0,0,0,.45)] shrink-0">
       <div class="absolute top-[18px] left-1/2 -translate-x-1/2 w-28 h-7 bg-slate-900 rounded-full z-30"></div>
-      <div id="phone" class="relative h-full w-full rounded-[38px] bg-[#F7F5F0] overflow-hidden flex flex-col">
+      <div id="phone" class="relative h-full w-full rounded-[38px] bg-[#F4F7F5] overflow-hidden flex flex-col">
 
         <!-- status bar -->
         <div class="flex justify-between items-center px-7 pt-3 pb-1 text-[12px] font-bold text-slate-900 bg-white">
           <span id="clock">9:41</span><span class="tracking-widest">●●● 5G ▮</span>
         </div>
         <!-- app bar -->
-        <div class="bg-white px-4 pb-3 flex items-center gap-3 border-b border-black/5">
-          <button data-a="back" aria-label="Quay lại" class="w-9 h-9 rounded-full bg-slate-100 grid place-items-center">‹</button>
-          <h1 class="flex-1 font-extrabold text-sb-dark">Giỏ hàng &amp; Thanh toán</h1>
-          <a href="index.html" aria-label="Starbucks – về trang chủ" title="Về trang chủ">__LOGO__</a>
+        <div class="bg-sb-green text-white px-4 py-3 flex items-center gap-3">
+          <a id="appLogo" href="index.html" aria-label="Starbucks – về trang chủ" title="Về trang chủ" class="bg-white rounded-full p-0.5"></a>
+          <div class="flex-1 min-w-0">
+            <h1 id="appTitle" class="font-extrabold leading-tight"></h1>
+            <button data-a="stores" class="text-[11px] text-white/85 truncate max-w-full text-left underline decoration-white/40">📍 <span id="storeShort"></span> ▾</button>
+          </div>
+          <button data-a="profile" class="text-right leading-tight" aria-label="Hồ sơ thành viên">
+            <span class="block text-[10px] text-white/70">Xin chào</span>
+            <span id="hiName" class="block text-xs font-bold truncate max-w-[90px]"></span>
+          </button>
         </div>
 
-        <!-- scroll area -->
-        <div id="scroll" class="flex-1 overflow-y-auto no-scrollbar px-4 py-4 space-y-4">
-          <div id="banner"></div>
+        <!-- banner -->
+        <div id="banner" class="px-3 pt-3"></div>
 
-          <!-- store -->
-          <div class="bg-white rounded-2xl p-3.5 flex items-center gap-3 border border-black/5">
-            <div class="w-10 h-10 rounded-xl bg-sb-light grid place-items-center">📍</div>
-            <div class="flex-1 min-w-0">
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Nhận tại</p>
-              <p id="storeName" class="text-sm font-bold text-sb-dark truncate"></p>
-            </div>
-            <button data-a="stores" class="text-xs font-bold text-sb-green px-3 py-1.5 rounded-full bg-sb-light">Đổi</button>
-          </div>
+        <!-- content -->
+        <div id="scroll" class="flex-1 overflow-y-auto no-scrollbar px-3 pt-3 pb-24"></div>
 
-          <!-- items -->
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <h2 class="font-extrabold text-sb-dark">Món của bạn</h2>
-              <span id="itemCount" class="text-xs text-slate-400"></span>
-            </div>
-            <div id="items" class="space-y-3"></div>
-          </div>
+        <!-- floating cart bar -->
+        <div id="floatBar" class="absolute left-3 right-3 bottom-[68px] z-10"></div>
 
-          <!-- offer -->
-          <div id="offer"></div>
-
-          <!-- pickup -->
-          <div>
-            <h2 class="font-extrabold text-sb-dark mb-2">Thời gian nhận món</h2>
-            <div id="pickup" class="space-y-2"></div>
-          </div>
-
-          <!-- payment -->
-          <div>
-            <h2 class="font-extrabold text-sb-dark mb-2">Thanh toán</h2>
-            <div id="pay" class="space-y-2"></div>
-          </div>
-
-          <!-- summary -->
-          <div id="summary" class="bg-white rounded-2xl p-4 border border-black/5 space-y-2 text-sm"></div>
-          <div class="h-2"></div>
-        </div>
-
-        <!-- footer -->
-        <div class="bg-white border-t border-black/5 p-4">
-          <button id="orderBtn" data-a="order" class="w-full h-14 rounded-full font-extrabold text-white bg-sb-green hover:bg-sb-mid transition flex items-center justify-between px-6 disabled:bg-slate-300 disabled:cursor-not-allowed"></button>
-        </div>
+        <!-- bottom nav -->
+        <nav id="nav" class="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-200 grid grid-cols-3 z-20"></nav>
       </div>
     </div>
   </section>
 
   <!-- RIGHT: explanation -->
-  <aside class="space-y-5 order-3">
+  <aside class="embed-hide space-y-5 order-3">
     <div class="bg-sb-dark text-white rounded-3xl p-6">
       <p class="text-xs font-bold uppercase tracking-widest text-sb-neon">Giải quyết Phantom Inventory</p>
       <h2 class="mt-2 text-2xl font-black">Khách biết trước khi trả tiền</h2>
       <ol class="mt-5 space-y-3">
-        <li role="button" tabindex="0" data-info="s1" class="clickable flex gap-3 p-3 rounded-2xl bg-white/5"><span class="w-7 h-7 rounded-full bg-sb-neon text-sb-dark font-black grid place-items-center shrink-0">1</span><span><b>Barista / kho báo hết nguyên liệu</b><br><span class="text-sm text-white/60">Ghi nhận ngay tại KDS.</span></span></li>
-        <li role="button" tabindex="0" data-info="s2" class="clickable flex gap-3 p-3 rounded-2xl bg-white/5"><span class="w-7 h-7 rounded-full bg-sb-neon text-sb-dark font-black grid place-items-center shrink-0">2</span><span><b>API cập nhật &lt; 5 giây</b><br><span class="text-sm text-white/60">Tồn kho đồng bộ tới app.</span></span></li>
-        <li role="button" tabindex="0" data-info="s3" class="clickable flex gap-3 p-3 rounded-2xl bg-white/5"><span class="w-7 h-7 rounded-full bg-sb-neon text-sb-dark font-black grid place-items-center shrink-0">3</span><span><b>App khóa món + cảnh báo nổi bật</b><br><span class="text-sm text-white/60">Kèm gợi ý thay thế / chi nhánh khác.</span></span></li>
-        <li role="button" tabindex="0" data-info="s4" class="clickable flex gap-3 p-3 rounded-2xl bg-white/5"><span class="w-7 h-7 rounded-full bg-sb-neon text-sb-dark font-black grid place-items-center shrink-0">4</span><span><b>Không còn đơn bị hủy vì hết hàng</b><br><span class="text-sm text-white/60">Giữ lại doanh thu &amp; niềm tin.</span></span></li>
+        <li role="button" tabindex="0" data-info="s1" class="clickable flex gap-3 p-3 rounded-2xl bg-white/10"><span class="w-7 h-7 rounded-full bg-sb-neon text-sb-dark font-black grid place-items-center shrink-0">1</span><span><b>Barista báo hết nguyên liệu trên KDS</b><br><span class="text-sm text-white/70">Nút "📦 Tồn kho" trên màn hình Barista.</span></span></li>
+        <li role="button" tabindex="0" data-info="s2" class="clickable flex gap-3 p-3 rounded-2xl bg-white/10"><span class="w-7 h-7 rounded-full bg-sb-neon text-sb-dark font-black grid place-items-center shrink-0">2</span><span><b>API đồng bộ &lt; 5 giây</b><br><span class="text-sm text-white/70">App nhận tín hiệu tức thì.</span></span></li>
+        <li role="button" tabindex="0" data-info="s3" class="clickable flex gap-3 p-3 rounded-2xl bg-white/10"><span class="w-7 h-7 rounded-full bg-sb-neon text-sb-dark font-black grid place-items-center shrink-0">3</span><span><b>Mọi món dùng nguyên liệu đó bị khóa</b><br><span class="text-sm text-white/70">Thẻ đỏ nổi bật + gợi ý món thay thế.</span></span></li>
+        <li role="button" tabindex="0" data-info="s4" class="clickable flex gap-3 p-3 rounded-2xl bg-white/10"><span class="w-7 h-7 rounded-full bg-sb-neon text-sb-dark font-black grid place-items-center shrink-0">4</span><span><b>Đơn hợp lệ hiện ngay trên KDS</b><br><span class="text-sm text-white/70">Cột "ĐƠN APP" kèm tên khách hàng.</span></span></li>
       </ol>
     </div>
-    <div class="bg-white rounded-3xl p-6 border border-black/5">
-      <h3 class="font-extrabold text-sb-dark">Thử ngay trên điện thoại</h3>
+    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
+      <h3 class="font-extrabold text-sb-dark">Thử ngay</h3>
       <ul class="mt-3 space-y-2 text-sm text-slate-600">
-        <li>• Nhấn <b>banner thời gian chờ</b> để xem chi tiết &amp; hẹn giờ.</li>
-        <li>• Nhấn <b>thẻ cam trên Matcha Latte</b> để xem gợi ý thay thế.</li>
-        <li>• Đổi mức tải bên trái để xem 4 trạng thái.</li>
-        <li>• Nhấn <b>"Đổi"</b> để chọn chi nhánh vắng hơn.</li>
-        <li>• Nhấn <b>logo Starbucks</b> để về trang chủ.</li>
+        <li>1. Chọn món → thêm vào giỏ → nhập <b>tên khách hàng</b> → Đặt hàng.</li>
+        <li>2. Mở <b>KDS</b>: đơn xuất hiện ở cột ĐƠN APP kèm tên bạn.</li>
+        <li>3. Trên KDS bấm <b>Tồn kho</b> báo hết một nguyên liệu → món trên App bị khóa.</li>
+        <li>4. Trên KDS bấm <b>Hoàn thành</b> → tab "Đơn của tôi" báo sẵn sàng.</li>
       </ul>
-      <div class="mt-4 flex gap-2">
-        <a href="kds.html" class="px-4 py-2 rounded-full bg-sb-green text-white text-sm font-bold">Xem KDS →</a>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <a href="demo.html" class="px-4 py-2 rounded-full bg-sb-green text-white text-sm font-bold">Xem song song →</a>
+        <a href="kds.html" class="px-4 py-2 rounded-full bg-sb-light text-sb-dark text-sm font-bold">Xem KDS</a>
         <a href="roi.html" class="px-4 py-2 rounded-full bg-sb-light text-sb-dark text-sm font-bold">Xem ROI</a>
       </div>
     </div>
@@ -144,239 +112,401 @@
 <script>
 SB.header('app');
 SB.footer();
-document.getElementById('phone').innerHTML = document.getElementById('phone').innerHTML.replace('__LOGO__', SB.logo(34));
+if (SB.embed) { const m = document.getElementById('main'); m.className = 'flex justify-center py-3'; }
+document.getElementById('appLogo').innerHTML = SB.logo(36);
+if (SB.embed) document.getElementById('appLogo').target = '_top';
 
-/* ---------- data ---------- */
+/* ---------- dữ liệu ---------- */
 const LEVELS = [
-  { key: 'ok',    label: 'Bình thường', wait: 5,    open: 6,  staff: '4/4', counters: '4/4', msg: 'Cửa hàng đang thông thoáng. Thời gian nhận món dự kiến: 5 phút nữa', cls: 'from-emerald-50 to-emerald-100 border-emerald-300 text-emerald-900', ico: 'bg-emerald-500' },
-  { key: 'busy',  label: 'Đông',        wait: 15,   open: 23, staff: '3/4', counters: '3/4', msg: 'Cửa hàng hiện đang đông. Thời gian nhận món dự kiến: 15 phút nữa', cls: 'from-amber-50 to-amber-100 border-amber-300 text-amber-900', ico: 'bg-amber-500' },
-  { key: 'over',  label: 'Quá tải',     wait: 25,   open: 41, staff: '3/4', counters: '2/4', msg: 'Cửa hàng đang rất đông. Thời gian nhận món dự kiến: 25 phút nữa', cls: 'from-orange-50 to-orange-100 border-orange-300 text-orange-900', ico: 'bg-orange-500' },
-  { key: 'pause', label: 'Tạm dừng',    wait: null, open: 58, staff: '2/4', counters: '1/4', msg: 'Cửa hàng tạm ngưng nhận đơn di động. Vui lòng thử lại sau ít phút', cls: 'from-red-50 to-red-100 border-red-300 text-red-900', ico: 'bg-red-500' }
+  { label: 'Bình thường', wait: 5,    staff: '4/4', counters: '4/4', msg: 'Cửa hàng đang thông thoáng. Nhận món dự kiến sau 5 phút', box: 'bg-emerald-100 border-emerald-500 text-emerald-950', ico: 'bg-emerald-600' },
+  { label: 'Đông',        wait: 15,   staff: '3/4', counters: '3/4', msg: 'Cửa hàng hiện đang đông. Thời gian nhận món dự kiến: 15 phút nữa', box: 'bg-amber-100 border-amber-500 text-amber-950', ico: 'bg-amber-500' },
+  { label: 'Quá tải',     wait: 25,   staff: '3/4', counters: '2/4', msg: 'Cửa hàng đang rất đông. Thời gian nhận món dự kiến: 25 phút nữa', box: 'bg-orange-100 border-orange-600 text-orange-950', ico: 'bg-orange-600' },
+  { label: 'Tạm dừng',    wait: null, staff: '2/4', counters: '1/4', msg: 'Cửa hàng tạm ngưng nhận đơn di động. Vui lòng thử lại sau ít phút', box: 'bg-red-100 border-red-600 text-red-950', ico: 'bg-red-600' }
 ];
 const STORES = [
-  { id: 'X', name: 'Chi nhánh Nguyễn Huệ · Phố đi bộ, Q.1', short: 'chi nhánh Nguyễn Huệ', dist: '350 m', live: true },
-  { id: 'NW', name: 'Chi nhánh New World · Cửa hàng đầu tiên VN (2013)', short: 'chi nhánh New World', dist: '850 m', load: 0, oos: {} },
-  { id: 'B', name: 'Chi nhánh Landmark 81 · Vinhomes Central Park', short: 'chi nhánh Landmark 81', dist: '1,2 km', load: 0, oos: {} },
-  { id: 'HN', name: 'Chi nhánh Nhà Thờ · Hoàn Kiếm, Hà Nội', short: 'chi nhánh Nhà Thờ', dist: 'Hà Nội', load: 1, oos: {} },
-  { id: 'DN', name: 'Chi nhánh Bà Nà Hills · Đà Nẵng', short: 'chi nhánh Bà Nà Hills', dist: 'Đà Nẵng', load: 0, oos: {} }
-];
-const ITEMS = [
-  { id: 'caramel',   name: 'Caramel Macchiato', opt: 'Grande · Nóng · Ít ngọt',  price: 85000, ico: '☕', bg: 'from-amber-200 to-amber-400' },
-  { id: 'matcha',    name: 'Matcha Latte',      opt: 'Grande · Đá · Sữa tươi',   price: 79000, ico: '🍵', bg: 'from-lime-200 to-emerald-400', ing: 'Bột matcha' },
-  { id: 'coldbrew',  name: 'Dolce Misto / Phin Cold Brew', opt: 'Grande · Đá · Sữa đặc', price: 82000, ico: '🧊', bg: 'from-amber-700 to-amber-900' },
-  { id: 'croissant', name: 'Croissant bơ Pháp', opt: 'Hâm nóng giòn',            price: 55000, ico: '🥐', bg: 'from-orange-200 to-amber-300' }
+  { id: 'X',  name: 'Starbucks Nguyễn Huệ · Q.1, TP.HCM',     short: 'Nguyễn Huệ', dist: '350 m', live: true },
+  { id: 'NW', name: 'Starbucks New World · Q.1, TP.HCM',      short: 'New World',  dist: '850 m', load: 0 },
+  { id: 'LM', name: 'Starbucks Landmark 81 · Bình Thạnh',     short: 'Landmark 81', dist: '1,2 km', load: 0 },
+  { id: 'HN', name: 'Starbucks Nhà Thờ · Hoàn Kiếm, Hà Nội',  short: 'Nhà Thờ',    dist: 'Hà Nội', load: 1 },
+  { id: 'DN', name: 'Starbucks Bà Nà Hills · Đà Nẵng',        short: 'Bà Nà Hills', dist: 'Đà Nẵng', load: 0 }
 ];
 const PAYS = [
   { id: 'card', name: 'Thẻ Starbucks', sub: 'Số dư 250.000đ', mult: 2, ico: '💳' },
-  { id: 'momo', name: 'Ví MoMo',       sub: 'Liên kết',        mult: 1, ico: '🟣' },
+  { id: 'momo', name: 'Ví MoMo',       sub: 'Đã liên kết',     mult: 1, ico: '🟣' },
   { id: 'bank', name: 'Thẻ ngân hàng', sub: '•••• 4821',       mult: 1, ico: '🏦' }
 ];
+const HEATABLE = ['croissant', 'sandwich', 'muffin'];
+const MY_KEY = 'sbux_my_orders_v2';
 
-const S = { store: 0, cart: { caramel: 1, matcha: 1, croissant: 1 }, pickup: 0, pay: 'card', offer: true, countdown: 10, demo: SB.state.get() };
+const S = { store: 0, tab: 'menu', cat: 'all', cart: [], pickup: 0, pay: 'card', offer: true, countdown: 10, demo: SB.state.get(), my: [], seen: {} };
+try { S.my = JSON.parse(localStorage.getItem(MY_KEY) || '[]'); } catch (e) {}
+
 const store = () => STORES[S.store];
 const levelIdx = () => store().live ? S.demo.load : store().load;
 const level = () => LEVELS[levelIdx()];
-const isOOS = id => store().live ? !!S.demo.oos[id] : !!(store().oos || {})[id];
-const DISCOUNT = 0.2;
+const oosMap = () => store().live ? S.demo.oos : {};
+const ingName = k => SB.ING[k] ? SB.ING[k].name : k;
 
-/* ---------- helpers ---------- */
-function hhmm(addMin) {
-  const d = new Date(Date.now() + addMin * 60000);
-  return d.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+/* lưu vào state chung mà không tự re-render */
+let mute = () => {};
+function save(fn) { S.demo = SB.state.mutate(fn); mute(); }
+
+function lineBlocked(l) {
+  const it = SB.item(l.id); let k = SB.blockedBy(it, oosMap());
+  if (!k && it.drink) { const m = SB.MILKS.find(x => x.n === l.milk); if (m && m.ing && oosMap()[m.ing]) k = m.ing; }
+  return k;
 }
+function linePrice(l) {
+  const it = SB.item(l.id); let p = it.price;
+  if (it.drink) p += (SB.SIZES.find(s => s.n === l.size) || { add: 0 }).add + (SB.MILKS.find(m => m.n === l.milk) || { add: 0 }).add;
+  return p;
+}
+function lineMods(l) {
+  const it = SB.item(l.id), m = [];
+  if (it.drink) { if (l.sweet && l.sweet !== 'Bình thường') m.push(l.sweet); if (l.milk && l.milk !== 'Sữa tươi') m.push(l.milk); }
+  else if (HEATABLE.includes(l.id) && l.heat) m.push('Hâm nóng');
+  return m;
+}
+function lineDesc(l) {
+  const it = SB.item(l.id);
+  return [it.drink ? l.size : null].concat(lineMods(l)).filter(Boolean).join(' · ') || (it.drink ? '' : 'Phần tiêu chuẩn');
+}
+function hhmm(addMin) { return new Date(Date.now() + addMin * 60000).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }); }
+const cartCount = () => S.cart.reduce((s, l) => s + l.q, 0);
+
 function totals() {
-  let sub = 0;
-  ITEMS.forEach(it => { if (!isOOS(it.id)) sub += (S.cart[it.id] || 0) * it.price; });
-  const offerOn = S.offer && levelIdx() < 2 && S.cart.croissant && !isOOS('croissant');
-  const disc = offerOn ? Math.round(55000 * DISCOUNT * S.cart.croissant) : 0;
+  const ok = S.cart.filter(l => !lineBlocked(l));
+  const blocked = S.cart.filter(l => lineBlocked(l));
+  const sub = ok.reduce((s, l) => s + linePrice(l) * l.q, 0);
+  const foods = ok.filter(l => SB.item(l.id).cat === 'food');
+  const offerAvail = foods.length > 0 && levelIdx() < 2;
+  const disc = (S.offer && offerAvail) ? Math.round(Math.min.apply(null, foods.map(linePrice)) * 0.2) : 0;
   const total = sub - disc;
   const pay = PAYS.find(p => p.id === S.pay);
   const stars = Math.round(Math.floor(total / 10000) * pay.mult * 1.2);
-  return { sub, disc, total, stars, pay, offerOn };
+  return { ok, blocked, sub, disc, total, pay, stars, foods };
 }
-function pickupLabels() {
-  const w = level().wait;
-  if (w === null) return [];
+function pickupOpts() {
+  const w = level().wait; if (w === null) return [];
   return [
-    { t: 'Ngay khi sẵn sàng', s: `Dự kiến ${hhmm(w)} (~${w} phút)` },
-    { t: `Hẹn lúc ${hhmm(w + 10)}`, s: 'Đồ uống được pha đúng giờ, nóng và đá còn nguyên' },
-    { t: `Hẹn lúc ${hhmm(w + 25)}`, s: levelIdx() >= 1 ? 'Gợi ý: khung giờ vắng hơn' : 'Linh hoạt theo lịch của bạn' }
+    { t: 'Ngay khi sẵn sàng', s: `Dự kiến ${hhmm(w)} (~${w} phút)`, where: 'Ngay khi sẵn sàng' },
+    { t: `Hẹn lúc ${hhmm(w + 10)}`, s: 'Pha đúng giờ hẹn, đồ uống còn nóng/lạnh', where: `Hẹn lấy ${hhmm(w + 10)}` },
+    { t: `Hẹn lúc ${hhmm(w + 25)}`, s: levelIdx() >= 1 ? 'Gợi ý: khung giờ vắng hơn' : 'Linh hoạt theo lịch của bạn', where: `Hẹn lấy ${hhmm(w + 25)}` }
   ];
 }
+const affectedItems = () => SB.MENU.filter(it => SB.blockedBy(it, oosMap()));
 
-/* ---------- render ---------- */
+/* ---------- render: khung ---------- */
 function renderBanner() {
-  const L = level();
-  const paused = L.wait === null;
+  const L = level(), paused = L.wait === null, i = levelIdx();
+  const open = store().live ? S.demo.tickets.length : [3, 6, 12, 18][i];
   document.getElementById('banner').innerHTML = `
-  <div role="button" tabindex="0" data-a="waitinfo" class="cursor-pointer rounded-2xl border bg-gradient-to-br ${L.cls} p-4 shadow-sm hover:shadow-md transition">
-    <div class="flex items-start gap-3">
-      <div class="relative w-11 h-11 rounded-full ${L.ico} text-white grid place-items-center shrink-0">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>
-        ${levelIdx() > 0 ? '<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-white animate-ping opacity-70"></span>' : ''}
+  <button data-a="waitinfo" class="w-full text-left rounded-2xl border-2 ${L.box} p-3 shadow-sm hover:shadow-md transition">
+    <div class="flex items-center gap-3">
+      <div class="relative w-10 h-10 rounded-full ${L.ico} text-white grid place-items-center shrink-0">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>
+        ${i > 0 ? '<span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-white animate-ping"></span>' : ''}
       </div>
-      <div class="flex-1">
-        <p class="font-extrabold leading-snug">${L.msg}</p>
-        <p class="mt-1 text-xs opacity-70 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-current"></span>Cập nhật trực tiếp · làm mới sau <b id="cd">${S.countdown}</b>s · Nhấn để xem chi tiết</p>
+      <div class="flex-1 min-w-0">
+        <p class="text-[13px] font-extrabold leading-snug">${L.msg}</p>
+        <p class="mt-0.5 text-[11px] opacity-80">${open} đơn đang mở · làm mới sau <b id="cd">${S.countdown}</b>s · Nhấn xem chi tiết</p>
       </div>
     </div>
-    ${paused ? '' : `<div class="mt-3 h-1.5 rounded-full bg-black/10 overflow-hidden"><div class="h-full bg-current opacity-60 rounded-full" style="width:${Math.min(100, 15 + L.wait * 3)}%"></div></div>`}
+  </button>`;
+}
+
+function renderHead() {
+  document.getElementById('appTitle').textContent = { menu: 'Thực đơn', cart: 'Giỏ hàng & Thanh toán', orders: 'Đơn của tôi' }[S.tab];
+  document.getElementById('storeShort').textContent = store().short;
+  document.getElementById('hiName').textContent = S.demo.customer || 'Khách';
+}
+
+function activeOrders() {
+  return S.my.map(o => {
+    const t = S.demo.tickets.find(x => x.id === o.id);
+    const ready = (S.demo.ready || []).includes(o.id);
+    return Object.assign({}, o, { status: ready ? 'ready' : t ? t.status : (o.live === false ? 'offline' : 'ready') });
+  });
+}
+
+function renderNav() {
+  const n = cartCount(), pending = activeOrders().filter(o => o.status === 'new' || o.status === 'making').length;
+  const tabs = [['menu', '🍽️', 'Thực đơn', 0], ['cart', '🛒', 'Giỏ hàng', n], ['orders', '🧾', 'Đơn của tôi', pending]];
+  setHTML(document.getElementById('nav'), tabs.map(([k, ico, l, badge]) => `
+    <button data-a="tab" data-t="${k}" class="relative py-2.5 flex flex-col items-center gap-0.5 ${S.tab === k ? 'text-sb-green font-extrabold' : 'text-slate-500 font-semibold'}">
+      <span class="text-xl leading-none">${ico}</span><span class="text-[11px]">${l}</span>
+      ${S.tab === k ? '<i class="absolute top-0 left-6 right-6 h-0.5 rounded-full bg-sb-green"></i>' : ''}
+      ${badge ? `<b class="absolute top-1 right-[28%] min-w-[18px] h-[18px] px-1 rounded-full bg-red-600 text-white text-[10px] grid place-items-center">${badge}</b>` : ''}
+    </button>`).join(''));
+}
+
+function renderFloat() {
+  const el = document.getElementById('floatBar'), n = cartCount();
+  if (S.tab !== 'menu' || !n) { el.innerHTML = ''; return; }
+  const t = totals();
+  el.innerHTML = `<button data-a="tab" data-t="cart" class="w-full h-12 rounded-full bg-sb-dark text-white font-extrabold px-5 flex items-center justify-between shadow-xl hover:bg-black transition">
+    <span>🛒 Xem giỏ · ${n} món</span><span>${SB.money(t.total)}</span></button>`;
+}
+
+/* ---------- render: tab Thực đơn ---------- */
+function itemCard(it) {
+  const bk = SB.blockedBy(it, oosMap());
+  const inCart = S.cart.filter(l => l.id === it.id).reduce((s, l) => s + l.q, 0);
+  return `
+  <div class="relative rounded-2xl bg-white border-2 ${bk ? 'border-red-300' : 'border-slate-200'} overflow-hidden shadow-sm">
+    <button data-a="${bk ? 'oos' : 'item'}" data-id="${it.id}" class="w-full text-left">
+      <div class="p-3 flex gap-3 ${bk ? 'opacity-50 grayscale' : ''}">
+        <div class="w-[68px] h-[68px] rounded-2xl bg-gradient-to-br ${it.bg} grid place-items-center text-3xl shrink-0 relative">${it.ico}
+          ${it.best && !bk ? '<span class="absolute -top-1.5 -left-1.5 text-[9px] font-black bg-sb-gold text-sb-dark rounded-full px-1.5 py-0.5">HOT</span>' : ''}</div>
+        <div class="flex-1 min-w-0">
+          <p class="font-extrabold text-sb-dark leading-tight">${it.name}</p>
+          <p class="text-[11px] text-slate-500 mt-0.5 leading-snug line-clamp-2">${it.desc}</p>
+          <p class="mt-1.5 font-extrabold text-sm text-sb-green ${bk ? 'line-through' : ''}">${SB.money(it.price)}</p>
+        </div>
+        ${bk ? '' : `<div class="self-end relative"><span class="w-9 h-9 rounded-full bg-sb-green text-white text-xl font-bold grid place-items-center">＋</span>
+          ${inCart ? `<b class="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-sb-dark text-white text-[10px] grid place-items-center">${inCart}</b>` : ''}</div>`}
+      </div>
+    </button>
+    ${bk ? `<button data-a="oos" data-id="${it.id}" class="w-full text-left bg-gradient-to-r from-orange-600 to-red-600 text-white px-3 py-2.5 flex items-center gap-2.5">
+      <span class="w-7 h-7 rounded-full bg-white/25 grid place-items-center shrink-0">⚠️</span>
+      <span class="flex-1 text-[12.5px] font-bold leading-snug">Nguyên liệu món này đang tạm hết tại ${store().short}<br><span class="font-medium opacity-90">Hết: ${ingName(bk)}</span></span>
+      <span class="text-[11px] font-bold bg-white/25 rounded-full px-2.5 py-1 shrink-0">Gợi ý ›</span></button>` : ''}
   </div>`;
 }
 
-function renderItems() {
-  document.getElementById('storeName').textContent = store().name;
-  let n = 0;
-  document.getElementById('items').innerHTML = ITEMS.map(it => {
-    const q = S.cart[it.id] || 0; if (!q) return '';
-    n++;
-    const out = isOOS(it.id);
-    return `
-    <div class="relative rounded-2xl bg-white border ${out ? 'border-orange-300' : 'border-black/5'} overflow-hidden">
-      <div class="p-3.5 flex gap-3 ${out ? 'opacity-45 grayscale' : ''}" aria-disabled="${out}">
-        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br ${it.bg} grid place-items-center text-3xl shrink-0">${it.ico}</div>
+function renderMenu() {
+  const oos = Object.keys(oosMap());
+  const aff = affectedItems();
+  const chips = [{ id: 'all', name: 'Tất cả', ico: '✨' }].concat(SB.CATS);
+  let html = '';
+  if (oos.length) {
+    html += `<button data-a="oosList" class="w-full mb-3 text-left rounded-2xl bg-red-50 border-2 border-red-400 px-3 py-2.5 flex items-center gap-2.5">
+      <span class="text-lg">⚠️</span>
+      <span class="flex-1 text-[12px] text-red-900 leading-snug"><b>Tạm hết tại ${store().short}:</b> ${oos.map(ingName).join(', ')}<br>Ảnh hưởng <b>${aff.length} món</b> · Nhấn xem chi tiết</span></button>`;
+  }
+  html += `<div class="flex gap-2 overflow-x-auto no-scrollbar pb-3 -mx-1 px-1">${chips.map(c => `
+    <button data-a="cat" data-id="${c.id}" class="shrink-0 px-3.5 py-2 rounded-full text-[13px] font-bold border-2 transition ${S.cat === c.id ? 'bg-sb-green border-sb-green text-white' : 'bg-white border-slate-200 text-sb-dark hover:border-sb-green'}">${c.ico} ${c.name}</button>`).join('')}</div>`;
+  const cats = S.cat === 'all' ? SB.CATS : SB.CATS.filter(c => c.id === S.cat);
+  cats.forEach(c => {
+    const list = SB.MENU.filter(m => m.cat === c.id);
+    html += `<h2 class="mt-2 mb-2 flex items-center gap-2 font-extrabold text-sb-dark"><span class="w-1.5 h-5 rounded-full bg-sb-green"></span>${c.ico} ${c.name}<span class="text-xs font-semibold text-slate-400">${list.length} món</span></h2>
+      <div class="space-y-2.5 mb-4">${list.map(itemCard).join('')}</div>`;
+  });
+  return html;
+}
+
+/* ---------- render: tab Giỏ hàng ---------- */
+function section(title, body) { return `<div class="mb-4"><h2 class="font-extrabold text-sb-dark mb-2 flex items-center gap-2"><span class="w-1.5 h-5 rounded-full bg-sb-green"></span>${title}</h2>${body}</div>`; }
+
+function renderCart() {
+  if (!S.cart.length) {
+    return `<div class="py-16 text-center"><div class="text-6xl">🛒</div><p class="mt-3 font-extrabold text-sb-dark">Giỏ hàng trống</p><p class="text-sm text-slate-500">Chọn món từ thực đơn để bắt đầu.</p>
+      <button data-a="tab" data-t="menu" class="mt-4 px-6 py-3 rounded-full bg-sb-green text-white font-bold">Xem thực đơn</button></div>`;
+  }
+  const t = totals(), opts = pickupOpts(), paused = level().wait === null;
+  let h = '';
+
+  h += section('Khách hàng', `
+    <label class="block bg-white rounded-2xl border-2 border-slate-200 p-3 focus-within:border-sb-green">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Tên khách hàng (hiện trên màn hình Barista)</span>
+      <input id="custName" type="text" maxlength="30" value="${SB.esc(S.demo.customer || '')}" placeholder="Nhập tên của bạn" class="mt-1 w-full text-base font-bold text-sb-dark outline-none bg-transparent">
+    </label>`);
+
+  h += section(`Món của bạn (${cartCount()})`, `<div class="space-y-2.5">${S.cart.map(l => {
+    const it = SB.item(l.id), bk = lineBlocked(l);
+    return `<div class="rounded-2xl bg-white border-2 ${bk ? 'border-red-400' : 'border-slate-200'} overflow-hidden">
+      <div class="p-3 flex gap-3 ${bk ? 'opacity-50 grayscale' : ''}">
+        <div class="w-14 h-14 rounded-xl bg-gradient-to-br ${it.bg} grid place-items-center text-2xl shrink-0">${it.ico}</div>
         <div class="flex-1 min-w-0">
           <p class="font-bold text-sb-dark leading-tight">${it.name}</p>
-          <p class="text-xs text-slate-500 mt-0.5">${it.opt}</p>
+          <p class="text-[11px] text-slate-500 mt-0.5">${lineDesc(l)}</p>
           <div class="mt-2 flex items-center justify-between">
-            <span class="font-bold text-sm ${out ? 'line-through' : ''}">${SB.money(it.price)}</span>
+            <span class="font-extrabold text-sm ${bk ? 'line-through' : 'text-sb-green'}">${SB.money(linePrice(l) * l.q)}</span>
             <span class="flex items-center gap-2">
-              <button ${out ? 'disabled' : ''} data-a="dec" data-id="${it.id}" class="w-7 h-7 rounded-full bg-slate-100 font-bold" aria-label="Giảm">−</button>
-              <b class="w-4 text-center text-sm">${q}</b>
-              <button ${out ? 'disabled' : ''} data-a="inc" data-id="${it.id}" class="w-7 h-7 rounded-full bg-sb-green text-white font-bold" aria-label="Tăng">+</button>
+              <button ${bk ? 'disabled' : ''} data-a="dec" data-k="${l.k}" class="w-7 h-7 rounded-full bg-slate-200 font-bold" aria-label="Giảm">−</button>
+              <b class="w-4 text-center text-sm">${l.q}</b>
+              <button ${bk ? 'disabled' : ''} data-a="inc" data-k="${l.k}" class="w-7 h-7 rounded-full bg-sb-green text-white font-bold" aria-label="Tăng">+</button>
             </span>
           </div>
         </div>
       </div>
-      ${out ? `
-      <button data-a="oos" data-id="${it.id}" class="w-full text-left bg-gradient-to-r from-orange-500 to-red-500 text-white px-3.5 py-2.5 flex items-center gap-2.5 hover:brightness-105 transition">
-        <span class="w-7 h-7 rounded-full bg-white/25 grid place-items-center shrink-0">⚠️</span>
-        <span class="flex-1 text-[13px] font-bold leading-snug">Nguyên liệu món này đang tạm hết tại ${store().short}</span>
-        <span class="text-[11px] font-bold bg-white/25 rounded-full px-2.5 py-1 shrink-0">Xem gợi ý ›</span>
-      </button>` : ''}
+      ${bk ? `<div class="bg-gradient-to-r from-orange-600 to-red-600 text-white px-3 py-2.5 flex items-center gap-2">
+        <span>⚠️</span><span class="flex-1 text-[12px] font-bold leading-snug">Nguyên liệu món này đang tạm hết tại ${store().short} (${ingName(bk)})</span>
+        <button data-a="oos" data-id="${l.id}" class="text-[11px] font-bold bg-white/25 rounded-full px-2.5 py-1">Gợi ý</button>
+        <button data-a="rm" data-k="${l.k}" class="text-[11px] font-bold bg-white text-red-700 rounded-full px-2.5 py-1">Xóa</button></div>` : ''}
     </div>`;
-  }).join('') || '<div class="p-6 text-center text-slate-400 bg-white rounded-2xl">Giỏ hàng trống</div>';
-  document.getElementById('itemCount').textContent = n + ' món';
-}
+  }).join('')}</div>
+  <button data-a="tab" data-t="menu" class="mt-2 w-full py-2.5 rounded-xl border-2 border-dashed border-sb-green text-sb-green font-bold text-sm">＋ Thêm món khác</button>`);
 
-function renderOffer() {
-  const t = totals();
-  const el = document.getElementById('offer');
-  if (!S.cart.croissant || isOOS('croissant')) { el.innerHTML = ''; return; }
-  if (levelIdx() >= 2) {
-    el.innerHTML = `<div class="rounded-2xl bg-slate-100 border border-dashed border-slate-300 p-3.5 flex gap-3 items-center">
-      <span class="text-xl">⏸️</span><p class="text-xs text-slate-600 flex-1"><b>Ưu đãi dành riêng cho bạn tạm hoãn</b> vì cửa hàng đang quá tải. Sẽ mở lại khi bớt đông.</p>
+  if (t.foods.length && levelIdx() < 2) {
+    h += `<div class="mb-4 rounded-2xl bg-gradient-to-r from-sb-green to-sb-mid text-white p-3 flex items-center gap-3">
+      <div class="w-11 h-11 rounded-xl bg-white/20 grid place-items-center text-2xl">🎁</div>
+      <div class="flex-1"><p class="font-bold text-sm">Giảm 20% một món bánh / đồ ăn</p><button data-a="why" class="text-[11px] underline text-white/85">Vì sao tôi nhận được ưu đãi này?</button></div>
+      <button data-a="offer" class="px-3 py-2 rounded-full text-xs font-extrabold ${S.offer ? 'bg-sb-neon text-sb-dark' : 'bg-white text-sb-green'}">${S.offer ? '✓ Đã áp dụng' : 'Áp dụng'}</button></div>`;
+  } else if (t.foods.length) {
+    h += `<div class="mb-4 rounded-2xl bg-slate-200 border-2 border-dashed border-slate-400 p-3 flex gap-3 items-center"><span class="text-xl">⏸️</span>
+      <p class="text-xs text-slate-700 flex-1"><b>Ưu đãi dành riêng cho bạn tạm hoãn</b> vì cửa hàng đang quá tải. Sẽ mở lại khi bớt đông.</p>
       <button data-a="whyDelay" class="text-xs font-bold text-sb-green">Vì sao?</button></div>`;
-    return;
   }
-  el.innerHTML = `<div class="rounded-2xl bg-gradient-to-r from-sb-green to-sb-mid text-white p-3.5 flex items-center gap-3">
-    <div class="w-11 h-11 rounded-xl bg-white/15 grid place-items-center text-2xl">🎁</div>
-    <div class="flex-1"><p class="font-bold text-sm">Giảm 20% Croissant bơ</p>
-      <button data-a="why" class="text-[11px] underline text-white/80">Vì sao tôi nhận được ưu đãi này?</button></div>
-    <button data-a="offer" class="px-3.5 py-2 rounded-full text-xs font-extrabold ${S.offer ? 'bg-sb-neon text-sb-dark' : 'bg-white text-sb-green'}">${S.offer ? '✓ Đã áp dụng' : 'Áp dụng'}</button></div>`;
-}
 
-function renderPickup() {
-  const opts = pickupLabels();
-  const el = document.getElementById('pickup');
-  if (!opts.length) { el.innerHTML = '<div class="p-3.5 rounded-2xl bg-red-50 text-red-800 text-sm border border-red-200">Hiện không thể đặt món cho chi nhánh này. Hãy chọn chi nhánh khác.</div>'; return; }
-  if (S.pickup >= opts.length) S.pickup = 0;
-  el.innerHTML = opts.map((o, i) => `
-    <button data-a="pickup" data-i="${i}" class="w-full text-left flex items-center gap-3 p-3 rounded-2xl bg-white border ${S.pickup === i ? 'border-sb-green ring-2 ring-sb-green/20' : 'border-black/5'}">
+  h += section('Thời gian nhận món', opts.length ? `<div class="space-y-2">${opts.map((o, i) => `
+    <button data-a="pickup" data-i="${i}" class="w-full text-left flex items-center gap-3 p-3 rounded-2xl bg-white border-2 ${S.pickup === i ? 'border-sb-green bg-sb-pale' : 'border-slate-200'}">
       <span class="w-5 h-5 rounded-full border-2 ${S.pickup === i ? 'border-sb-green bg-sb-green' : 'border-slate-300'} grid place-items-center">${S.pickup === i ? '<i class="w-1.5 h-1.5 bg-white rounded-full"></i>' : ''}</span>
-      <span class="flex-1"><b class="text-sm text-sb-dark">${o.t}</b><br><span class="text-xs text-slate-500">${o.s}</span></span>
-    </button>`).join('');
-}
+      <span class="flex-1"><b class="text-sm text-sb-dark">${o.t}</b><br><span class="text-xs text-slate-500">${o.s}</span></span></button>`).join('')}</div>`
+    : '<div class="p-3 rounded-2xl bg-red-100 text-red-900 text-sm border-2 border-red-400 font-semibold">Chi nhánh này đang tạm ngưng nhận đơn di động. Hãy chọn chi nhánh khác.</div>');
 
-function renderPay() {
-  document.getElementById('pay').innerHTML = PAYS.map(p => `
-    <button data-a="pay" data-id="${p.id}" class="w-full text-left flex items-center gap-3 p-3 rounded-2xl bg-white border ${S.pay === p.id ? 'border-sb-green ring-2 ring-sb-green/20' : 'border-black/5'}">
+  h += section('Thanh toán', `<div class="space-y-2">${PAYS.map(p => `
+    <button data-a="pay" data-id="${p.id}" class="w-full text-left flex items-center gap-3 p-3 rounded-2xl bg-white border-2 ${S.pay === p.id ? 'border-sb-green bg-sb-pale' : 'border-slate-200'}">
       <span class="text-xl">${p.ico}</span>
       <span class="flex-1"><b class="text-sm text-sb-dark">${p.name}</b><br><span class="text-xs text-slate-500">${p.sub}</span></span>
-      <span class="text-[11px] font-extrabold px-2 py-1 rounded-full ${p.mult > 1 ? 'bg-sb-gold/25 text-amber-800' : 'bg-slate-100 text-slate-500'}">⭐ ×${p.mult}</span>
-    </button>`).join('');
+      <span class="text-[11px] font-extrabold px-2 py-1 rounded-full ${p.mult > 1 ? 'bg-sb-gold/40 text-amber-900' : 'bg-slate-100 text-slate-500'}">⭐ ×${p.mult}</span></button>`).join('')}</div>`);
+
+  const canOrder = !paused && t.ok.length > 0 && t.blocked.length === 0;
+  h += `<div class="bg-white rounded-2xl p-4 border-2 border-slate-200 space-y-2 text-sm mb-3">
+      <div class="flex justify-between"><span class="text-slate-500">Tạm tính</span><b>${SB.money(t.sub)}</b></div>
+      ${t.disc ? `<div class="flex justify-between text-sb-green"><span>Ưu đãi dành cho bạn</span><b>−${SB.money(t.disc)}</b></div>` : ''}
+      <div class="flex justify-between border-t pt-2"><span class="font-bold text-sb-dark">Tổng cộng</span><b class="text-lg text-sb-dark">${SB.money(t.total)}</b></div>
+      <button data-a="stars" class="w-full flex items-center justify-between rounded-xl bg-sb-gold/25 px-3 py-2.5 text-amber-950 font-bold"><span>⭐ Bạn sẽ nhận +${t.stars} Sao</span><span class="text-xs underline">Cách tính</span></button>
+    </div>
+    ${t.blocked.length ? '<p class="mb-2 text-xs font-bold text-red-700 text-center">⚠️ Vui lòng xóa món hết nguyên liệu để tiếp tục đặt hàng.</p>' : ''}
+    <button data-a="order" ${canOrder ? '' : 'disabled'} class="w-full h-14 rounded-full font-extrabold text-white bg-sb-green hover:bg-sb-mid transition flex items-center justify-between px-6 disabled:bg-slate-400 disabled:cursor-not-allowed">
+      ${paused ? '<span class="mx-auto">Tạm ngưng nhận đơn di động</span>' : `<span>Đặt hàng</span><span>${SB.money(t.total)}</span>`}</button>`;
+  return h;
 }
 
-function renderSummary() {
-  const t = totals();
-  document.getElementById('summary').innerHTML = `
-    <div class="flex justify-between"><span class="text-slate-500">Tạm tính</span><b>${SB.money(t.sub)}</b></div>
-    ${t.disc ? `<div class="flex justify-between text-sb-green"><span>Ưu đãi dành cho bạn</span><b>−${SB.money(t.disc)}</b></div>` : ''}
-    <div class="flex justify-between border-t pt-2"><span class="font-bold text-sb-dark">Tổng cộng</span><b class="text-base text-sb-dark">${SB.money(t.total)}</b></div>
-    <button data-a="stars" class="w-full flex items-center justify-between rounded-xl bg-sb-gold/15 px-3 py-2.5 text-amber-900 font-bold">
-      <span>⭐ Bạn sẽ nhận +${t.stars} Sao</span><span class="text-xs underline">Cách tính</span></button>`;
-
-  const btn = document.getElementById('orderBtn');
-  const paused = level().wait === null;
-  const hasItems = t.sub > 0;
-  btn.disabled = paused || !hasItems;
-  btn.innerHTML = paused
-    ? '<span class="mx-auto">Tạm ngưng nhận đơn di động</span>'
-    : (!hasItems ? '<span class="mx-auto">Chưa có món hợp lệ</span>' : `<span>Đặt hàng</span><span>${SB.money(t.total)}</span>`);
+/* ---------- render: tab Đơn của tôi ---------- */
+function renderOrders() {
+  const list = activeOrders().slice().reverse();
+  if (!list.length) return `<div class="py-16 text-center"><div class="text-6xl">🧾</div><p class="mt-3 font-extrabold text-sb-dark">Chưa có đơn nào</p><p class="text-sm text-slate-500">Đặt món để theo dõi trạng thái tại đây.</p>
+    <button data-a="tab" data-t="menu" class="mt-4 px-6 py-3 rounded-full bg-sb-green text-white font-bold">Xem thực đơn</button></div>`;
+  const label = { new: ['Đã gửi tới quầy · chờ pha', 'bg-amber-100 text-amber-900 border-amber-400', 1], making: ['Barista đang pha chế', 'bg-sky-100 text-sky-900 border-sky-400', 2], ready: ['Sẵn sàng – mời nhận món!', 'bg-emerald-100 text-emerald-900 border-emerald-500', 3], offline: ['Đã gửi (chi nhánh không kết nối KDS demo)', 'bg-slate-100 text-slate-700 border-slate-300', 1] };
+  return list.map(o => {
+    const L = label[o.status] || label.new, step = L[2];
+    return `<div class="mb-3 rounded-2xl bg-white border-2 border-slate-200 p-3.5 shadow-sm">
+      <div class="flex items-center justify-between"><b class="text-sb-dark text-base">#${o.id}</b><span class="text-xs text-slate-400">${o.time} · ${SB.esc(o.storeShort)}</span></div>
+      <p class="text-xs text-slate-500 mt-0.5">Tên trên đơn: <b class="text-sb-dark">${SB.esc(o.name)}</b> · ${o.pickup}</p>
+      <ul class="mt-2 text-sm space-y-0.5">${o.items.map(i => `<li><b>${i.q}×</b> ${SB.esc(i.n)} <span class="text-slate-400 text-xs">${SB.esc([i.s].concat(i.m).filter(Boolean).join(' · '))}</span></li>`).join('')}</ul>
+      <div class="mt-3 flex items-center gap-1.5">${[1, 2, 3].map(n => `<i class="flex-1 h-1.5 rounded-full ${n <= step ? 'bg-sb-green' : 'bg-slate-200'}"></i>`).join('')}</div>
+      <div class="mt-2 text-xs font-bold px-3 py-2 rounded-xl border-2 ${L[1]}">${L[0]}</div>
+      <div class="mt-2 flex justify-between text-sm"><span class="text-slate-500">Tổng tiền</span><b>${SB.money(o.total)}</b></div>
+    </div>`;
+  }).join('');
 }
 
-function renderAll() { renderBanner(); renderItems(); renderOffer(); renderPickup(); renderPay(); renderSummary(); renderControls(); }
+/* chỉ thay DOM khi nội dung thực sự đổi (tránh mất click / nháy hình khi đồng bộ) */
+function setHTML(el, html) { if (el._h !== html) { el.innerHTML = html; el._h = html; return true; } return false; }
+function renderBody(keepScroll) {
+  const sc = document.getElementById('scroll'), top = keepScroll ? sc.scrollTop : 0;
+  const changed = setHTML(sc, S.tab === 'menu' ? renderMenu() : S.tab === 'cart' ? renderCart() : renderOrders());
+  if (changed) sc.scrollTop = top;
+}
 
 function renderControls() {
+  const d = S.demo;
   document.getElementById('ctl-load').innerHTML = LEVELS.map((l, i) => `
-    <button data-c="load" data-i="${i}" class="px-3 py-2.5 rounded-2xl text-sm font-bold border ${S.demo.load === i ? 'bg-sb-green text-white border-sb-green' : 'bg-white border-slate-200 text-sb-dark hover:bg-sb-light'}">${i} · ${l.label}</button>`).join('');
-  document.getElementById('ctl-oos').checked = !!S.demo.oos.matcha;
+    <button data-c="load" data-i="${i}" class="px-3 py-2.5 rounded-xl text-sm font-bold border-2 ${d.load === i ? 'bg-sb-green text-white border-sb-green' : 'bg-white border-slate-200 text-sb-dark hover:bg-sb-pale'}">${i} · ${l.label}</button>`).join('');
+  const a = document.getElementById('ctl-auto');
+  a.textContent = d.mode === 'auto' ? '✓ Đang tự động theo số đơn trên KDS' : '↺ Quay về chế độ tự động';
+  a.className = 'mt-2 w-full px-3 py-2 rounded-xl text-sm font-bold border-2 ' + (d.mode === 'auto' ? 'bg-sb-pale border-sb-green text-sb-green' : 'bg-white border-slate-300 text-sb-dark hover:bg-sb-pale');
+  document.getElementById('ctl-ing').innerHTML = Object.keys(SB.ING).map(k => `
+    <button data-c="ing" data-k="${k}" class="px-2.5 py-1.5 rounded-full text-[11px] font-bold border-2 ${d.oos[k] ? 'bg-red-600 border-red-600 text-white' : 'bg-white border-slate-200 text-sb-dark hover:bg-sb-pale'}">${SB.ING[k].ico} ${SB.ING[k].name}${d.oos[k] ? ' · HẾT' : ''}</button>`).join('');
 }
 
-/* ---------- info modals ---------- */
+function renderAll(keepScroll) { renderHead(); renderBanner(); renderBody(keepScroll); renderNav(); renderFloat(); renderControls(); }
+
+/* ---------- modals ---------- */
+function openItem(id) {
+  const it = SB.item(id);
+  const o = { size: 'Grande', sweet: 'Bình thường', milk: 'Sữa tươi', heat: true, q: 1 };
+  SB.modal({
+    icon: it.ico, title: it.name, html: '<div id="itm"></div>',
+    onOpen: el => {
+      const box = el.querySelector('#itm');
+      const price = () => { let p = it.price; if (it.drink) p += SB.SIZES.find(s => s.n === o.size).add + SB.MILKS.find(m => m.n === o.milk).add; return p * o.q; };
+      const opt = (grp, val, label, disabled, sub) => `<button ${disabled ? 'disabled' : ''} data-o="${grp}" data-v="${val}" class="px-3.5 py-2 rounded-xl text-sm font-bold border-2 ${o[grp] === val ? 'bg-sb-green text-white border-sb-green' : disabled ? 'bg-slate-100 text-slate-400 border-slate-200 line-through' : 'bg-white border-slate-300 text-sb-dark hover:border-sb-green'}">${label}${sub ? `<span class="block text-[10px] font-medium opacity-80">${sub}</span>` : ''}</button>`;
+      const draw = () => {
+        let h = `<div class="rounded-2xl bg-gradient-to-br ${it.bg} p-5 text-center text-5xl">${it.ico}</div><p class="mt-3 text-slate-600">${it.desc}</p>`;
+        if (it.drink) {
+          h += `<p class="mt-4 font-bold text-sb-dark">Kích cỡ</p><div class="mt-2 flex flex-wrap gap-2">${SB.SIZES.map(s => opt('size', s.n, s.n, false, s.add ? '+' + SB.money(s.add) : 'Mặc định')).join('')}</div>
+          <p class="mt-4 font-bold text-sb-dark">Độ ngọt</p><div class="mt-2 flex flex-wrap gap-2">${SB.SWEET.map(s => opt('sweet', s, s)).join('')}</div>
+          <p class="mt-4 font-bold text-sb-dark">Loại sữa</p><div class="mt-2 flex flex-wrap gap-2">${SB.MILKS.map(m => { const out = m.ing && oosMap()[m.ing]; return opt('milk', m.n, m.n, out, out ? 'Tạm hết' : m.add ? '+' + SB.money(m.add) : ''); }).join('')}</div>`;
+        } else if (HEATABLE.includes(id)) {
+          h += `<p class="mt-4 font-bold text-sb-dark">Tùy chọn</p><div class="mt-2 flex gap-2">${opt('heat', true, '🔥 Hâm nóng')}${opt('heat', false, 'Không hâm')}</div>`;
+        }
+        h += `<div class="mt-5 flex items-center gap-3">
+          <span class="flex items-center gap-3 bg-slate-100 rounded-full px-2 py-1"><button data-q="-1" class="w-9 h-9 rounded-full bg-white font-bold shadow">−</button><b class="w-5 text-center">${o.q}</b><button data-q="1" class="w-9 h-9 rounded-full bg-sb-green text-white font-bold">+</button></span>
+          <button data-add class="flex-1 h-12 rounded-full bg-sb-green hover:bg-sb-mid text-white font-extrabold flex items-center justify-between px-5"><span>Thêm vào giỏ</span><span>${SB.money(price())}</span></button></div>`;
+        box.innerHTML = h;
+      };
+      box.addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b || b.disabled) return;
+        if (b.dataset.o) { o[b.dataset.o] = b.dataset.o === 'heat' ? b.dataset.v === 'true' : b.dataset.v; draw(); }
+        else if (b.dataset.q) { o.q = Math.max(1, o.q + +b.dataset.q); draw(); }
+        else if ('add' in b.dataset) {
+          const line = { k: 'l' + Date.now() + Math.random().toString(36).slice(2, 5), id, q: o.q, size: it.drink ? o.size : '', sweet: o.sweet, milk: o.milk, heat: o.heat };
+          const same = S.cart.find(l => l.id === id && l.size === line.size && l.sweet === line.sweet && l.milk === line.milk && l.heat === line.heat);
+          if (same) same.q += o.q; else S.cart.push(line);
+          SB.closeModal(); renderAll(true); SB.toast(`Đã thêm ${it.name} vào giỏ`, 'ok');
+        }
+      });
+      draw();
+    }
+  });
+}
+
+function oosModal(id) {
+  const it = SB.item(id), bk = SB.blockedBy(it, oosMap()) || (it.ing || [])[0];
+  const alts = SB.MENU.filter(m => m.cat === it.cat && m.id !== id && !SB.blockedBy(m, oosMap())).slice(0, 3);
+  const other = STORES.filter(s => !s.live && s.load < 3)[0];
+  SB.modal({
+    icon: '⚠️', title: `${it.name} tạm hết`,
+    html: `
+    <div class="rounded-2xl bg-orange-100 border-2 border-orange-500 p-3.5 text-orange-950 font-semibold">
+      Nguyên liệu <b>${ingName(bk)}</b> đang tạm hết tại <b>${store().short}</b>. Barista vừa cập nhật trên màn hình KDS.</div>
+    <p class="mt-4 font-bold text-sb-dark">Gợi ý thay thế tại chi nhánh này</p>
+    <div class="mt-2 space-y-2">${alts.map(a => `<button data-alt="${a.id}" class="w-full text-left flex items-center gap-3 p-3 rounded-2xl bg-sb-pale hover:bg-sb-light border border-sb-light"><span class="text-2xl">${a.ico}</span><span class="flex-1"><b>${a.name}</b><br><span class="text-xs text-slate-500">Còn hàng · ${SB.money(a.price)}</span></span><span class="text-sb-green font-bold text-sm">Chọn</span></button>`).join('') || '<p class="text-slate-500">Hiện chưa có món thay thế cùng nhóm.</p>'}</div>
+    ${other ? `<p class="mt-4 font-bold text-sb-dark">Chi nhánh khác còn món này</p>
+    <div class="mt-2 p-3 rounded-2xl border-2 border-slate-200 flex items-center gap-3"><span class="text-xl">📍</span><span class="flex-1"><b>${other.short}</b> · ${other.dist}<br><span class="text-xs text-slate-500">Chờ ~${LEVELS[other.load].wait} phút · đủ nguyên liệu</span></span></div>` : ''}`,
+    actions: [
+      ...(S.cart.some(l => l.id === id) ? [{ label: 'Xóa khỏi giỏ', onClick: () => { S.cart = S.cart.filter(l => l.id !== id); renderAll(true); SB.toast('Đã xóa ' + it.name); } }] : []),
+      { label: '🔔 Báo khi có lại', onClick: () => SB.toast('Sẽ nhắn bạn khi ' + it.name + ' có lại', 'ok') },
+      ...(other ? [{ label: 'Đổi sang ' + other.short, primary: true, onClick: () => { S.store = STORES.indexOf(other); S.pickup = 0; renderAll(true); SB.toast('Đã chọn ' + other.name); } }] : [])
+    ],
+    onOpen: el => el.querySelectorAll('[data-alt]').forEach(b => b.addEventListener('click', () => { SB.closeModal(); openItem(b.dataset.alt); }))
+  });
+}
+
+function oosListModal() {
+  const oos = Object.keys(oosMap()), aff = affectedItems();
+  SB.modal({
+    icon: '⚠️', title: `Tạm hết tại ${store().short}`,
+    html: `<p class="text-slate-600">Danh sách cập nhật trực tiếp từ màn hình Barista (KDS).</p>
+    <p class="mt-3 font-bold text-sb-dark">Nguyên liệu hết</p>
+    <div class="mt-2 flex flex-wrap gap-2">${oos.map(k => `<span class="px-3 py-1.5 rounded-full bg-red-600 text-white text-xs font-bold">${SB.ING[k].ico} ${ingName(k)}</span>`).join('')}</div>
+    <p class="mt-4 font-bold text-sb-dark">Món bị khóa (${aff.length})</p>
+    <ul class="mt-2 space-y-1.5">${aff.map(a => `<li class="flex items-center gap-2 p-2.5 rounded-xl bg-red-50 border border-red-200"><span class="text-xl">${a.ico}</span><b class="flex-1">${a.name}</b><span class="text-[11px] text-red-700 font-semibold">hết ${ingName(SB.blockedBy(a, oosMap()))}</span></li>`).join('')}</ul>`
+  });
+}
+
 function waitInfo() {
   const L = level(), i = levelIdx();
+  const open = store().live ? S.demo.tickets.length : [3, 6, 12, 18][i];
   SB.modal({
     icon: '⏱️', title: 'Thời gian chờ động',
     html: `
     <p class="font-semibold text-sb-dark">${store().name}</p>
     <div class="mt-3 grid grid-cols-3 gap-2 text-center">
-      <div class="rounded-2xl bg-sb-cream p-3"><p class="text-xl font-black text-sb-dark">${L.open}</p><p class="text-[11px] text-slate-500">Đơn đang mở</p></div>
-      <div class="rounded-2xl bg-sb-cream p-3"><p class="text-xl font-black text-sb-dark">${L.staff}</p><p class="text-[11px] text-slate-500">Barista ca trực</p></div>
-      <div class="rounded-2xl bg-sb-cream p-3"><p class="text-xl font-black text-sb-dark">${L.counters}</p><p class="text-[11px] text-slate-500">Quầy hoạt động</p></div>
+      <div class="rounded-2xl bg-sb-pale p-3"><p class="text-xl font-black text-sb-dark">${open}</p><p class="text-[11px] text-slate-500">Đơn đang mở</p></div>
+      <div class="rounded-2xl bg-sb-pale p-3"><p class="text-xl font-black text-sb-dark">${L.staff}</p><p class="text-[11px] text-slate-500">Barista ca trực</p></div>
+      <div class="rounded-2xl bg-sb-pale p-3"><p class="text-xl font-black text-sb-dark">${L.counters}</p><p class="text-[11px] text-slate-500">Quầy hoạt động</p></div>
     </div>
-    <p class="mt-4">Thời gian chờ được tính từ đơn đang mở, nhân viên ca trực và trạng thái các quầy; tín hiệu làm mới mỗi 10 giây và đến app trong 5 giây.</p>
+    <p class="mt-4">Thời gian chờ tính từ đơn đang mở, nhân viên ca trực và trạng thái các quầy; làm mới mỗi 10 giây, đến app trong 5 giây. Mỗi đơn bạn đặt cũng làm tăng số đơn mở trên KDS.</p>
     <ul class="mt-3 space-y-1.5 text-slate-600">
       <li>${i >= 1 ? '✅' : '▫️'} Mức 1: tăng thời gian chờ hiển thị</li>
       <li>${i >= 2 ? '✅' : '▫️'} Mức 2: trì hoãn ưu đãi &amp; tiết chế đơn di động</li>
       <li>${i >= 3 ? '✅' : '▫️'} Mức 3: tạm dừng nhận đơn</li></ul>
     <p class="mt-3 text-xs text-slate-400">Khi tải giảm, app tự khôi phục nhận đơn (FR-10).</p>`,
-    actions: [
-      { label: 'Chọn chi nhánh khác', onClick: storesModal },
-      { label: 'Xem phía KDS', href: 'kds.html' },
-      ...(L.wait !== null ? [{ label: 'Hẹn giờ lấy món', primary: true, onClick: () => { S.pickup = 1; renderPickup(); document.getElementById('pickup').scrollIntoView({ behavior: 'smooth', block: 'center' }); } }] : [])
-    ]
-  });
-}
-
-function oosModal(id) {
-  const it = ITEMS.find(x => x.id === id);
-  SB.modal({
-    icon: '⚠️', title: `${it.name} tạm hết`,
-    html: `
-    <div class="rounded-2xl bg-orange-50 border border-orange-200 p-3.5 text-orange-900">
-      Nguyên liệu <b>${it.ing || 'chính'}</b> đang tạm hết tại <b>${store().short}</b>. Dự kiến có lại lúc <b>${hhmm(90)}</b>.
-    </div>
-    <p class="mt-4 font-bold text-sb-dark">Gợi ý thay thế tại chi nhánh này</p>
-    <div class="mt-2 space-y-2">
-      <button data-alt="cold" class="alt w-full text-left flex items-center gap-3 p-3 rounded-2xl bg-sb-cream hover:bg-sb-light"><span class="text-2xl">🧊</span><span class="flex-1"><b>Cold Brew Cream</b><br><span class="text-xs text-slate-500">Còn hàng · 79.000đ</span></span><span class="text-sb-green font-bold text-sm">Thêm</span></button>
-      <button data-alt="caramel" class="alt w-full text-left flex items-center gap-3 p-3 rounded-2xl bg-sb-cream hover:bg-sb-light"><span class="text-2xl">☕</span><span class="flex-1"><b>Thêm Caramel Macchiato</b><br><span class="text-xs text-slate-500">Còn hàng · 85.000đ</span></span><span class="text-sb-green font-bold text-sm">+1</span></button>
-    </div>
-    <p class="mt-4 font-bold text-sb-dark">Chi nhánh gần đây còn món này</p>
-    <div class="mt-2 p-3 rounded-2xl border border-black/10 flex items-center gap-3">
-      <span class="text-xl">📍</span><span class="flex-1"><b>Landmark 81</b> · 1,2 km<br><span class="text-xs text-slate-500">Chờ ~5 phút · còn đủ nguyên liệu</span></span>
-    </div>`,
-    actions: [
-      { label: 'Xóa khỏi giỏ', onClick: () => { delete S.cart[id]; renderAll(); SB.toast('Đã xóa ' + it.name); } },
-      { label: '🔔 Báo khi có lại', onClick: () => SB.toast('Sẽ nhắn bạn khi ' + it.name + ' có lại') },
-      { label: 'Đổi sang Landmark 81', primary: true, onClick: () => { S.store = 1; S.pickup = 0; renderAll(); SB.toast('Đã chuyển sang Landmark 81'); } }
-    ],
-    onOpen: el => el.querySelectorAll('.alt').forEach(b => b.addEventListener('click', () => {
-      const k = b.dataset.alt;
-      if (k === 'cold') { ITEMS.find(x => x.id === 'cold') || ITEMS.push({ id: 'cold', name: 'Cold Brew Cream', opt: 'Grande · Đá', price: 79000, ico: '🧊', bg: 'from-sky-200 to-slate-300' }); S.cart.cold = (S.cart.cold || 0) + 1; }
-      else S.cart.caramel = (S.cart.caramel || 0) + 1;
-      SB.closeModal(); renderAll(); SB.toast('Đã thêm vào giỏ');
-    }))
+    actions: [{ label: 'Chọn chi nhánh khác', onClick: storesModal }, { label: 'Xem phía KDS', href: 'kds.html' }]
   });
 }
 
@@ -385,15 +515,25 @@ function storesModal() {
     icon: '📍', title: 'Chọn chi nhánh nhận món',
     html: `<div class="space-y-2">${STORES.map((s, i) => {
       const L = LEVELS[s.live ? S.demo.load : s.load];
-      const oos = s.live ? Object.keys(S.demo.oos).filter(k => S.demo.oos[k]).length : 0;
-      return `<button data-store="${i}" class="st w-full text-left p-3.5 rounded-2xl border ${i === S.store ? 'border-sb-green bg-sb-light/50' : 'border-black/10'} hover:bg-sb-light/60 flex items-center gap-3">
+      const oos = s.live ? Object.keys(S.demo.oos).length : 0;
+      return `<button data-store="${i}" class="st w-full text-left p-3.5 rounded-2xl border-2 ${i === S.store ? 'border-sb-green bg-sb-pale' : 'border-slate-200'} hover:bg-sb-pale flex items-center gap-3">
         <span class="w-3 h-3 rounded-full ${L.ico}"></span>
-        <span class="flex-1"><b class="text-sb-dark">${s.name}</b><br><span class="text-xs text-slate-500">${s.dist} · ${L.wait ? 'Chờ ~' + L.wait + ' phút' : 'Tạm ngưng nhận đơn'}${oos ? ' · ' + oos + ' món hết nguyên liệu' : ''}</span></span>
+        <span class="flex-1"><b class="text-sb-dark">${s.name}</b>${s.live ? ' <span class="text-[10px] font-extrabold bg-sb-green text-white rounded-full px-2 py-0.5">KDS LIVE</span>' : ''}<br><span class="text-xs text-slate-500">${s.dist} · ${L.wait ? 'Chờ ~' + L.wait + ' phút' : 'Tạm ngưng nhận đơn'}${oos ? ' · ' + oos + ' nguyên liệu hết' : ''}</span></span>
         ${i === S.store ? '<span class="text-sb-green font-bold">✓</span>' : ''}</button>`;
     }).join('')}</div>`,
     onOpen: el => el.querySelectorAll('.st').forEach(b => b.addEventListener('click', () => {
-      S.store = +b.dataset.store; S.pickup = 0; SB.closeModal(); renderAll(); SB.toast('Đã chọn ' + store().name);
+      S.store = +b.dataset.store; S.pickup = 0; SB.closeModal(); renderAll(true); SB.toast('Đã chọn ' + store().name);
     }))
+  });
+}
+
+function profileModal() {
+  SB.modal({
+    icon: '👤', title: 'Hồ sơ thành viên',
+    html: `<div class="rounded-2xl bg-gradient-to-br from-sb-green to-sb-dark text-white p-4">
+      <p class="text-xs text-white/70">Starbucks Rewards</p><p class="text-xl font-black">${SB.esc(S.demo.customer || 'Khách')}</p>
+      <p class="mt-2 text-sm">Hạng <b>Gold</b> · ⭐ 262 Sao · còn 38 Sao lên hạng kế</p></div>
+      <p class="mt-3 text-slate-600">Tên này hiển thị trên đơn ở màn hình Barista. Bạn có thể đổi tên ở bước Giỏ hàng.</p>`
   });
 }
 
@@ -421,80 +561,133 @@ function whyModal() {
       <tr><td class="py-2 text-slate-500">Sở thích</td><td class="py-2">Đã đánh dấu thích đồ ăn nhẹ</td></tr>
       <tr><td class="py-2 text-slate-500">Hạng</td><td class="py-2">Gold · còn 38 Sao lên hạng kế</td></tr>
       <tr><td class="py-2 text-slate-500">Đồng thuận</td><td class="py-2">Đã đồng ý nhận ưu đãi cá nhân hóa</td></tr>
-      <tr><td class="py-2 text-slate-500">Quy tắc</td><td class="py-2 font-mono text-xs">OFFER-CROIS-20 · v3.2</td></tr>
+      <tr><td class="py-2 text-slate-500">Quy tắc</td><td class="py-2 font-mono text-xs">OFFER-FOOD-20 · v3.2</td></tr>
       <tr><td class="py-2 text-slate-500">Giới hạn tần suất</td><td class="py-2">2/3 ưu đãi trong tuần</td></tr></tbody></table>
     <p class="mt-3 text-xs text-slate-400">Quyết định ưu đãi trong app trả về &lt; 300 ms.</p>`
   });
 }
 
-function orderDone() {
-  const t = totals(), opts = pickupLabels();
-  const id = 'M-' + (890 + Math.floor(Math.random() * 90));
+/* ---------- đặt hàng → đẩy sang KDS ---------- */
+function placeOrder() {
+  const name = (S.demo.customer || '').trim();
+  if (!name) { SB.toast('Vui lòng nhập tên khách hàng', 'warn'); const i = document.getElementById('custName'); if (i) i.focus(); return; }
+  const fresh = SB.state.get(); S.demo = fresh;
+  const t = totals(), opts = pickupOpts();
+  if (t.blocked.length) { renderAll(true); SB.toast('Có món vừa hết nguyên liệu – vui lòng xóa khỏi giỏ', 'warn'); return; }
+  if (!opts.length || !t.ok.length) return;
+  const live = store().live;
+  const items = t.ok.map(l => ({ q: l.q, id: l.id, n: SB.item(l.id).name, s: SB.item(l.id).drink ? l.size : '', m: lineMods(l) }));
+  const where = opts[S.pickup].where;
+  let id = 'M-' + fresh.seq.M, lvlMsg = null;
+  save(st => {
+    id = 'M-' + st.seq.M; st.seq.M++;
+    st.customer = name;
+    if (live) {
+      st.tickets.push({ id, src: 'app', name, start: Date.now(), status: 'new', where, items, total: t.total });
+      /* tự động nâng mức kiểm soát nếu đơn tăng (chế độ tự động) */
+      if (st.mode === 'auto') {
+        const r = st.tickets.length / 12, lv = r < 0.5 ? 0 : r < 0.8 ? 1 : r < 1.1 ? 2 : 3;
+        if (lv !== st.load) {
+          st.logs = [{ at: new Date().toISOString(), level: lv, actor: 'Tự động', reason: `Đơn app ${id} làm số đơn mở = ${st.tickets.length}/12`, open: st.tickets.length, counters: LEVELS[lv].counters, rule: 'LOAD-RULE v1.4' }].concat(st.logs).slice(0, 20);
+          st.load = lv; lvlMsg = lv;
+        }
+      }
+    }
+  });
+  S.my.push({ id, name, items, total: t.total, pickup: where, time: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }), storeShort: store().short, live });
+  try { localStorage.setItem(MY_KEY, JSON.stringify(S.my.slice(-12))); } catch (e) {}
+  S.cart = []; S.tab = 'orders'; S.seen[id] = live ? 'new' : 'offline';
+  renderAll();
   SB.modal({
     icon: '✅', title: `Đặt hàng thành công · #${id}`,
-    html: `<p>Đơn của bạn đã được gửi tới <b>${store().name}</b> và sẽ xuất hiện ở cột <b>ĐƠN APP</b> trên màn hình Barista.</p>
-    <div class="mt-3 rounded-2xl bg-sb-cream p-4 space-y-1.5">
-      <div class="flex justify-between"><span class="text-slate-500">Nhận món</span><b>${opts[S.pickup].t}</b></div>
+    html: `<p>${live ? `Đơn của <b>${SB.esc(name)}</b> đã xuất hiện ở cột <b>ĐƠN APP</b> trên màn hình Barista tại <b>${store().short}</b>.` : `Đơn đã gửi tới <b>${store().short}</b>. (Chi nhánh này không nối KDS trong bản demo.)`}</p>
+    <div class="mt-3 rounded-2xl bg-sb-pale p-4 space-y-1.5">
+      <div class="flex justify-between"><span class="text-slate-500">Nhận món</span><b>${where}</b></div>
       <div class="flex justify-between"><span class="text-slate-500">Tổng</span><b>${SB.money(t.total)}</b></div>
-      <div class="flex justify-between"><span class="text-slate-500">Sao (chờ ghi sổ)</span><b class="text-sb-green">+${t.stars} ⭐</b></div></div>`,
+      <div class="flex justify-between"><span class="text-slate-500">Sao (chờ ghi sổ)</span><b class="text-sb-green">+${t.stars} ⭐</b></div></div>
+    ${lvlMsg !== null ? `<p class="mt-3 text-xs text-amber-800 bg-amber-100 rounded-xl p-2.5">Số đơn mở tăng → hệ thống tự nâng mức tải lên <b>${LEVELS[lvlMsg].label}</b>.</p>` : ''}`,
     actions: [{ label: 'Về trang chủ', href: 'index.html' }, { label: 'Xem trên KDS', href: 'kds.html', primary: true }]
   });
 }
 
-/* ---------- events ---------- */
+/* ---------- sự kiện ---------- */
 document.getElementById('phone').addEventListener('click', e => {
   const b = e.target.closest('[data-a]'); if (!b) return;
-  const a = b.dataset.a, id = b.dataset.id;
-  if (a === 'inc') { S.cart[id]++; renderAll(); }
-  else if (a === 'dec') { S.cart[id] = Math.max(0, S.cart[id] - 1); if (!S.cart[id]) delete S.cart[id]; renderAll(); }
-  else if (a === 'waitinfo') waitInfo();
+  const a = b.dataset.a, id = b.dataset.id, k = b.dataset.k;
+  if (a === 'tab') { S.tab = b.dataset.t; renderAll(); document.getElementById('scroll').scrollTop = 0; }
+  else if (a === 'cat') { S.cat = id; renderBody(); renderNav(); }
+  else if (a === 'item') openItem(id);
   else if (a === 'oos') oosModal(id);
+  else if (a === 'oosList') oosListModal();
+  else if (a === 'inc') { S.cart.find(l => l.k === k).q++; renderAll(true); }
+  else if (a === 'dec') { const l = S.cart.find(x => x.k === k); l.q--; if (l.q <= 0) S.cart = S.cart.filter(x => x.k !== k); renderAll(true); }
+  else if (a === 'rm') { S.cart = S.cart.filter(x => x.k !== k); renderAll(true); }
+  else if (a === 'waitinfo') waitInfo();
   else if (a === 'stores') storesModal();
+  else if (a === 'profile') profileModal();
   else if (a === 'stars') starsModal();
   else if (a === 'why') whyModal();
   else if (a === 'whyDelay') SB.modal({ icon: '⏸️', title: 'Ưu đãi tạm hoãn', html: '<p>Khi cửa hàng ở <b>Mức 2 – Quá tải</b>, hệ thống trì hoãn ưu đãi để không kéo thêm đơn (FR-09). Hành động này được ghi log và quản lý có thể ghi đè.</p>' });
-  else if (a === 'offer') { S.offer = !S.offer; renderAll(); }
-  else if (a === 'pickup') { S.pickup = +b.dataset.i; renderPickup(); }
-  else if (a === 'pay') { S.pay = id; renderPay(); renderSummary(); }
-  else if (a === 'order') orderDone();
-  else if (a === 'back') SB.modal({ title: 'Quay lại thực đơn?', html: '<p>Đây là prototype tập trung vào màn Thanh toán. Bạn có thể về trang chủ để xem các khu vực khác.</p>', actions: [{ label: 'Ở lại' }, { label: 'Về trang chủ', href: 'index.html', primary: true }] });
+  else if (a === 'offer') { S.offer = !S.offer; renderAll(true); }
+  else if (a === 'pickup') { S.pickup = +b.dataset.i; renderBody(true); }
+  else if (a === 'pay') { S.pay = id; renderBody(true); }
+  else if (a === 'order') placeOrder();
 });
-document.getElementById('phone').addEventListener('keydown', e => {
-  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[role=button][data-a]')) { e.preventDefault(); e.target.click(); }
+document.getElementById('phone').addEventListener('input', e => {
+  if (e.target.id === 'custName') { const v = e.target.value; save(st => { st.customer = v; }); document.getElementById('hiName').textContent = v || 'Khách'; }
 });
 
+/* điều khiển demo (cột trái) */
 document.getElementById('ctl-load').addEventListener('click', e => {
   const b = e.target.closest('[data-c=load]'); if (!b) return;
-  S.demo = SB.state.set({ load: +b.dataset.i, mode: 'manual' }); renderAll();
+  save(st => { st.load = +b.dataset.i; st.mode = 'manual'; });
+  renderAll(true);
 });
-document.getElementById('ctl-oos').addEventListener('change', e => {
-  const oos = Object.assign({}, S.demo.oos); if (e.target.checked) oos.matcha = true; else delete oos.matcha;
-  S.demo = SB.state.set({ oos }); renderAll();
+document.getElementById('ctl-auto').addEventListener('click', () => { save(st => { st.mode = 'auto'; }); renderAll(true); });
+document.getElementById('ctl-ing').addEventListener('click', e => {
+  const b = e.target.closest('[data-c=ing]'); if (!b) return;
+  save(st => { if (st.oos[b.dataset.k]) delete st.oos[b.dataset.k]; else st.oos[b.dataset.k] = true; });
+  renderAll(true);
 });
 document.getElementById('ctl-reset').addEventListener('click', () => {
-  SB.state.reset(); S.demo = SB.state.get(); S.cart = { caramel: 1, matcha: 1, croissant: 1 }; S.store = 0; S.pickup = 0; S.offer = true; renderAll(); SB.toast('Đã đặt lại demo');
+  SB.state.reset(); localStorage.removeItem(MY_KEY); S.my = []; S.cart = []; S.store = 0; S.pickup = 0; S.offer = true; S.tab = 'menu';
+  S.demo = SB.state.get(); mute(); renderAll(); SB.toast('Đã đặt lại demo (cả KDS)');
 });
 
-/* real-time refresh every 10 s + cross-tab sync */
-function sync() { S.demo = SB.state.get(); S.countdown = 10; renderAll(); }
-window.addEventListener('storage', e => { if (e.key === SB.state.key) sync(); });
+/* ---------- đồng bộ thời gian thực ---------- */
+function statusOf(o) { return o.status; }
+function sync(fromTimer) {
+  const prev = {}; activeOrders().forEach(o => prev[o.id] = o.status);
+  S.demo = SB.state.get();
+  activeOrders().forEach(o => {
+    if (prev[o.id] && prev[o.id] !== o.status) {
+      if (o.status === 'ready') SB.toast(`🎉 Đơn #${o.id} đã sẵn sàng – mời nhận món!`, 'ok');
+      else if (o.status === 'making') SB.toast(`👨‍🍳 Barista đang pha đơn #${o.id}`);
+    }
+  });
+  S.countdown = 10;
+  const typing = document.activeElement && document.activeElement.id === 'custName';
+  if (typing) { renderBanner(); renderControls(); renderHead(); return; }
+  renderAll(true);
+}
+mute = SB.state.subscribe(() => sync(false));
 setInterval(() => {
   S.countdown--;
-  if (S.countdown <= 0) { sync(); return; }
+  if (S.countdown <= 0) { sync(true); return; }
   const cd = document.getElementById('cd'); if (cd) cd.textContent = S.countdown;
 }, 1000);
-setInterval(() => { document.getElementById('clock').textContent = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }); }, 10000);
-document.getElementById('clock').textContent = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+const clk = () => { document.getElementById('clock').textContent = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }); };
+clk(); setInterval(clk, 10000);
 
 SB.info = {
   s1: { icon: '1️⃣', title: 'Ghi nhận hết nguyên liệu', html: '<p>Barista hoặc hệ thống kho đánh dấu nguyên liệu hết trên KDS (nút <b>Tồn kho</b>). Đây là nguồn dữ liệu cho cả app.</p>', actions: [{ label: 'Thử trên KDS', href: 'kds.html', primary: true }] },
   s2: { icon: '2️⃣', title: 'API cập nhật < 5 giây', html: '<p>API tích hợp WMS ⇄ CRM đẩy sự kiện tồn kho và tải trọng tới app trong 5 giây (NFR-02). Banner tự làm mới 10 giây/lần.</p>', actions: [{ label: 'Chi phí API trong ROI', href: 'roi.html' }] },
-  s3: { icon: '3️⃣', title: 'Khóa món & cảnh báo', html: '<p>Món bị làm mờ, không thể tăng số lượng, kèm thẻ cam nổi bật tại chi nhánh liên quan; khách được gợi ý món thay thế hoặc chi nhánh khác còn nguyên liệu.</p>' },
-  s4: { icon: '4️⃣', title: 'Giữ lại doanh thu', html: '<p>Khách không thanh toán nhầm món không làm được → giảm đơn hủy từ ~4% xuống ~1,8% (giả định).</p>', actions: [{ label: 'Xem tính toán ROI', href: 'roi.html', primary: true }] },
-  'r-fr09': { title: 'FR-09 · Kiểm soát tự động theo mức', html: '<p>Tăng thời gian chờ → trì hoãn ưu đãi → tiết chế đơn di động → tạm dừng; có log và quyền ghi đè của quản lý. Thử 4 mức bằng bảng điều khiển bên trái.</p>', actions: [{ label: 'Mọi yêu cầu', href: 'requirements.html?open=FR-09' }] },
-  'r-fr01': { title: 'FR-01 · Quy tắc tích Sao', html: '<p>Nhấn dòng "Bạn sẽ nhận +N Sao" trong điện thoại để xem quy tắc.</p>', actions: [{ label: 'Chi tiết', href: 'requirements.html?open=FR-01' }] },
-  'r-fr04': { title: 'FR-04 · Ưu đãi cá nhân hóa', html: '<p>Nhấn "Vì sao tôi nhận được ưu đãi này?" để xem log yếu tố.</p>', actions: [{ label: 'Chi tiết', href: 'requirements.html?open=FR-04' }] },
-  'r-nfr02': { title: 'NFR-02 · Tín hiệu tải trọng', html: '<p>Làm mới mỗi 10 giây (xem bộ đếm ngược trong banner), quyết định đến app trong 5 giây.</p>', actions: [{ label: 'Chi tiết', href: 'requirements.html?open=NFR-02' }] },
+  s3: { icon: '3️⃣', title: 'Khóa món & cảnh báo', html: '<p>Mọi món dùng nguyên liệu đã hết bị làm mờ, không thể thêm vào giỏ, kèm thẻ đỏ nổi bật; khách được gợi ý món thay thế hoặc chi nhánh khác còn nguyên liệu.</p>' },
+  s4: { icon: '4️⃣', title: 'Đơn hợp lệ hiện ngay trên KDS', html: '<p>Khách chỉ đặt được món còn nguyên liệu → giảm đơn hủy từ ~4% xuống ~1,8% (giả định). Đơn xuất hiện ở cột ĐƠN APP kèm tên khách hàng.</p>', actions: [{ label: 'Xem tính toán ROI', href: 'roi.html', primary: true }] },
+  'r-fr09': { title: 'FR-09 · Kiểm soát tự động theo mức', html: '<p>Tăng thời gian chờ → trì hoãn ưu đãi → tiết chế đơn di động → tạm dừng; có log và quyền ghi đè của quản lý. Thử 4 mức ở bảng điều khiển bên trái.</p>', actions: [{ label: 'Mọi yêu cầu', href: 'requirements.html?open=FR-09' }] },
+  'r-fr01': { title: 'FR-01 · Quy tắc tích Sao', html: '<p>Ở bước Giỏ hàng, nhấn dòng "Bạn sẽ nhận +N Sao" để xem quy tắc.</p>', actions: [{ label: 'Chi tiết', href: 'requirements.html?open=FR-01' }] },
+  'r-fr04': { title: 'FR-04 · Ưu đãi cá nhân hóa', html: '<p>Thêm một món bánh vào giỏ, nhấn "Vì sao tôi nhận được ưu đãi này?" để xem log yếu tố.</p>', actions: [{ label: 'Chi tiết', href: 'requirements.html?open=FR-04' }] },
+  'r-nfr02': { title: 'NFR-02 · Tín hiệu tải trọng', html: '<p>Làm mới mỗi 10 giây (xem bộ đếm trong banner), quyết định đến app trong 5 giây.</p>', actions: [{ label: 'Chi tiết', href: 'requirements.html?open=NFR-02' }] },
   'r-nfr03': { title: 'NFR-03 · Quyết định ưu đãi < 300 ms', html: '<p>Khối ưu đãi được tính sẵn từ hồ sơ hợp nhất nên phản hồi nhanh.</p>', actions: [{ label: 'Chi tiết', href: 'requirements.html?open=NFR-03' }] }
 };
 

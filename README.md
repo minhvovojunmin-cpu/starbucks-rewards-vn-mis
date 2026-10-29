@@ -16,23 +16,28 @@ Tại chuỗi cửa hàng cà phê cao cấp như Starbucks Việt Nam, sự bù
 
 ## 🚀 2. Các Sản phẩm Bàn giao trong Đề án (Deliverables)
 
-Dự án đề xuất giải pháp hệ thống tích hợp toàn diện gồm 3 thành phần chính:
+Dự án đề xuất giải pháp hệ thống tích hợp toàn diện gồm 4 thành phần chính:
+
+### ⚡ 0. Màn hình Demo Song Song App ⇄ KDS ([demo.html](./demo.html))
+- Đặt **App Khách hàng** và **Màn hình Barista KDS** cạnh nhau trên cùng một màn hình để kiểm thử đồng bộ 2 chiều thời gian thực mà không cần chuyển tab.
 
 ### 📱 A. Ứng dụng Khách hàng Mới ([customer-app.html](./customer-app.html))
+- **Thực đơn 18 món chuẩn Starbucks VN (4 danh mục):** Cà phê (8 món), Trà (4 món), Frappuccino (3 món), Bánh & Đồ ăn (3 món) kèm tùy chỉnh Size, Độ ngọt, Sữa và Hâm nóng.
+- **Đặt đơn đẩy thẳng sang KDS kèm tên khách hàng:** Khi khách nhập tên và bấm Đặt hàng, vé đơn xuất hiện ngay ở cột **ĐƠN APP** bên màn hình Barista kèm tên khách và chuông báo.
+- **Theo dõi tiến độ đơn trực tiếp (Tab "Đơn của tôi"):** Trạng thái tự động chuyển từ *Chờ pha* → *Barista đang pha chế* → *Sẵn sàng – mời nhận món!* khi Barista bấm nút trên KDS.
 - **Thời gian chờ động (Dynamic Wait Time Banner):** Banner cảnh báo tự động tính toán theo tải trọng thời gian thực: *"Cửa hàng hiện đang đông. Thời gian nhận món dự kiến: 15 phút nữa"*.
-- **Cảnh báo hết nguyên liệu theo chi nhánh:** Món thiếu nguyên liệu tự động làm mờ (*disabled*) kèm tag cảnh báo cam đỏ: *"Nguyên liệu món này đang tạm hết tại chi nhánh X"*, đồng thời gợi ý món thay thế hoặc chi nhánh lân cận còn hàng.
-- **Minh bạch thuật toán ưu đãi:** Tích hợp tính năng *"Vì sao tôi nhận được ưu đãi này?"* giúp truy xuất nguồn gốc khuyến mãi từ hồ sơ thành viên hợp nhất.
+- **Khóa món tự động khi hết nguyên liệu:** Khi Barista báo hết nguyên liệu trên KDS (trong 13 nguyên liệu cốt lõi), mọi món liên quan trên App tự động khóa kèm thẻ đỏ báo rõ nguyên liệu đang tạm hết.
 
 ### 🖥️ B. Màn hình Điều phối Quầy Barista KDS ([kds.html](./kds.html))
-- **Giao diện Tablet Dark Mode & Glassmorphism:** Giảm mỏi mắt trong môi trường ánh sáng mạnh của quầy bar.
-- **Tách luồng đơn 50/50 rõ rệt:**
-  - **Cột Trái:** *ĐƠN TẠI QUẦY (WALK-IN)* – Ưu tiên phục vụ khách đang đứng tại cửa hàng.
-  - **Cột Phải:** *ĐƠN APP (MOBILE ORDER)* – Sắp xếp khoa học theo khung giờ khách hẹn đến lấy.
+- **Giao diện High-Contrast chuẩn Quầy Bar:** Tương phản rõ ràng giữa 2 luồng đơn và trạng thái thời gian.
+- **Tách luồng đơn 50/50 rõ rệt kèm Tên khách hàng (`👤 Tên khách`):**
+  - **Cột Trái (Vàng hổ phách):** *ĐƠN TẠI QUẦY (WALK-IN)* – Ưu tiên phục vụ khách đang đứng tại cửa hàng (có nút **+ Đơn tại quầy** để tạo nhanh đơn POS).
+  - **Cột Phải (Xanh Starbucks):** *ĐƠN APP (MOBILE ORDER)* – Nhận đơn trực tiếp từ App khách hàng theo thời gian thực.
+- **Quản lý Tồn kho 13 nguyên liệu (`📦 Tồn kho`):** Bật/tắt trạng thái Còn/Hết của từng nguyên liệu, đồng bộ khóa/mở món tức thời trên App khách hàng.
 - **Bộ đếm thời gian mã hóa màu (Color-Coded Timers):**
   - 🟢 **Xanh:** < 4 phút (Đúng tiến độ)
   - 🟡 **Vàng:** 4 – 10 phút (Cần chú ý)
-  - 🔴 **Đỏ:** > 10 phút (Khẩn cấp, có hiệu ứng nhịp tim)
-- **Kiểm soát tải trọng & Quản lý ghi đè:** 4 mức kiểm soát dung lượng nhận đơn tự động khôi phục khi tải giảm.
+  - 🔴 **Đỏ:** > 10 phút (Khẩn cấp)
 
 ### 📈 C. Bảng Đánh giá Khả thi Kinh tế ROI 3 Năm ([roi.html](./roi.html))
 Mô hình tài chính đầu tư cho **150 cửa hàng Starbucks tại Việt Nam** (300 màn hình KDS):

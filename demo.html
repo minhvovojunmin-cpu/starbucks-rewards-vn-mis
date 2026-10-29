@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo song song App ⇄ KDS · Starbucks Rewards Vietnam</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="assets/common.js"></script>
+</head>
+<body class="bg-[#E4ECE8] text-slate-700">
+<div id="site-header"></div>
+
+<main class="max-w-[1700px] mx-auto px-4 py-6">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <p class="text-sm font-bold uppercase tracking-widest text-sb-green">Demo trực tiếp</p>
+      <h1 class="mt-1 text-3xl font-black text-sb-dark">App khách hàng ⇄ Màn hình Barista</h1>
+      <p class="mt-1 text-slate-600">Hai màn hình dùng chung một dữ liệu thời gian thực. Thao tác bên này, xem kết quả bên kia.</p>
+    </div>
+    <button id="reset" class="px-4 py-2.5 rounded-full bg-white border-2 border-slate-300 text-sb-dark text-sm font-bold hover:bg-sb-pale">↺ Đặt lại dữ liệu demo</button>
+  </div>
+
+  <ol class="mt-5 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+    <li class="rounded-2xl bg-white border-2 border-slate-200 p-4 flex gap-3"><span class="w-8 h-8 rounded-full bg-sb-green text-white font-black grid place-items-center shrink-0">1</span><span class="text-sm"><b class="text-sb-dark">Đặt món trên App.</b> Thêm món vào giỏ, nhập tên khách, bấm Đặt hàng.</span></li>
+    <li class="rounded-2xl bg-white border-2 border-slate-200 p-4 flex gap-3"><span class="w-8 h-8 rounded-full bg-sb-green text-white font-black grid place-items-center shrink-0">2</span><span class="text-sm"><b class="text-sb-dark">Xem KDS.</b> Đơn hiện ở cột <b>ĐƠN APP</b> kèm tên khách, có tiếng báo.</span></li>
+    <li class="rounded-2xl bg-white border-2 border-slate-200 p-4 flex gap-3"><span class="w-8 h-8 rounded-full bg-red-600 text-white font-black grid place-items-center shrink-0">3</span><span class="text-sm"><b class="text-sb-dark">Báo hết nguyên liệu trên KDS</b> (📦 Tồn kho). Món trên App bị khóa kèm thẻ đỏ.</span></li>
+    <li class="rounded-2xl bg-white border-2 border-slate-200 p-4 flex gap-3"><span class="w-8 h-8 rounded-full bg-sb-dark text-white font-black grid place-items-center shrink-0">4</span><span class="text-sm"><b class="text-sb-dark">Bấm Hoàn thành trên KDS.</b> Tab "Đơn của tôi" trên App báo sẵn sàng.</span></li>
+  </ol>
+
+  <div class="mt-5 grid xl:grid-cols-[430px_1fr] gap-5 items-start">
+    <div>
+      <p class="mb-2 text-sm font-extrabold text-sb-dark">📱 App khách hàng</p>
+      <iframe id="fApp" title="App khách hàng" src="customer-app.html?embed=1" class="w-full h-[860px] rounded-3xl border-2 border-slate-300 bg-[#E4ECE8] shadow-lg"></iframe>
+    </div>
+    <div>
+      <p class="mb-2 text-sm font-extrabold text-sb-dark">🖥️ Màn hình Barista (KDS)</p>
+      <iframe id="fKds" title="Màn hình Barista" src="kds.html?embed=1" class="w-full h-[860px] rounded-3xl border-2 border-slate-700 bg-[#050d0a] shadow-lg"></iframe>
+    </div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+<script>
+SB.header('demo');
+SB.footer();
+document.getElementById('reset').addEventListener('click', () => {
+  SB.state.reset(); try { localStorage.removeItem('sbux_my_orders_v2'); } catch (e) {}
+  const a = document.getElementById('fApp'), k = document.getElementById('fKds');
+  a.src = a.src; k.src = k.src;
+  SB.toast('Đã đặt lại dữ liệu demo', 'ok');
+});
+</script>
+</body>
+</html>
