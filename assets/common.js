@@ -174,6 +174,23 @@ window.SB = {
   esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); },
 
   /* ======================================================================
+     CHI NHÁNH STARBUCKS VIỆT NAM (đồng bộ trực tiếp App ⇄ KDS)
+     ====================================================================== */
+  STORES: [
+    { id: 'NH',  name: 'Starbucks Nguyễn Huệ · Q.1, TP.HCM',         short: 'Nguyễn Huệ, Q.1',   dist: '350 m' },
+    { id: 'NW',  name: 'Starbucks New World · Q.1, TP.HCM',          short: 'New World, Q.1',    dist: '850 m' },
+    { id: 'LM',  name: 'Starbucks Landmark 81 · Bình Thạnh, TP.HCM', short: 'Landmark 81',       dist: '1,2 km' },
+    { id: 'TD',  name: 'Starbucks Thảo Điền · TP. Thủ Đức, TP.HCM',  short: 'Thảo Điền',         dist: '2,4 km' },
+    { id: 'PMH', name: 'Starbucks Panorama · Phú Mỹ Hưng, Q.7',      short: 'Phú Mỹ Hưng, Q.7',  dist: '3,1 km' },
+    { id: 'NT',  name: 'Starbucks Nhà Thờ · Hoàn Kiếm, Hà Nội',      short: 'Nhà Thờ, Hà Nội',   dist: 'Hà Nội' },
+    { id: 'BN',  name: 'Starbucks Bà Nà Hills · Đà Nẵng',            short: 'Bà Nà Hills, ĐN',   dist: 'Đà Nẵng' }
+  ],
+  store(st) {
+    const id = (st && st.store) || 'NH';
+    return SB.STORES.find(s => s.id === id) || SB.STORES[0];
+  },
+
+  /* ======================================================================
      THỰC ĐƠN & NGUYÊN LIỆU (dùng chung App + KDS)
      ====================================================================== */
   CATS: [
@@ -237,7 +254,7 @@ window.SB = {
       const ago = (m, s = 0) => Date.now() - (m * 60 + s) * 1000;
       const it = (q, id, size, mods) => ({ q, id, n: SB.item(id).name, s: size || '', m: mods || [] });
       return {
-        load: 1, mode: 'auto', oos: { matcha: true }, logs: [], done: 14,
+        store: 'NH', load: 1, mode: 'auto', oos: { matcha: true }, logs: [], done: 14,
         seq: { W: 104, M: 891 }, customer: 'Võ Minh',
         tickets: [
           { id: 'W-099', src: 'walk', name: 'Thu Hà',      start: ago(11, 40), status: 'making', where: 'Tại quầy',     items: [it(1, 'caramel', 'Grande', ['Ít ngọt', 'Sữa đậu nành']), it(1, 'croissant', '', ['Hâm nóng'])] },

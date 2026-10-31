@@ -22,11 +22,19 @@
     <div id="kds" class="kds-bg rounded-[1.7rem] overflow-hidden flex flex-col h-[860px] min-h-[640px]">
 
       <!-- hàng 1: thương hiệu + hành động -->
-      <div class="bg-sb-dark px-5 py-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-white/10">
-        <a id="kdsHome" href="index.html" class="flex items-center gap-3 mr-auto" title="Về trang chủ" aria-label="Starbucks – về trang chủ">
+      <div class="bg-sb-dark px-5 py-3 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-white/10">
+        <a id="kdsHome" href="index.html" class="flex items-center gap-3" title="Về trang chủ" aria-label="Starbucks – về trang chủ">
           <span id="kdsLogo" class="bg-white rounded-full p-0.5"></span>
-          <span class="leading-tight"><span class="block font-extrabold text-lg">Barista Station</span><span class="block text-xs text-white/70">Starbucks Nguyễn Huệ · Q.1, TP.HCM</span></span>
+          <span class="leading-tight"><span class="block font-extrabold text-lg">Barista Station</span><span class="block text-[11px] text-sb-neon font-bold uppercase tracking-wider">KDS · Đồng bộ địa điểm theo App</span></span>
         </a>
+        <button id="btnStore" class="mr-auto px-3.5 py-2 rounded-xl bg-sb-green/35 ring-1 ring-sb-neon/60 hover:bg-sb-green/55 text-left transition flex items-center gap-2">
+          <span class="text-base leading-none">📍</span>
+          <span class="leading-tight">
+            <span class="block text-[10px] uppercase tracking-wider text-sb-neon font-extrabold">Chi nhánh đang hiển thị</span>
+            <span id="kdsStoreName" class="block text-xs sm:text-sm font-extrabold text-white">Starbucks Nguyễn Huệ · Q.1, TP.HCM</span>
+          </span>
+          <span class="text-xs text-white/70 ml-1">▾</span>
+        </button>
         <button id="btnWalk" class="px-4 py-2.5 rounded-xl bg-amber-400 text-black text-sm font-extrabold hover:brightness-110">＋ Đơn tại quầy</button>
         <button id="btnStock" class="px-4 py-2.5 rounded-xl bg-white/10 ring-1 ring-white/25 text-sm font-extrabold hover:bg-white/20 flex items-center gap-2">📦 Tồn kho <b id="stockBadge" class="hidden min-w-[22px] h-[22px] px-1.5 rounded-full bg-red-600 text-white text-xs grid place-items-center"></b></button>
         <button id="btnLoad" class="px-4 py-2.5 rounded-xl text-sm font-extrabold flex items-center gap-2"></button>
@@ -112,6 +120,7 @@ const fresh = new Set();           // ticket mới từ App → làm nổi bật
 function save(fn) { ST = SB.state.mutate(fn); mute(); }
 
 /* ---------- helpers ---------- */
+const curStore = () => SB.store(ST);
 const secs = t => Math.max(0, Math.floor((Date.now() - t.start) / 1000));
 const tone = s => s < 240 ? 'g' : s < 600 ? 'y' : 'r';
 const fmt = s => String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
@@ -145,7 +154,7 @@ function ticketHTML(t) {
             ${fresh.has(t.id) ? '<span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-white text-black">MỚI</span>' : ''}
           </div>
           <p class="mt-1 text-lg font-extrabold leading-tight truncate">👤 ${esc(t.name)}</p>
-          <p class="text-xs text-white/65 font-semibold">${isApp ? '⏰' : '📍'} ${esc(t.where)}</p>
+          <p class="text-xs text-white/65 font-semibold">📍 ${esc(curStore().short)} · ${isApp ? '⏰' : '🏪'} ${esc(t.where)}</p>
         </div>
         <span data-timer="${t.id}" class="mono text-xl font-extrabold px-3 py-2 rounded-xl shrink-0 ${k.chip}">⏱ ${fmt(s)}</span>
       </div>
@@ -170,13 +179,15 @@ function render() {
   document.getElementById('cntWalk').textContent = w.length;
   document.getElementById('cntApp').textContent = a.length;
   const avg = l => l.length ? fmt(Math.round(l.reduce((s, t) => s + secs(t), 0) / l.length)) : '--:--';
-  document.getElementById('subWalk').textContent = 'Chờ trung bình ' + avg(w);
-  document.getElementById('subApp').textContent = 'Chờ trung bình ' + avg(a) + ' · tên khách hiển thị trên mỗi đơn';
+  document.getElementById('subWalk').textContent = 'Chờ trung bình ' + avg(w) + ' · ' + curStore().short;
+  document.getElementById('subApp').textContent = 'Chờ trung bình ' + avg(a) + ' · ' + curStore().short;
   renderBar();
 }
 
 function renderBar() {
   const L = LV[ST.load], n = ST.tickets.length;
+  const sn = document.getElementById('kdsStoreName');
+  if (sn) sn.textContent = curStore().name;
   const avgAll = n ? fmt(Math.round(ST.tickets.reduce((s, t) => s + secs(t), 0) / n)) : '--:--';
   const late = ST.tickets.filter(t => secs(t) >= 600).length;
   document.getElementById('stats').innerHTML = [
@@ -213,6 +224,27 @@ function evaluateLoad() {
 }
 
 /* ---------- modal ---------- */
+function storeKdsModal() {
+  const curId = curStore().id;
+  SB.modal({
+    dark: true, icon: '📍', title: 'Chi nhánh KDS (đồng bộ theo điện thoại)',
+    html: `<p class="text-white/75 text-sm mb-3">Màn hình KDS luôn hiển thị theo địa điểm được chọn trên App điện thoại. Bạn cũng có thể đổi trực tiếp tại đây:</p>
+    <div class="space-y-2">${SB.STORES.map(s => {
+      const on = s.id === curId;
+      return `<button data-kstore="${s.id}" class="w-full text-left p-3.5 rounded-xl border-2 ${on ? 'border-sb-neon bg-sb-green/35' : 'border-white/10 bg-white/5 hover:bg-white/10'} flex items-center justify-between gap-3 transition">
+        <span><b class="text-white">${esc(s.name)}</b><br><span class="text-xs text-white/60">Khoảng cách: ${esc(s.dist)}</span></span>
+        <span class="text-xs font-extrabold px-2.5 py-1 rounded-full ${on ? 'bg-sb-neon text-sb-dark' : 'bg-white/10 text-white/70'}">${on ? '✓ Đang hiển thị' : 'Chọn'}</span>
+      </button>`;
+    }).join('')}</div>`,
+    onOpen: el => el.querySelectorAll('[data-kstore]').forEach(b => b.addEventListener('click', () => {
+      const id = b.dataset.kstore;
+      save(st => { st.store = id; });
+      SB.closeModal(); render();
+      SB.toast('📍 Đã chuyển KDS & App sang: ' + curStore().name, 'ok');
+    }))
+  });
+}
+
 function ticketModal(id) {
   const t = ST.tickets.find(x => x.id === id); if (!t) return;
   const s = secs(t), k = tone(s), isApp = t.src === 'app';
@@ -228,7 +260,8 @@ function ticketModal(id) {
     <ul class="mt-2 space-y-2">${t.items.map(i => `<li class="p-3 rounded-xl bg-white/10"><b>${i.q}× ${esc(i.n)}</b> <span class="text-white/60">${esc(i.s || '')}</span>${i.m.length ? `<div class="mt-1.5 flex flex-wrap gap-1.5">${i.m.map(m => `<span class="text-xs px-2 py-0.5 rounded-md bg-sb-green text-white">${esc(m)}</span>`).join('')}</div>` : '<p class="text-xs text-white/50 mt-1">Không tùy chỉnh</p>'}</li>`).join('')}</ul>
     <div class="mt-4 text-sm text-white/80 space-y-1">
       <p>👤 Khách hàng: <b>${esc(t.name)}</b></p>
-      <p>${isApp ? '⏰' : '📍'} ${esc(t.where)}</p>
+      <p>📍 Chi nhánh: <b>${esc(curStore().name)}</b></p>
+      <p>${isApp ? '⏰' : '🏪'} ${esc(t.where)}</p>
       ${isApp ? `<p>⭐ Thành viên Rewards · Sao ghi sổ sau khi hoàn thành (exactly-once)</p>${t.total ? `<p>💳 Đã thanh toán: <b>${SB.money(t.total)}</b></p>` : ''}` : '<p>👤 Khách đang đứng chờ tại quầy – ưu tiên làm nhanh</p>'}
     </div>`,
     actions: [
@@ -240,8 +273,8 @@ function ticketModal(id) {
 
 function stockModal() {
   SB.modal({
-    dark: true, wide: true, icon: '📦', title: 'Tồn kho nguyên liệu · Starbucks Nguyễn Huệ',
-    html: `<p class="text-white/70">Đánh dấu <b>hết nguyên liệu</b> → mọi món dùng nguyên liệu đó bị khóa trên App trong &lt; 5 giây, kèm thẻ cảnh báo đỏ cho khách.</p>
+    dark: true, wide: true, icon: '📦', title: 'Tồn kho nguyên liệu · ' + curStore().name,
+    html: `<p class="text-white/70">Đánh dấu <b>hết nguyên liệu</b> → mọi món dùng nguyên liệu đó bị khóa trên App tại <b>${esc(curStore().short)}</b> trong &lt; 5 giây, kèm thẻ cảnh báo đỏ cho khách.</p>
     <div id="stk" class="mt-3 grid sm:grid-cols-2 gap-2"></div>`,
     actions: [{ label: 'Xem trên App', href: 'customer-app.html' }, { label: 'Xong', primary: true }],
     onOpen: el => {
@@ -270,7 +303,7 @@ function stockModal() {
 function loadModal() {
   const logs = ST.logs;
   SB.modal({
-    dark: true, wide: true, icon: '🚦', title: 'Kiểm soát tải trọng cửa hàng',
+    dark: true, wide: true, icon: '🚦', title: 'Kiểm soát tải trọng · ' + curStore().name,
     html: `
     <div class="grid sm:grid-cols-3 gap-2 text-center">
       <div class="rounded-xl bg-white/10 p-3"><p class="mono text-xl font-extrabold">${ST.tickets.length}</p><p class="text-[11px] text-white/60">Đơn đang mở (Walk-in + App)</p></div>
@@ -385,6 +418,7 @@ document.addEventListener('click', e => {
   const s = e.target.closest('[data-stat]'); if (s) statModal(s.dataset.stat);
 });
 document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-t]')) { e.preventDefault(); ticketModal(e.target.dataset.t); } });
+document.getElementById('btnStore').addEventListener('click', storeKdsModal);
 document.getElementById('btnLoad').addEventListener('click', loadModal);
 document.getElementById('btnStock').addEventListener('click', stockModal);
 document.getElementById('btnWalk').addEventListener('click', walkModal);
@@ -398,11 +432,17 @@ document.getElementById('btnLegend').addEventListener('click', () => SB.modal({
 /* ---------- đồng bộ từ App ---------- */
 function onExternal() {
   const before = new Set(ST.tickets.map(t => t.id));
+  const prevStore = curStore().id;
   ST = SB.state.get();
+  if (curStore().id !== prevStore) {
+    const bs = document.getElementById('btnStore');
+    if (bs) { bs.classList.remove('sb-flash'); void bs.offsetWidth; bs.classList.add('sb-flash'); }
+    SB.toast(`📍 Màn hình KDS đã chuyển sang: ${curStore().name}`, 'ok');
+  }
   const added = ST.tickets.filter(t => !before.has(t.id) && t.src === 'app');
   added.forEach(t => {
     fresh.add(t.id); setTimeout(() => { fresh.delete(t.id); render(); }, 8000);
-    SB.toast(`📱 Đơn mới #${t.id} từ App · ${t.name}`, 'ok'); beep();
+    SB.toast(`📱 Đơn mới #${t.id} từ App · ${t.name} (${curStore().short})`, 'ok'); beep();
   });
   render();
 }

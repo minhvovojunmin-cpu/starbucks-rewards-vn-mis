@@ -17,7 +17,7 @@
   <aside class="embed-hide space-y-5 order-2 lg:order-1">
     <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm">
       <h2 class="font-extrabold text-sb-dark">🎛️ Điều khiển demo</h2>
-      <p class="text-xs text-slate-500 mt-1">Áp dụng cho chi nhánh Nguyễn Huệ (kết nối KDS). Đổi ở đây hoặc trên màn KDS đều đồng bộ.</p>
+      <p class="text-xs text-slate-500 mt-1">Đang kết nối KDS tại: <b id="ctl-store" class="text-sb-green">Nguyễn Huệ, Q.1</b>. Chọn địa điểm trên điện thoại sẽ đổi ngay địa điểm hiển thị trên màn hình KDS.</p>
       <p class="mt-4 text-xs font-bold uppercase tracking-widest text-slate-400">Mức tải trọng</p>
       <div id="ctl-load" class="mt-2 grid grid-cols-2 gap-2"></div>
       <button id="ctl-auto" class="mt-2 w-full px-3 py-2 rounded-xl text-sm font-bold"></button>
@@ -55,7 +55,7 @@
           <a id="appLogo" href="index.html" aria-label="Starbucks – về trang chủ" title="Về trang chủ" class="bg-white rounded-full p-0.5"></a>
           <div class="flex-1 min-w-0">
             <h1 id="appTitle" class="font-extrabold leading-tight"></h1>
-            <button data-a="stores" class="text-[11px] text-white/85 truncate max-w-full text-left underline decoration-white/40">📍 <span id="storeShort"></span> ▾</button>
+            <button data-a="stores" class="mt-0.5 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/15 hover:bg-white/25 text-[11px] font-bold text-white truncate max-w-full text-left transition">📍 <span id="storeShort"></span> ▾</button>
           </div>
           <button data-a="profile" class="text-right leading-tight" aria-label="Hồ sơ thành viên">
             <span class="block text-[10px] text-white/70">Xin chào</span>
@@ -123,13 +123,7 @@ const LEVELS = [
   { label: 'Quá tải',     wait: 25,   staff: '3/4', counters: '2/4', msg: 'Cửa hàng đang rất đông. Thời gian nhận món dự kiến: 25 phút nữa', box: 'bg-orange-100 border-orange-600 text-orange-950', ico: 'bg-orange-600' },
   { label: 'Tạm dừng',    wait: null, staff: '2/4', counters: '1/4', msg: 'Cửa hàng tạm ngưng nhận đơn di động. Vui lòng thử lại sau ít phút', box: 'bg-red-100 border-red-600 text-red-950', ico: 'bg-red-600' }
 ];
-const STORES = [
-  { id: 'X',  name: 'Starbucks Nguyễn Huệ · Q.1, TP.HCM',     short: 'Nguyễn Huệ', dist: '350 m', live: true },
-  { id: 'NW', name: 'Starbucks New World · Q.1, TP.HCM',      short: 'New World',  dist: '850 m', load: 0 },
-  { id: 'LM', name: 'Starbucks Landmark 81 · Bình Thạnh',     short: 'Landmark 81', dist: '1,2 km', load: 0 },
-  { id: 'HN', name: 'Starbucks Nhà Thờ · Hoàn Kiếm, Hà Nội',  short: 'Nhà Thờ',    dist: 'Hà Nội', load: 1 },
-  { id: 'DN', name: 'Starbucks Bà Nà Hills · Đà Nẵng',        short: 'Bà Nà Hills', dist: 'Đà Nẵng', load: 0 }
-];
+const STORES = SB.STORES;
 const PAYS = [
   { id: 'card', name: 'Thẻ Starbucks', sub: 'Số dư 250.000đ', mult: 2, ico: '💳' },
   { id: 'momo', name: 'Ví MoMo',       sub: 'Đã liên kết',     mult: 1, ico: '🟣' },
@@ -138,13 +132,13 @@ const PAYS = [
 const HEATABLE = ['croissant', 'sandwich', 'muffin'];
 const MY_KEY = 'sbux_my_orders_v2';
 
-const S = { store: 0, tab: 'menu', cat: 'all', cart: [], pickup: 0, pay: 'card', offer: true, countdown: 10, demo: SB.state.get(), my: [], seen: {} };
+const S = { tab: 'menu', cat: 'all', cart: [], pickup: 0, pay: 'card', offer: true, countdown: 10, demo: SB.state.get(), my: [], seen: {} };
 try { S.my = JSON.parse(localStorage.getItem(MY_KEY) || '[]'); } catch (e) {}
 
-const store = () => STORES[S.store];
-const levelIdx = () => store().live ? S.demo.load : store().load;
+const store = () => SB.store(S.demo);
+const levelIdx = () => S.demo.load;
 const level = () => LEVELS[levelIdx()];
-const oosMap = () => store().live ? S.demo.oos : {};
+const oosMap = () => S.demo.oos || {};
 const ingName = k => SB.ING[k] ? SB.ING[k].name : k;
 
 /* lưu vào state chung mà không tự re-render */
@@ -199,7 +193,7 @@ const affectedItems = () => SB.MENU.filter(it => SB.blockedBy(it, oosMap()));
 /* ---------- render: khung ---------- */
 function renderBanner() {
   const L = level(), paused = L.wait === null, i = levelIdx();
-  const open = store().live ? S.demo.tickets.length : [3, 6, 12, 18][i];
+  const open = S.demo.tickets.length;
   document.getElementById('banner').innerHTML = `
   <button data-a="waitinfo" class="w-full text-left rounded-2xl border-2 ${L.box} p-3 shadow-sm hover:shadow-md transition">
     <div class="flex items-center gap-3">
@@ -209,7 +203,7 @@ function renderBanner() {
       </div>
       <div class="flex-1 min-w-0">
         <p class="text-[13px] font-extrabold leading-snug">${L.msg}</p>
-        <p class="mt-0.5 text-[11px] opacity-80">${open} đơn đang mở · làm mới sau <b id="cd">${S.countdown}</b>s · Nhấn xem chi tiết</p>
+        <p class="mt-0.5 text-[11px] opacity-80">${open} đơn đang mở tại ${store().short} · làm mới sau <b id="cd">${S.countdown}</b>s · Nhấn xem chi tiết</p>
       </div>
     </div>
   </button>`;
@@ -219,6 +213,8 @@ function renderHead() {
   document.getElementById('appTitle').textContent = { menu: 'Thực đơn', cart: 'Giỏ hàng & Thanh toán', orders: 'Đơn của tôi' }[S.tab];
   document.getElementById('storeShort').textContent = store().short;
   document.getElementById('hiName').textContent = S.demo.customer || 'Khách';
+  const cs = document.getElementById('ctl-store');
+  if (cs) cs.textContent = store().name;
 }
 
 function activeOrders() {
@@ -305,6 +301,16 @@ function renderCart() {
   }
   const t = totals(), opts = pickupOpts(), paused = level().wait === null;
   let h = '';
+
+  h += section('Chi nhánh nhận món (đồng bộ KDS)', `
+    <button data-a="stores" class="w-full text-left bg-white rounded-2xl border-2 border-slate-200 hover:border-sb-green p-3 flex items-center gap-3 transition">
+      <span class="w-10 h-10 rounded-xl bg-sb-pale text-sb-green grid place-items-center text-xl shrink-0">📍</span>
+      <span class="flex-1 min-w-0">
+        <span class="block text-sm font-extrabold text-sb-dark truncate">${SB.esc(store().name)}</span>
+        <span class="block text-[11px] text-sb-green font-semibold">Đang hiển thị trên màn hình Barista KDS · Nhấn để đổi</span>
+      </span>
+      <span class="text-xs font-extrabold text-sb-green bg-sb-pale px-2.5 py-1 rounded-full shrink-0">Đổi ▾</span>
+    </button>`);
 
   h += section('Khách hàng', `
     <label class="block bg-white rounded-2xl border-2 border-slate-200 p-3 focus-within:border-sb-green">
@@ -457,7 +463,7 @@ function openItem(id) {
 function oosModal(id) {
   const it = SB.item(id), bk = SB.blockedBy(it, oosMap()) || (it.ing || [])[0];
   const alts = SB.MENU.filter(m => m.cat === it.cat && m.id !== id && !SB.blockedBy(m, oosMap())).slice(0, 3);
-  const other = STORES.filter(s => !s.live && s.load < 3)[0];
+  const other = STORES.find(s => s.id !== store().id) || STORES[0];
   SB.modal({
     icon: '⚠️', title: `${it.name} tạm hết`,
     html: `
@@ -465,12 +471,12 @@ function oosModal(id) {
       Nguyên liệu <b>${ingName(bk)}</b> đang tạm hết tại <b>${store().short}</b>. Barista vừa cập nhật trên màn hình KDS.</div>
     <p class="mt-4 font-bold text-sb-dark">Gợi ý thay thế tại chi nhánh này</p>
     <div class="mt-2 space-y-2">${alts.map(a => `<button data-alt="${a.id}" class="w-full text-left flex items-center gap-3 p-3 rounded-2xl bg-sb-pale hover:bg-sb-light border border-sb-light"><span class="text-2xl">${a.ico}</span><span class="flex-1"><b>${a.name}</b><br><span class="text-xs text-slate-500">Còn hàng · ${SB.money(a.price)}</span></span><span class="text-sb-green font-bold text-sm">Chọn</span></button>`).join('') || '<p class="text-slate-500">Hiện chưa có món thay thế cùng nhóm.</p>'}</div>
-    ${other ? `<p class="mt-4 font-bold text-sb-dark">Chi nhánh khác còn món này</p>
-    <div class="mt-2 p-3 rounded-2xl border-2 border-slate-200 flex items-center gap-3"><span class="text-xl">📍</span><span class="flex-1"><b>${other.short}</b> · ${other.dist}<br><span class="text-xs text-slate-500">Chờ ~${LEVELS[other.load].wait} phút · đủ nguyên liệu</span></span></div>` : ''}`,
+    ${other ? `<p class="mt-4 font-bold text-sb-dark">Đổi địa điểm nhận món (đồng bộ màn hình KDS)</p>
+    <div class="mt-2 p-3 rounded-2xl border-2 border-slate-200 flex items-center gap-3"><span class="text-xl">📍</span><span class="flex-1"><b>${other.name}</b><br><span class="text-xs text-slate-500">Khoảng cách: ${other.dist} · KDS sẽ chuyển sang chi nhánh này</span></span></div>` : ''}`,
     actions: [
       ...(S.cart.some(l => l.id === id) ? [{ label: 'Xóa khỏi giỏ', onClick: () => { S.cart = S.cart.filter(l => l.id !== id); renderAll(true); SB.toast('Đã xóa ' + it.name); } }] : []),
       { label: '🔔 Báo khi có lại', onClick: () => SB.toast('Sẽ nhắn bạn khi ' + it.name + ' có lại', 'ok') },
-      ...(other ? [{ label: 'Đổi sang ' + other.short, primary: true, onClick: () => { S.store = STORES.indexOf(other); S.pickup = 0; renderAll(true); SB.toast('Đã chọn ' + other.name); } }] : [])
+      ...(other ? [{ label: 'Đổi sang ' + other.short, primary: true, onClick: () => { save(st => { st.store = other.id; }); S.pickup = 0; renderAll(true); SB.toast('📍 Đã chuyển App & KDS sang ' + other.name, 'ok'); } }] : [])
     ],
     onOpen: el => el.querySelectorAll('[data-alt]').forEach(b => b.addEventListener('click', () => { SB.closeModal(); openItem(b.dataset.alt); }))
   });
@@ -490,7 +496,7 @@ function oosListModal() {
 
 function waitInfo() {
   const L = level(), i = levelIdx();
-  const open = store().live ? S.demo.tickets.length : [3, 6, 12, 18][i];
+  const open = S.demo.tickets.length;
   SB.modal({
     icon: '⏱️', title: 'Thời gian chờ động',
     html: `
@@ -511,18 +517,24 @@ function waitInfo() {
 }
 
 function storesModal() {
+  const curId = store().id;
+  const L = level();
+  const oos = Object.keys(S.demo.oos || {}).length;
   SB.modal({
-    icon: '📍', title: 'Chọn chi nhánh nhận món',
-    html: `<div class="space-y-2">${STORES.map((s, i) => {
-      const L = LEVELS[s.live ? S.demo.load : s.load];
-      const oos = s.live ? Object.keys(S.demo.oos).length : 0;
-      return `<button data-store="${i}" class="st w-full text-left p-3.5 rounded-2xl border-2 ${i === S.store ? 'border-sb-green bg-sb-pale' : 'border-slate-200'} hover:bg-sb-pale flex items-center gap-3">
+    icon: '📍', title: 'Chọn địa điểm nhận món (đồng bộ KDS)',
+    html: `<p class="text-xs text-slate-500 mb-3">Chọn chi nhánh bất kỳ bên dưới — màn hình Barista KDS sẽ tự động chuyển sang đúng chi nhánh bạn chọn.</p>
+    <div class="space-y-2">${STORES.map(s => {
+      const active = s.id === curId;
+      return `<button data-store="${s.id}" class="st w-full text-left p-3.5 rounded-2xl border-2 ${active ? 'border-sb-green bg-sb-pale' : 'border-slate-200'} hover:bg-sb-pale flex items-center gap-3 transition">
         <span class="w-3 h-3 rounded-full ${L.ico}"></span>
-        <span class="flex-1"><b class="text-sb-dark">${s.name}</b>${s.live ? ' <span class="text-[10px] font-extrabold bg-sb-green text-white rounded-full px-2 py-0.5">KDS LIVE</span>' : ''}<br><span class="text-xs text-slate-500">${s.dist} · ${L.wait ? 'Chờ ~' + L.wait + ' phút' : 'Tạm ngưng nhận đơn'}${oos ? ' · ' + oos + ' nguyên liệu hết' : ''}</span></span>
-        ${i === S.store ? '<span class="text-sb-green font-bold">✓</span>' : ''}</button>`;
+        <span class="flex-1"><b class="text-sb-dark">${s.name}</b> <span class="text-[10px] font-extrabold ${active ? 'bg-sb-green text-white' : 'bg-slate-200 text-slate-700'} rounded-full px-2 py-0.5">${active ? 'ĐANG CHỌN · KDS LIVE' : 'KẾT NỐI KDS'}</span><br><span class="text-xs text-slate-500">${s.dist} · ${L.wait ? 'Chờ ~' + L.wait + ' phút' : 'Tạm ngưng nhận đơn'}${oos ? ' · ' + oos + ' nguyên liệu hết' : ''}</span></span>
+        ${active ? '<span class="text-sb-green font-bold">✓</span>' : ''}</button>`;
     }).join('')}</div>`,
     onOpen: el => el.querySelectorAll('.st').forEach(b => b.addEventListener('click', () => {
-      S.store = +b.dataset.store; S.pickup = 0; SB.closeModal(); renderAll(true); SB.toast('Đã chọn ' + store().name);
+      const id = b.dataset.store;
+      save(st => { st.store = id; });
+      S.pickup = 0; SB.closeModal(); renderAll(true);
+      SB.toast('📍 Đã chọn ' + store().name + ' (đã đồng bộ sang KDS)', 'ok');
     }))
   });
 }
@@ -575,33 +587,32 @@ function placeOrder() {
   const t = totals(), opts = pickupOpts();
   if (t.blocked.length) { renderAll(true); SB.toast('Có món vừa hết nguyên liệu – vui lòng xóa khỏi giỏ', 'warn'); return; }
   if (!opts.length || !t.ok.length) return;
-  const live = store().live;
+  const curStore = store();
   const items = t.ok.map(l => ({ q: l.q, id: l.id, n: SB.item(l.id).name, s: SB.item(l.id).drink ? l.size : '', m: lineMods(l) }));
   const where = opts[S.pickup].where;
   let id = 'M-' + fresh.seq.M, lvlMsg = null;
   save(st => {
     id = 'M-' + st.seq.M; st.seq.M++;
     st.customer = name;
-    if (live) {
-      st.tickets.push({ id, src: 'app', name, start: Date.now(), status: 'new', where, items, total: t.total });
-      /* tự động nâng mức kiểm soát nếu đơn tăng (chế độ tự động) */
-      if (st.mode === 'auto') {
-        const r = st.tickets.length / 12, lv = r < 0.5 ? 0 : r < 0.8 ? 1 : r < 1.1 ? 2 : 3;
-        if (lv !== st.load) {
-          st.logs = [{ at: new Date().toISOString(), level: lv, actor: 'Tự động', reason: `Đơn app ${id} làm số đơn mở = ${st.tickets.length}/12`, open: st.tickets.length, counters: LEVELS[lv].counters, rule: 'LOAD-RULE v1.4' }].concat(st.logs).slice(0, 20);
-          st.load = lv; lvlMsg = lv;
-        }
+    st.tickets.push({ id, src: 'app', name, start: Date.now(), status: 'new', where, store: curStore.short, storeName: curStore.name, items, total: t.total });
+    /* tự động nâng mức kiểm soát nếu đơn tăng (chế độ tự động) */
+    if (st.mode === 'auto') {
+      const r = st.tickets.length / 12, lv = r < 0.5 ? 0 : r < 0.8 ? 1 : r < 1.1 ? 2 : 3;
+      if (lv !== st.load) {
+        st.logs = [{ at: new Date().toISOString(), level: lv, actor: 'Tự động', reason: `Đơn app ${id} làm số đơn mở = ${st.tickets.length}/12`, open: st.tickets.length, counters: LEVELS[lv].counters, rule: 'LOAD-RULE v1.4' }].concat(st.logs).slice(0, 20);
+        st.load = lv; lvlMsg = lv;
       }
     }
   });
-  S.my.push({ id, name, items, total: t.total, pickup: where, time: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }), storeShort: store().short, live });
+  S.my.push({ id, name, items, total: t.total, pickup: where, time: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }), storeShort: curStore.short, live: true });
   try { localStorage.setItem(MY_KEY, JSON.stringify(S.my.slice(-12))); } catch (e) {}
-  S.cart = []; S.tab = 'orders'; S.seen[id] = live ? 'new' : 'offline';
+  S.cart = []; S.tab = 'orders'; S.seen[id] = 'new';
   renderAll();
   SB.modal({
     icon: '✅', title: `Đặt hàng thành công · #${id}`,
-    html: `<p>${live ? `Đơn của <b>${SB.esc(name)}</b> đã xuất hiện ở cột <b>ĐƠN APP</b> trên màn hình Barista tại <b>${store().short}</b>.` : `Đơn đã gửi tới <b>${store().short}</b>. (Chi nhánh này không nối KDS trong bản demo.)`}</p>
+    html: `<p>Đơn của <b>${SB.esc(name)}</b> đã xuất hiện ở cột <b>ĐƠN APP</b> trên màn hình Barista tại <b>${SB.esc(curStore.name)}</b>.</p>
     <div class="mt-3 rounded-2xl bg-sb-pale p-4 space-y-1.5">
+      <div class="flex justify-between"><span class="text-slate-500">Địa điểm KDS</span><b>${SB.esc(curStore.short)}</b></div>
       <div class="flex justify-between"><span class="text-slate-500">Nhận món</span><b>${where}</b></div>
       <div class="flex justify-between"><span class="text-slate-500">Tổng</span><b>${SB.money(t.total)}</b></div>
       <div class="flex justify-between"><span class="text-slate-500">Sao (chờ ghi sổ)</span><b class="text-sb-green">+${t.stars} ⭐</b></div></div>
