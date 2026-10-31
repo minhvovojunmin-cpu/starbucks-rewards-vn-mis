@@ -39,8 +39,8 @@
       <div role="button" tabindex="0" data-info="live" class="clickable glass rounded-3xl p-6 text-white">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-xs uppercase tracking-widest text-white/60">Cửa hàng · Nguyễn Huệ, Q.1</p>
-            <p class="text-xl font-extrabold mt-1">Tải trọng hiện tại</p>
+            <p id="homeStore" class="text-xs uppercase tracking-widest text-sb-neon font-bold">📍 Cửa hàng · Nguyễn Huệ, Q.1</p>
+            <p class="text-xl font-extrabold mt-1">Tải trọng hiện tại (Đồng bộ App ⇄ KDS)</p>
           </div>
           <span class="px-3 py-1 rounded-full bg-amber-400 text-black text-xs font-extrabold">ĐÔNG</span>
         </div>
@@ -155,6 +155,12 @@
 <script>
 SB.header('home');
 SB.footer();
+const syncHomeStore = () => {
+  const el = document.getElementById('homeStore');
+  if (el) el.textContent = '📍 ' + SB.store(SB.state.get()).name;
+};
+syncHomeStore();
+SB.state.subscribe(syncHomeStore);
 
 const go = (label, href) => ({ label, href, primary: true });
 
