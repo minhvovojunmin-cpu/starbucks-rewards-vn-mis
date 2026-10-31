@@ -57,7 +57,13 @@
           <div class="px-5 py-3.5 flex items-center justify-between bg-amber-400 text-black">
             <div class="flex items-center gap-3">
               <span class="w-10 h-10 rounded-xl bg-black/15 grid place-items-center text-xl">🏪</span>
-              <div><h2 class="font-black tracking-wide leading-tight">ĐƠN TẠI QUẦY <span class="font-extrabold opacity-70">(WALK-IN)</span></h2><p id="subWalk" class="text-xs font-semibold opacity-70"></p></div>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h2 class="font-black tracking-wide leading-tight">ĐƠN TẠI QUẦY <span class="font-extrabold opacity-70">(WALK-IN)</span></h2>
+                  <span id="walkLiveBadge" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/80 text-amber-300 text-[10px] font-extrabold"><i class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></i> POS TỰ ĐỘNG</span>
+                </div>
+                <p id="subWalk" class="text-xs font-semibold opacity-80"></p>
+              </div>
             </div>
             <span id="cntWalk" class="mono text-3xl font-extrabold"></span>
           </div>
@@ -77,9 +83,10 @@
       </div>
 
       <div class="px-5 py-2.5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-white/60">
-        <span>Đồng bộ trực tiếp với App · Sắp xếp: đơn chờ lâu nhất lên đầu</span>
-        <div class="flex gap-2">
-          <button id="btnNew" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 font-semibold text-white">⚡ Mô phỏng đơn ngẫu nhiên</button>
+        <span>Đồng bộ trực tiếp với App · Đơn tại quầy tự động phát sinh liên tục tại cửa hàng</span>
+        <div class="flex flex-wrap gap-2">
+          <button id="btnAutoWalk" class="px-3 py-1.5 rounded-lg bg-amber-400/20 ring-1 ring-amber-400/60 hover:bg-amber-400/30 font-bold text-amber-300">🏪 Tự động đơn tại quầy: BẬT (12s)</button>
+          <button id="btnNew" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 font-semibold text-white">⚡ Thêm ngay 1 đơn</button>
           <a href="customer-app.html" target="_blank" class="embed-hide px-3 py-1.5 rounded-lg bg-sb-green hover:bg-sb-mid font-semibold text-white">Mở App ↗</a>
         </div>
       </div>
@@ -179,8 +186,8 @@ function render() {
   document.getElementById('cntWalk').textContent = w.length;
   document.getElementById('cntApp').textContent = a.length;
   const avg = l => l.length ? fmt(Math.round(l.reduce((s, t) => s + secs(t), 0) / l.length)) : '--:--';
-  document.getElementById('subWalk').textContent = 'Chờ trung bình ' + avg(w) + ' · ' + curStore().short;
-  document.getElementById('subApp').textContent = 'Chờ trung bình ' + avg(a) + ' · ' + curStore().short;
+  document.getElementById('subWalk').textContent = `Chờ TB ${avg(w)} · ${curStore().short} · ${autoWalk ? 'Đơn mới tại quầy sau ' + walkCd + 's' : 'Đang tạm dừng tự động'}`;
+  document.getElementById('subApp').textContent = 'Chờ TB ' + avg(a) + ' · ' + curStore().short;
   renderBar();
 }
 
@@ -199,7 +206,21 @@ function renderBar() {
   b.innerHTML = `<span class="w-2 h-2 rounded-full bg-current"></span> TẢI: ${L.short} <span class="text-[10px] opacity-75 font-bold">${ST.mode === 'manual' ? '· GHI ĐÈ' : '· TỰ ĐỘNG'}</span>`;
   const sb = document.getElementById('stockBadge'), cnt = Object.keys(ST.oos).length;
   sb.textContent = cnt; sb.classList.toggle('hidden', !cnt);
+  const bw = document.getElementById('btnAutoWalk'), wl = document.getElementById('walkLiveBadge');
+  if (bw) {
+    bw.textContent = autoWalk ? `🏪 Tự động đơn tại quầy: BẬT (${walkCd}s)` : '🏪 Tự động đơn tại quầy: TẮT';
+    bw.className = autoWalk
+      ? 'px-3 py-1.5 rounded-lg bg-amber-400/20 ring-1 ring-amber-400/60 hover:bg-amber-400/30 font-bold text-amber-300'
+      : 'px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 font-semibold text-white/60';
+  }
+  if (wl) {
+    wl.innerHTML = autoWalk
+      ? '<i class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></i> POS TỰ ĐỘNG'
+      : '⏸ POS TẠM DỪNG';
+  }
 }
+
+let autoWalk = true, walkCd = 12;
 
 function tick() {
   document.getElementById('clock').textContent = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
@@ -210,6 +231,19 @@ function tick() {
     const bar = document.querySelector(`[data-bar="${t.id}"]`);
     if (bar) bar.className = 'absolute left-0 top-0 bottom-0 w-2 ' + k.bar;
   });
+  if (autoWalk) {
+    walkCd--;
+    if (walkCd <= 0 || walk().length < 2) {
+      walkCd = 12;
+      spawnWalkIn();
+      return;
+    }
+    const w = walk(), avg = l => l.length ? fmt(Math.round(l.reduce((s, t) => s + secs(t), 0) / l.length)) : '--:--';
+    const sw = document.getElementById('subWalk');
+    if (sw) sw.textContent = `Chờ TB ${avg(w)} · ${curStore().short} · Đơn mới tại quầy sau ${walkCd}s`;
+    const bw = document.getElementById('btnAutoWalk');
+    if (bw) bw.textContent = `🏪 Tự động đơn tại quầy: BẬT (${walkCd}s)`;
+  }
 }
 
 /* ---------- tự động kiểm soát tải (FR-08..FR-10) ---------- */
@@ -396,19 +430,48 @@ function finish(id) {
   });
   render(); SB.toast('Hoàn thành #' + id, 'ok'); evaluateLoad();
 }
-function randomOrder() {
-  const isApp = Math.random() > .5, p = isApp ? 'M' : 'W';
+const WALK_NAMES = ['Anh Tuấn', 'Chị Thảo', 'Minh Khôi', 'Bảo Ngọc', 'Hoàng Yến', 'Thanh Tùng', 'Thùy Dương', 'Quang Huy', 'Phương Linh', 'Đình Khoa', 'Ngọc Trâm', 'Trung Hiếu', 'Khánh Vy', 'Tuấn Anh'];
+const WALK_WHERE = ['Tại quầy', 'Dùng tại chỗ', 'Mang đi'];
+const WALK_SIZES = ['Tall', 'Grande', 'Venti'];
+const WALK_MODS  = [[], ['Ít ngọt'], ['Ít đá'], ['Ít ngọt', 'Ít đá'], ['Sữa đậu nành'], ['Sữa yến mạch']];
+
+function spawnWalkIn(silent) {
   const pool = SB.MENU.filter(m => !SB.blockedBy(m, ST.oos));
-  const m = pool[Math.floor(Math.random() * pool.length)];
-  const names = ['Khánh Linh', 'Gia Bảo', 'Mai Anh', 'Tuấn Kiệt', 'Ngọc Hân', 'Việt Anh', 'Thanh Tâm', 'Hải Đăng'];
-  const name = names[Math.floor(Math.random() * names.length)];
+  if (!pool.length) return;
+  const pick = () => pool[Math.floor(Math.random() * pool.length)];
+  const m1 = pick(), m2 = Math.random() > 0.55 ? pick() : null;
+  const mkItem = m => ({
+    q: 1 + (Math.random() > 0.78 ? 1 : 0),
+    id: m.id, n: m.name,
+    s: m.drink ? WALK_SIZES[Math.floor(Math.random() * WALK_SIZES.length)] : '',
+    m: m.drink ? WALK_MODS[Math.floor(Math.random() * WALK_MODS.length)] : (m.id === 'croissant' || m.id === 'sandwich' ? ['Hâm nóng'] : [])
+  });
+  const items = [mkItem(m1)].concat(m2 && m2.id !== m1.id ? [mkItem(m2)] : []);
+  const name = WALK_NAMES[Math.floor(Math.random() * WALK_NAMES.length)];
+  const where = WALK_WHERE[Math.floor(Math.random() * WALK_WHERE.length)];
   let id;
   save(st => {
-    id = p + '-' + st.seq[p]; st.seq[p]++;
-    st.tickets.push({ id, src: isApp ? 'app' : 'walk', name, start: Date.now(), status: 'new', where: isApp ? 'Ngay khi sẵn sàng' : 'Mang đi',
-      items: [{ q: 1 + Math.floor(Math.random() * 2), id: m.id, n: m.name, s: m.drink ? 'Grande' : '', m: m.drink ? ['Ít ngọt'] : [] }] });
+    /* luân chuyển tự nhiên: nếu quầy đã có >= 4 đơn walk-in, hoàn thành đơn walk-in lâu nhất và chuyển đơn kế sang ĐANG LÀM */
+    const ws = st.tickets.filter(t => t.src === 'walk').sort((a, b) => a.start - b.start);
+    if (ws.length >= 5) {
+      const oldest = ws[0];
+      const idx = st.tickets.findIndex(x => x.id === oldest.id);
+      if (idx >= 0) { st.tickets.splice(idx, 1); st.done++; }
+    }
+    const nextNew = st.tickets.filter(t => t.src === 'walk' && t.status === 'new').sort((a, b) => a.start - b.start)[0];
+    if (nextNew) nextNew.status = 'making';
+
+    id = 'W-' + st.seq.W; st.seq.W++;
+    st.tickets.push({ id, src: 'walk', name, start: Date.now(), status: 'new', where, store: curStore().short, items });
   });
+  fresh.add(id); setTimeout(() => { fresh.delete(id); render(); }, 6000);
   render(); evaluateLoad();
+  if (!silent) SB.toast(`🏪 Đơn mới tại quầy #${id} · ${name} (${curStore().short})`);
+}
+
+function randomOrder() {
+  walkCd = 12;
+  spawnWalkIn(false);
 }
 
 document.addEventListener('click', e => {
@@ -422,7 +485,11 @@ document.getElementById('btnStore').addEventListener('click', storeKdsModal);
 document.getElementById('btnLoad').addEventListener('click', loadModal);
 document.getElementById('btnStock').addEventListener('click', stockModal);
 document.getElementById('btnWalk').addEventListener('click', walkModal);
-document.getElementById('btnNew').addEventListener('click', () => { randomOrder(); SB.toast('Có đơn mới'); });
+document.getElementById('btnAutoWalk').addEventListener('click', () => {
+  autoWalk = !autoWalk; walkCd = 12; render();
+  SB.toast(autoWalk ? '🏪 Đã BẬT tự động sinh đơn tại quầy (12s/đơn)' : '⏸ Đã TẠM DỪNG tự động sinh đơn tại quầy');
+});
+document.getElementById('btnNew').addEventListener('click', () => { randomOrder(); });
 document.getElementById('btnLegend').addEventListener('click', () => SB.modal({
   dark: true, icon: '🎨', title: 'Chú thích màu bộ đếm',
   html: `<div class="space-y-2">${Object.values(TONE).map(k => `<div class="flex items-center gap-3 p-3 rounded-xl bg-white/10"><span class="w-3 h-8 rounded ${k.bar}"></span><b>${k.name}</b></div>`).join('')}</div>
@@ -437,7 +504,9 @@ function onExternal() {
   if (curStore().id !== prevStore) {
     const bs = document.getElementById('btnStore');
     if (bs) { bs.classList.remove('sb-flash'); void bs.offsetWidth; bs.classList.add('sb-flash'); }
-    SB.toast(`📍 Màn hình KDS đã chuyển sang: ${curStore().name}`, 'ok');
+    walkCd = 12;
+    spawnWalkIn(true);
+    SB.toast(`📍 KDS chuyển sang ${curStore().name} · Đang nhận đơn tại quầy`, 'ok');
   }
   const added = ST.tickets.filter(t => !before.has(t.id) && t.src === 'app');
   added.forEach(t => {
