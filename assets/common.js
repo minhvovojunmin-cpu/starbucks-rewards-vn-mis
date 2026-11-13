@@ -21,11 +21,17 @@ tailwind.config = {
   @keyframes sbFade{from{opacity:0}to{opacity:1}}
   @keyframes sbPop{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
   @keyframes sbPulseRed{0%,100%{box-shadow:0 0 0 0 rgba(248,113,113,.55)}50%{box-shadow:0 0 0 8px rgba(248,113,113,0)}}
+  @keyframes sbPulseGold{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,.65)}50%{box-shadow:0 0 0 10px rgba(251,191,36,0)}}
   @keyframes sbFlash{0%{background-color:rgba(43,238,155,.45)}100%{background-color:transparent}}
+  @keyframes sbFlashGold{0%{background-color:rgba(251,191,36,.55)}100%{background-color:transparent}}
   .sb-fade{animation:sbFade .18s ease-out}
   .sb-pop{animation:sbPop .22s ease-out}
   .sb-pulse-red{animation:sbPulseRed 1.6s infinite}
+  .sb-pulse-gold{animation:sbPulseGold 1.5s infinite}
   .sb-flash{animation:sbFlash 2.4s ease-out}
+  .sb-flash-gold{animation:sbFlashGold 2.4s ease-out}
+  .sb-vip-card{background:linear-gradient(135deg,#0B2A22 0%,#1E3932 55%,#3b2d13 100%);border:1px solid rgba(203,162,88,.45)}
+  .sb-gold-btn{background:linear-gradient(135deg,#F59E0B 0%,#FBBF24 50%,#D97706 100%);color:#1c1917}
   .no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{scrollbar-width:none}
   .clickable{cursor:pointer;transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease}
   .clickable:hover{transform:translateY(-2px);box-shadow:0 10px 30px -10px rgba(0,112,74,.35)}
@@ -240,6 +246,13 @@ window.SB = {
   SIZES: [{ n: 'Tall', add: 0 }, { n: 'Grande', add: 6000 }, { n: 'Venti', add: 12000 }],
   MILKS: [{ n: 'Sữa tươi', ing: null, add: 0 }, { n: 'Sữa đậu nành', ing: 'soy', add: 8000 }, { n: 'Sữa yến mạch', ing: 'oat', add: 10000 }],
   SWEET: ['Bình thường', 'Ít ngọt', 'Không đường'],
+  CARS: [
+    'Mercedes C300 Trắng · 51K-888.88',
+    'Porsche Macan Đen · 30K-999.99',
+    'BMW X5 Xanh · 51L-686.86',
+    'VinFast VF9 Trắng · 51K-779.79',
+    'Lexus RX350 Đỏ · 51H-868.68'
+  ],
 
   item(id) { return SB.MENU.find(m => m.id === id); },
   /* trả về nguyên liệu hết đang chặn món (hoặc null) */
@@ -249,21 +262,24 @@ window.SB = {
      TRẠNG THÁI DÙNG CHUNG (localStorage) – App ⇄ KDS
      ====================================================================== */
   state: {
-    key: 'sbux_demo_v2',
+    key: 'sbux_demo_v3',
     _seed() {
       const ago = (m, s = 0) => Date.now() - (m * 60 + s) * 1000;
       const it = (q, id, size, mods) => ({ q, id, n: SB.item(id).name, s: size || '', m: mods || [] });
       return {
         store: 'NH', load: 1, mode: 'auto', oos: { matcha: true }, logs: [], done: 14,
-        seq: { W: 104, M: 891 }, customer: 'Võ Minh',
+        seq: { W: 104, M: 891 },
+        customer: 'Võ Minh', stars: 1280, tier: 'Reserve VIP',
+        car: 'Mercedes C300 Trắng · 51K-888.88',
+        spot: 'Làn dừng VIP trước sảnh chính',
         tickets: [
           { id: 'W-099', src: 'walk', name: 'Thu Hà',      start: ago(11, 40), status: 'making', where: 'Tại quầy',     items: [it(1, 'caramel', 'Grande', ['Ít ngọt', 'Sữa đậu nành']), it(1, 'croissant', '', ['Hâm nóng'])] },
           { id: 'W-101', src: 'walk', name: 'Quốc Bảo',    start: ago(5, 30),  status: 'new',    where: 'Dùng tại chỗ', items: [it(2, 'americano', 'Tall', ['Thêm 1 shot'])] },
           { id: 'W-102', src: 'walk', name: 'Minh Anh',    start: ago(2, 10),  status: 'new',    where: 'Mang đi',      items: [it(1, 'coldbrew', 'Grande', ['Ít đá', 'Ít ngọt']), it(1, 'latte', 'Tall', ['Sữa yến mạch'])] },
           { id: 'W-103', src: 'walk', name: 'Lan Phương',  start: ago(0, 45),  status: 'new',    where: 'Mang đi',      items: [it(1, 'peachtea', 'Grande', [])] },
-          { id: 'M-884', src: 'app',  name: 'Đức Trí',     start: ago(12, 5),  status: 'making', where: 'Hẹn lấy 11:30', items: [it(2, 'mochafrap', 'Grande', ['Không kem', 'Thêm sốt'])] },
-          { id: 'M-886', src: 'app',  name: 'Phương Thảo', start: ago(6, 20),  status: 'new',    where: 'Hẹn lấy 11:40', items: [it(1, 'caramel', 'Grande', ['Ít ngọt', 'Sữa đậu nành']), it(1, 'croissant', '', [])] },
-          { id: 'M-889', src: 'app',  name: 'Hoàng Nam',   start: ago(1, 50),  status: 'new',    where: 'Ngay khi sẵn sàng', items: [it(1, 'cbcream', 'Tall', ['Ít đá'])] }
+          { id: 'M-884', src: 'app',  name: 'Đức Trí',     start: ago(12, 5),  status: 'making', where: 'Giao tận xe · Hẹn 11:30', vip: true, stars: 940,  tier: 'Gold VIP',    car: 'Porsche Macan Đen · 30K-999.99', spot: 'Cổng chính', arrived: false, items: [it(2, 'mochafrap', 'Grande', ['Không kem', 'Thêm sốt'])] },
+          { id: 'M-886', src: 'app',  name: 'Phương Thảo', start: ago(6, 20),  status: 'new',    where: 'Giao tận xe · Hẹn 11:40', vip: true, stars: 680,  tier: 'Gold VIP',    car: 'BMW X5 Xanh · 51L-686.86',       spot: 'Sảnh bên phải', arrived: false, items: [it(1, 'caramel', 'Grande', ['Ít ngọt', 'Sữa đậu nành']), it(1, 'croissant', '', ['Hâm nóng'])] },
+          { id: 'M-890', src: 'app',  name: 'Võ Minh',     start: ago(2, 15),  status: 'making', where: 'Giao tận xe (VIP Curbside)', vip: true, stars: 1280, tier: 'Reserve VIP', car: 'Mercedes C300 Trắng · 51K-888.88', spot: 'Làn dừng VIP trước sảnh chính', arrived: false, total: 146000, items: [it(1, 'caramel', 'Grande', ['Ít ngọt']), it(1, 'croissant', '', ['Hâm nóng'])] }
         ]
       };
     },

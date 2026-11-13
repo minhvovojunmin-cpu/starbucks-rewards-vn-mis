@@ -16,16 +16,16 @@
 <div id="site-header"></div>
 
 <main id="main" class="max-w-[1500px] mx-auto px-3 sm:px-6 py-6">
-  <p class="embed-hide text-sm text-white/60 mb-3 px-1">Giao diện tablet (ngang) · Đơn đặt từ App hiện ở cột phải kèm tên khách · Mọi ticket, nút và chỉ số đều nhấn được.</p>
+  <p class="embed-hide text-sm text-white/60 mb-3 px-1">Giao diện KDS Barista · Triết lý <b>"Starbucks không bán cà phê — Chúng tôi bán trải nghiệm"</b>: Đơn khách VIP báo <b>"🚘 Tôi đến rồi!"</b> sẽ bật còi báo vàng &amp; đẩy lên đầu hàng chờ để nhân viên mang ra tận cửa xe.</p>
 
   <div id="bezel" class="rounded-[2.2rem] bg-slate-800 p-3 shadow-[0_40px_90px_-30px_rgba(0,0,0,.9)] ring-1 ring-white/10">
-    <div id="kds" class="kds-bg rounded-[1.7rem] overflow-hidden flex flex-col h-[860px] min-h-[640px]">
+    <div id="kds" class="kds-bg rounded-[1.7rem] overflow-hidden flex flex-col h-[880px] min-h-[660px]">
 
       <!-- hàng 1: thương hiệu + hành động -->
       <div class="bg-sb-dark px-5 py-3 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-white/10">
         <a id="kdsHome" href="index.html" class="flex items-center gap-3" title="Về trang chủ" aria-label="Starbucks – về trang chủ">
-          <span id="kdsLogo" class="bg-white rounded-full p-0.5"></span>
-          <span class="leading-tight"><span class="block font-extrabold text-lg">Barista Station</span><span class="block text-[11px] text-sb-neon font-bold uppercase tracking-wider">KDS · Đồng bộ địa điểm theo App</span></span>
+          <span id="kdsLogo" class="bg-white rounded-full p-0.5 ring-2 ring-amber-400/50"></span>
+          <span class="leading-tight"><span class="block font-extrabold text-lg">Barista Station · VIP Curbside</span><span class="block text-[11px] text-amber-300 font-bold uppercase tracking-wider">👑 KDS · Nhận tín hiệu "Tôi đến rồi!" giao tận xe</span></span>
         </a>
         <button id="btnStore" class="mr-auto px-3.5 py-2 rounded-xl bg-sb-green/35 ring-1 ring-sb-neon/60 hover:bg-sb-green/55 text-left transition flex items-center gap-2">
           <span class="text-base leading-none">📍</span>
@@ -35,16 +35,21 @@
           </span>
           <span class="text-xs text-white/70 ml-1">▾</span>
         </button>
-        <button id="btnWalk" class="px-4 py-2.5 rounded-xl bg-amber-400 text-black text-sm font-extrabold hover:brightness-110">＋ Đơn tại quầy</button>
-        <button id="btnStock" class="px-4 py-2.5 rounded-xl bg-white/10 ring-1 ring-white/25 text-sm font-extrabold hover:bg-white/20 flex items-center gap-2">📦 Tồn kho <b id="stockBadge" class="hidden min-w-[22px] h-[22px] px-1.5 rounded-full bg-red-600 text-white text-xs grid place-items-center"></b></button>
-        <button id="btnLoad" class="px-4 py-2.5 rounded-xl text-sm font-extrabold flex items-center gap-2"></button>
+        <button id="btnSimVip" class="px-3.5 py-2.5 rounded-xl sb-gold-btn text-sb-dark text-xs sm:text-sm font-black hover:brightness-110 shadow-md">🚘 Giả lập VIP báo "Tôi đến rồi!"</button>
+        <button id="btnWalk" class="px-3.5 py-2.5 rounded-xl bg-amber-400 text-black text-sm font-extrabold hover:brightness-110">＋ Đơn tại quầy</button>
+        <button id="btnStock" class="px-3.5 py-2.5 rounded-xl bg-white/10 ring-1 ring-white/25 text-sm font-extrabold hover:bg-white/20 flex items-center gap-2">📦 Tồn kho <b id="stockBadge" class="hidden min-w-[22px] h-[22px] px-1.5 rounded-full bg-red-600 text-white text-xs grid place-items-center"></b></button>
+        <button id="btnLoad" class="px-3.5 py-2.5 rounded-xl text-sm font-extrabold flex items-center gap-2"></button>
         <span id="clock" class="mono text-xl font-extrabold tabular-nums w-[78px] text-right">--:--</span>
       </div>
+
+      <!-- dải băng cảnh báo VIP "TÔI ĐẾN RỒI!" -->
+      <div id="vipAlertBar" class="hidden bg-gradient-to-r from-[#3b2a08] via-[#2b1f06] to-[#132a20] border-b-2 border-amber-400 px-5 py-2.5"></div>
 
       <!-- hàng 2: chỉ số + chú thích -->
       <div class="px-5 py-2.5 flex flex-wrap items-center gap-2 border-b border-white/10 bg-black/20">
         <div id="stats" class="flex flex-wrap items-center gap-2"></div>
         <button id="btnLegend" class="ml-auto flex items-center gap-3 px-3 py-1.5 rounded-xl bg-white/5 text-xs font-semibold hover:bg-white/10">
+          <span class="flex items-center gap-1"><i class="w-3 h-3 rounded-full bg-amber-300 ring-2 ring-amber-400"></i>👑 VIP đã tới sảnh</span>
           <span class="flex items-center gap-1"><i class="w-3 h-3 rounded-full bg-emerald-400"></i>&lt; 4 phút</span>
           <span class="flex items-center gap-1"><i class="w-3 h-3 rounded-full bg-amber-400"></i>4–10</span>
           <span class="flex items-center gap-1"><i class="w-3 h-3 rounded-full bg-red-500"></i>&gt; 10</span>
@@ -70,24 +75,29 @@
           <div id="colWalk" class="flex-1 overflow-y-auto no-scrollbar p-3.5 space-y-3"></div>
         </section>
 
-        <section class="min-h-0 flex flex-col rounded-3xl overflow-hidden bg-[#0d1f18] ring-2 ring-sb-neon/70" aria-label="Đơn App">
-          <div class="px-5 py-3.5 flex items-center justify-between bg-sb-green text-white">
+        <section class="min-h-0 flex flex-col rounded-3xl overflow-hidden bg-[#0d1f18] ring-2 ring-amber-300/80" aria-label="Đơn App & Đặc quyền VIP">
+          <div class="px-5 py-3.5 flex items-center justify-between bg-gradient-to-r from-[#0e2a21] via-sb-green to-[#1c4d38] text-white border-b border-amber-400/30">
             <div class="flex items-center gap-3">
-              <span class="w-10 h-10 rounded-xl bg-black/20 grid place-items-center text-xl">📱</span>
-              <div><h2 class="font-black tracking-wide leading-tight">ĐƠN APP <span class="font-extrabold opacity-80">(MOBILE ORDER)</span></h2><p id="subApp" class="text-xs font-semibold opacity-80"></p></div>
+              <span class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-300/40 grid place-items-center text-xl">👑</span>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h2 class="font-black tracking-wide leading-tight">ĐƠN ĐẶT TRƯỚC VIP <span class="font-extrabold text-amber-300">(CURBSIDE &amp; APP)</span></h2>
+                </div>
+                <p id="subApp" class="text-xs font-semibold text-amber-100/90"></p>
+              </div>
             </div>
-            <span id="cntApp" class="mono text-3xl font-extrabold text-sb-neon"></span>
+            <span id="cntApp" class="mono text-3xl font-extrabold text-amber-300"></span>
           </div>
           <div id="colApp" class="flex-1 overflow-y-auto no-scrollbar p-3.5 space-y-3"></div>
         </section>
       </div>
 
       <div class="px-5 py-2.5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-white/60">
-        <span>Đồng bộ trực tiếp với App · Đơn tại quầy tự động phát sinh liên tục tại cửa hàng</span>
+        <span>👑 Tín hiệu <b>"🚘 Tôi đến rồi!"</b> từ App đẩy đơn lên đầu cột phải · Đơn tại quầy tự động phát sinh liên tục</span>
         <div class="flex flex-wrap gap-2">
           <button id="btnAutoWalk" class="px-3 py-1.5 rounded-lg bg-amber-400/20 ring-1 ring-amber-400/60 hover:bg-amber-400/30 font-bold text-amber-300">🏪 Tự động đơn tại quầy: BẬT (12s)</button>
-          <button id="btnNew" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 font-semibold text-white">⚡ Thêm ngay 1 đơn</button>
-          <a href="customer-app.html" target="_blank" class="embed-hide px-3 py-1.5 rounded-lg bg-sb-green hover:bg-sb-mid font-semibold text-white">Mở App ↗</a>
+          <button id="btnNew" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 font-semibold text-white">⚡ Thêm ngay 1 đơn quầy</button>
+          <a href="customer-app.html" target="_blank" class="embed-hide px-3 py-1.5 rounded-lg bg-sb-green hover:bg-sb-mid font-semibold text-white">Mở App VIP ↗</a>
         </div>
       </div>
     </div>
@@ -133,7 +143,8 @@ const tone = s => s < 240 ? 'g' : s < 600 ? 'y' : 'r';
 const fmt = s => String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
 const esc = SB.esc;
 const walk = () => ST.tickets.filter(t => t.src === 'walk').sort((a, b) => a.start - b.start);
-const app = () => ST.tickets.filter(t => t.src === 'app').sort((a, b) => a.start - b.start);
+/* Ưu tiên đẩy đơn VIP đã bấm "Tôi đến rồi!" (arrived: true) lên đầu cột phải */
+const app = () => ST.tickets.filter(t => t.src === 'app').sort((a, b) => ((b.arrived ? 1 : 0) - (a.arrived ? 1 : 0)) || (a.start - b.start));
 const affected = k => SB.MENU.filter(m => (m.ing || []).includes(k));
 function autoLevel(n) { const r = n / CAPACITY; return r < 0.5 ? 0 : r < 0.8 ? 1 : r < 1.1 ? 2 : 3; }
 function addLog(st, level, actor, reason) {
@@ -143,25 +154,60 @@ function beep() {
   try { const c = new (window.AudioContext || window.webkitAudioContext)(), o = c.createOscillator(), g = c.createGain();
     o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.setValueAtTime(.12, c.currentTime); g.gain.exponentialRampToValueAtTime(.001, c.currentTime + .35); o.start(); o.stop(c.currentTime + .36); } catch (e) {}
 }
+function vipBeep() {
+  try {
+    const c = new (window.AudioContext || window.webkitAudioContext)();
+    [660, 880, 1175].forEach((freq, idx) => {
+      const o = c.createOscillator(), g = c.createGain();
+      o.connect(g); g.connect(c.destination);
+      o.frequency.value = freq;
+      const t0 = c.currentTime + idx * 0.14;
+      g.gain.setValueAtTime(0.16, t0);
+      g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.28);
+      o.start(t0); o.stop(t0 + 0.3);
+    });
+  } catch (e) {}
+}
 
 /* ---------- render ---------- */
 function itemsText(i) { return esc(i.n); }
 function ticketHTML(t) {
   const s = secs(t), k = TONE[tone(s)], isApp = t.src === 'app';
+  const isVip = isApp && (t.vip !== false);
+  const isArr = !!t.arrived;
+  const isDeliv = !!t.delivering;
+  const cardCls = isArr
+    ? 'bg-gradient-to-br from-[#2d2108] via-[#1c2b1e] to-[#14302a] ring-2 ring-amber-400 sb-pulse-gold'
+    : isVip
+    ? 'bg-gradient-to-br from-[#16352c] to-[#112720] ring-1 ring-amber-400/45 hover:ring-amber-300'
+    : 'bg-[#14302a] ring-1 ring-white/15 hover:ring-sb-neon/60';
+
   return `
-  <article role="button" tabindex="0" data-t="${t.id}" class="clickable relative rounded-2xl bg-[#14302a] ring-1 ring-white/15 overflow-hidden hover:ring-sb-neon/60 ${fresh.has(t.id) ? 'sb-flash' : ''}">
-    <span data-bar="${t.id}" class="absolute left-0 top-0 bottom-0 w-2 ${k.bar}"></span>
+  <article role="button" tabindex="0" data-t="${t.id}" class="clickable relative rounded-2xl ${cardCls} overflow-hidden ${fresh.has(t.id) ? 'sb-flash-gold' : ''}">
+    <span data-bar="${t.id}" class="absolute left-0 top-0 bottom-0 w-2 ${isArr ? 'bg-amber-400' : k.bar}"></span>
+    ${isArr ? `
+      <div class="bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 text-sb-dark px-4 py-1.5 flex items-center justify-between text-xs font-black tracking-wide">
+        <span>${isDeliv ? '🏃‍♂️ ĐANG MANG RA TẬN XE CHO KHÁCH VIP' : '🚘 KHÁCH VIP BÁO "TÔI ĐẾN RỒI!" · MANG RA XE NGAY'}</span>
+        <span class="px-2 py-0.5 rounded-full bg-sb-dark text-amber-300 text-[10px]">ƯU TIÊN SỐ 1</span>
+      </div>` : ''}
     <div class="pl-5 pr-4 py-3.5">
       <div class="flex items-start justify-between gap-3">
         <div class="min-w-0">
-          <div class="flex items-center gap-2 flex-wrap">
+          <div class="flex items-center gap-1.5 flex-wrap">
             <span class="mono text-xl font-extrabold">#${t.id}</span>
             <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full ${isApp ? 'bg-sb-green text-white' : 'bg-amber-400 text-black'}">${isApp ? '📱 APP' : '🏪 QUẦY'}</span>
-            ${t.status === 'making' ? '<span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-sb-neon text-sb-dark">ĐANG LÀM</span>' : ''}
+            ${isVip ? `<span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-amber-400/25 border border-amber-300/60 text-amber-200">👑 ${esc(t.tier || 'Reserve VIP')} · ⭐ ${(t.stars || 1280).toLocaleString('vi-VN')}</span>` : ''}
+            ${t.status === 'making' ? '<span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-sb-neon text-sb-dark">ĐANG PHA</span>' : ''}
+            ${isDeliv ? '<span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-300 text-sb-dark">ĐANG RA XE</span>' : ''}
             ${fresh.has(t.id) ? '<span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-white text-black">MỚI</span>' : ''}
           </div>
           <p class="mt-1 text-lg font-extrabold leading-tight truncate">👤 ${esc(t.name)}</p>
-          <p class="text-xs text-white/65 font-semibold">📍 ${esc(curStore().short)} · ${isApp ? '⏰' : '🏪'} ${esc(t.where)}</p>
+          <p class="text-xs text-white/70 font-semibold">📍 ${esc(curStore().short)} · ${isApp ? '🚘' : '🏪'} ${esc(t.where)}</p>
+          ${isVip && t.car ? `
+          <div class="mt-2 rounded-xl ${isArr ? 'bg-amber-400/20 border border-amber-300' : 'bg-black/25 border border-white/10'} px-3 py-1.5 text-xs">
+            <p class="font-extrabold text-amber-300 truncate">🚘 ${esc(t.car)}</p>
+            <p class="text-[11px] text-white/75 truncate">📍 ${esc(t.spot || 'Làn dừng VIP trước sảnh chính')}</p>
+          </div>` : ''}
         </div>
         <span data-timer="${t.id}" class="mono text-xl font-extrabold px-3 py-2 rounded-xl shrink-0 ${k.chip}">⏱ ${fmt(s)}</span>
       </div>
@@ -171,9 +217,55 @@ function ticketHTML(t) {
           <div class="flex-1"><p class="font-bold leading-tight">${itemsText(i)} ${i.s ? `<span class="text-white/55 font-semibold">· ${esc(i.s)}</span>` : ''}</p>
           ${i.m.length ? `<div class="mt-1 flex flex-wrap gap-1.5">${i.m.map(m => `<span class="text-[11px] font-bold px-2 py-0.5 rounded-md bg-white/15 text-white">${esc(m)}</span>`).join('')}</div>` : ''}</div></li>`).join('')}
       </ul>
-      <button data-act="${t.status === 'making' ? 'done' : 'start'}" data-id="${t.id}" class="mt-3 w-full py-2.5 rounded-xl text-sm font-extrabold transition ${t.status === 'making' ? 'bg-sb-neon text-sb-dark hover:brightness-110' : 'bg-white/15 hover:bg-white/25'}">${t.status === 'making' ? '✓ Hoàn thành' : '▶ Bắt đầu làm'}</button>
+      ${isApp ? `
+        <div class="mt-3 flex gap-2">
+          ${isDeliv ? `
+            <button data-act="done" data-id="${t.id}" class="flex-1 py-2.5 rounded-xl text-sm font-black bg-emerald-400 text-sb-dark hover:brightness-110 transition">✨ Đã giao tận cửa xe hoàn tất</button>
+          ` : isArr ? `
+            <button data-act="deliver" data-id="${t.id}" class="flex-1 py-2.5 rounded-xl text-sm font-black sb-gold-btn text-sb-dark hover:brightness-110 transition shadow-md">🏃‍♂️ Cử nhân viên mang ra xe ngay</button>
+            <button data-act="done" data-id="${t.id}" class="px-3 py-2.5 rounded-xl text-xs font-extrabold bg-emerald-500/30 border border-emerald-400/50 text-emerald-200 hover:bg-emerald-500/40 transition">✓ Giao xong</button>
+          ` : t.status === 'making' ? `
+            <button data-act="simArrive" data-id="${t.id}" class="flex-1 py-2.5 rounded-xl text-xs font-extrabold bg-amber-400/20 border border-amber-400/60 text-amber-200 hover:bg-amber-400/30 transition">🚘 Khách báo "Tôi đến rồi!"</button>
+            <button data-act="done" data-id="${t.id}" class="flex-1 py-2.5 rounded-xl text-sm font-extrabold bg-sb-neon text-sb-dark hover:brightness-110 transition">✓ Hoàn thành</button>
+          ` : `
+            <button data-act="start" data-id="${t.id}" class="flex-1 py-2.5 rounded-xl text-sm font-extrabold bg-white/15 hover:bg-white/25 transition">▶ Bắt đầu pha ưu tiên</button>
+            <button data-act="simArrive" data-id="${t.id}" class="px-3 py-2.5 rounded-xl text-xs font-extrabold bg-amber-400/20 border border-amber-400/50 text-amber-200 hover:bg-amber-400/30 transition" title="Giả lập khách bấm Tôi đến rồi">🚘 Báo tới</button>
+          `}
+        </div>
+      ` : `
+        <button data-act="${t.status === 'making' ? 'done' : 'start'}" data-id="${t.id}" class="mt-3 w-full py-2.5 rounded-xl text-sm font-extrabold transition ${t.status === 'making' ? 'bg-sb-neon text-sb-dark hover:brightness-110' : 'bg-white/15 hover:bg-white/25'}">${t.status === 'making' ? '✓ Hoàn thành' : '▶ Bắt đầu làm'}</button>
+      `}
     </div>
   </article>`;
+}
+
+function renderVipAlertBar() {
+  const bar = document.getElementById('vipAlertBar');
+  if (!bar) return;
+  const arrivedList = ST.tickets.filter(t => t.src === 'app' && t.arrived);
+  if (!arrivedList.length) {
+    bar.classList.add('hidden');
+    bar.innerHTML = '';
+    return;
+  }
+  bar.classList.remove('hidden');
+  bar.innerHTML = `<div class="flex flex-wrap items-center justify-between gap-3">
+    <div class="flex items-center gap-3 min-w-0">
+      <span class="w-10 h-10 rounded-xl sb-gold-btn text-sb-dark grid place-items-center text-xl font-black shrink-0 sb-pulse-gold">🚘</span>
+      <div class="min-w-0">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="px-2 py-0.5 rounded-full bg-amber-400 text-sb-dark text-[10px] font-black uppercase">👑 TÍN HIỆU VIP CURBSIDE (${arrivedList.length})</span>
+          <span class="text-xs sm:text-sm font-black text-amber-300 truncate">${arrivedList.map(t => `#${esc(t.id)} · ${esc(t.name)} (${esc(t.car || 'Xe VIP')})`).join('  |  ')}</span>
+        </div>
+        <p class="text-[11px] text-white/85 truncate">📍 Vị trí đón: <b>${esc(arrivedList[0].spot || 'Làn dừng VIP trước sảnh chính')}</b> · Khách đã bấm <b>"Tôi đến rồi!"</b> trên App — nhân viên mang nước ra tận xe!</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2 shrink-0">
+      ${arrivedList[0].delivering
+        ? `<button data-act="done" data-id="${arrivedList[0].id}" class="px-3.5 py-2 rounded-xl bg-emerald-400 text-sb-dark text-xs font-black hover:brightness-110">✨ Đã giao tận xe #${esc(arrivedList[0].id)}</button>`
+        : `<button data-act="deliver" data-id="${arrivedList[0].id}" class="px-3.5 py-2 rounded-xl sb-gold-btn text-sb-dark text-xs font-black hover:brightness-110">🏃‍♂️ Mang đơn #${esc(arrivedList[0].id)} ra xe ngay</button>`}
+    </div>
+  </div>`;
 }
 
 function render() {
@@ -186,8 +278,10 @@ function render() {
   document.getElementById('cntWalk').textContent = w.length;
   document.getElementById('cntApp').textContent = a.length;
   const avg = l => l.length ? fmt(Math.round(l.reduce((s, t) => s + secs(t), 0) / l.length)) : '--:--';
+  const vipArrCount = a.filter(t => t.arrived).length;
   document.getElementById('subWalk').textContent = `Chờ TB ${avg(w)} · ${curStore().short} · ${autoWalk ? 'Đơn mới tại quầy sau ' + walkCd + 's' : 'Đang tạm dừng tự động'}`;
-  document.getElementById('subApp').textContent = 'Chờ TB ' + avg(a) + ' · ' + curStore().short;
+  document.getElementById('subApp').textContent = `Chờ TB ${avg(a)} · ${curStore().short}${vipArrCount ? ` · 🚘 ${vipArrCount} khách VIP đang đợi ở xe` : ' · Ưu tiên giao tận xe VIP'}`;
+  renderVipAlertBar();
   renderBar();
 }
 
@@ -282,25 +376,37 @@ function storeKdsModal() {
 function ticketModal(id) {
   const t = ST.tickets.find(x => x.id === id); if (!t) return;
   const s = secs(t), k = tone(s), isApp = t.src === 'app';
+  const isVip = isApp && (t.vip !== false);
   SB.modal({
-    dark: true, icon: isApp ? '📱' : '🏪', title: `#${t.id} · ${esc(t.name)}`,
+    dark: true, icon: isVip ? '👑' : isApp ? '📱' : '🏪', title: `#${t.id} · ${esc(t.name)}`,
     html: `
+    ${t.arrived ? `<div class="mb-3 rounded-xl sb-gold-btn text-sb-dark p-3 font-black text-xs flex items-center justify-between">
+      <span>🚘 KHÁCH VIP ĐÃ TỚI TRƯỚC SẢNH — CẦN MANG RA XE NGAY!</span>
+      <span class="px-2 py-0.5 rounded-full bg-sb-dark text-amber-300 text-[10px]">ƯU TIÊN #1</span>
+    </div>` : ''}
     <div class="grid grid-cols-3 gap-2 text-center">
       <div class="rounded-xl bg-white/10 p-3"><p class="mono text-xl font-extrabold ${k === 'r' ? 'text-red-400' : k === 'y' ? 'text-amber-300' : 'text-emerald-400'}">${fmt(s)}</p><p class="text-[11px] text-white/60">Đã chờ</p></div>
-      <div class="rounded-xl bg-white/10 p-3"><p class="font-extrabold">${isApp ? 'App' : 'Walk-in'}</p><p class="text-[11px] text-white/60">Nguồn đơn</p></div>
-      <div class="rounded-xl bg-white/10 p-3"><p class="font-extrabold">${t.status === 'making' ? 'Đang làm' : 'Chờ làm'}</p><p class="text-[11px] text-white/60">Trạng thái</p></div>
+      <div class="rounded-xl bg-white/10 p-3"><p class="font-extrabold text-amber-300">${isVip ? '👑 Reserve VIP' : isApp ? 'App' : 'Walk-in'}</p><p class="text-[11px] text-white/60">${isVip ? (t.stars || 1280).toLocaleString('vi-VN') + ' ⭐' : 'Nguồn đơn'}</p></div>
+      <div class="rounded-xl bg-white/10 p-3"><p class="font-extrabold">${t.delivering ? 'Đang ra xe' : t.arrived ? 'Đợi ở xe' : t.status === 'making' ? 'Đang làm' : 'Chờ làm'}</p><p class="text-[11px] text-white/60">Trạng thái</p></div>
     </div>
+    ${isVip && t.car ? `
+    <div class="mt-3 rounded-xl bg-amber-400/15 border border-amber-400/50 p-3 text-sm space-y-1">
+      <p class="font-extrabold text-amber-300">🚘 Xe đón nhận món: ${esc(t.car)}</p>
+      <p class="text-xs text-white/85">📍 Vị trí đỗ: <b>${esc(t.spot || 'Làn dừng VIP trước sảnh chính')}</b></p>
+    </div>` : ''}
     <p class="mt-4 text-white/60 text-xs uppercase tracking-wider font-bold">Món &amp; tùy chỉnh</p>
     <ul class="mt-2 space-y-2">${t.items.map(i => `<li class="p-3 rounded-xl bg-white/10"><b>${i.q}× ${esc(i.n)}</b> <span class="text-white/60">${esc(i.s || '')}</span>${i.m.length ? `<div class="mt-1.5 flex flex-wrap gap-1.5">${i.m.map(m => `<span class="text-xs px-2 py-0.5 rounded-md bg-sb-green text-white">${esc(m)}</span>`).join('')}</div>` : '<p class="text-xs text-white/50 mt-1">Không tùy chỉnh</p>'}</li>`).join('')}</ul>
     <div class="mt-4 text-sm text-white/80 space-y-1">
       <p>👤 Khách hàng: <b>${esc(t.name)}</b></p>
       <p>📍 Chi nhánh: <b>${esc(curStore().name)}</b></p>
-      <p>${isApp ? '⏰' : '🏪'} ${esc(t.where)}</p>
-      ${isApp ? `<p>⭐ Thành viên Rewards · Sao ghi sổ sau khi hoàn thành (exactly-once)</p>${t.total ? `<p>💳 Đã thanh toán: <b>${SB.money(t.total)}</b></p>` : ''}` : '<p>👤 Khách đang đứng chờ tại quầy – ưu tiên làm nhanh</p>'}
+      <p>${isApp ? '🚘' : '🏪'} ${esc(t.where)}</p>
+      ${isApp ? `<p>⭐ Thành viên Reserve VIP · Sao ghi sổ sau khi giao tận xe hoàn tất (exactly-once)</p>${t.total ? `<p>💳 Đã thanh toán trước: <b>${SB.money(t.total)}</b></p>` : ''}` : '<p>👤 Khách đang đứng chờ tại quầy – ưu tiên làm nhanh</p>'}
     </div>`,
     actions: [
       { label: '⚠️ Báo hết nguyên liệu', onClick: stockModal },
-      t.status === 'making' ? { label: '✓ Hoàn thành', primary: true, onClick: () => finish(id) } : { label: '▶ Bắt đầu làm', primary: true, onClick: () => start(id) }
+      ...(isApp && !t.arrived ? [{ label: '🚘 Giả lập khách báo "Tôi đến rồi!"', onClick: () => simArrive(id) }] : []),
+      ...(isApp && t.arrived && !t.delivering ? [{ label: '🏃‍♂️ Cử nhân viên mang ra xe', primary: true, onClick: () => deliver(id) }] : []),
+      t.status === 'making' || t.arrived ? { label: isApp ? '✨ Đã giao tận xe hoàn tất' : '✓ Hoàn thành', primary: !t.arrived || t.delivering, onClick: () => finish(id) } : { label: '▶ Bắt đầu làm', primary: true, onClick: () => start(id) }
     ]
   });
 }
@@ -363,7 +469,7 @@ function loadModal() {
 function statModal(k) {
   const late = ST.tickets.filter(t => secs(t) >= 600);
   const info = {
-    open: ['📋', 'Đơn đang mở', `<p>${walk().length} đơn Walk-in và ${app().length} đơn App. Đây là đầu vào chính của chỉ số tải trọng (FR-08).</p>`],
+    open: ['📋', 'Đơn đang mở', `<p>${walk().length} đơn Walk-in và ${app().length} đơn App/VIP. Đây là đầu vào chính của chỉ số tải trọng (FR-08).</p>`],
     avg: ['⏳', 'Thời gian chờ trung bình', '<p>Tính từ lúc đơn tạo đến hiện tại. Timestamp được ghi lại để cải thiện mô hình dự báo (FR-11).</p>'],
     late: ['🔴', 'Đơn quá 10 phút', late.length ? `<p>Cần ưu tiên: ${late.map(t => '<b>#' + t.id + ' (' + esc(t.name) + ')</b>').join(', ')}.</p>` : '<p>Không có đơn nào quá 10 phút. 👍</p>'],
     done: ['✅', 'Đã hoàn thành hôm nay', `<p>${ST.done} đơn đã hoàn thành trong ca. Mỗi đơn hoàn thành kích hoạt ghi Sao một lần duy nhất (NFR-07).</p>`]
@@ -413,7 +519,7 @@ function walkModal() {
           save(st => { nid = 'W-' + st.seq.W; st.seq.W++; st.tickets.push({ id: nid, src: 'walk', name, start: Date.now(), status: 'new', where: o.where, items }); });
           SB.closeModal(); render(); evaluateLoad(); SB.toast(`Đã tạo đơn #${nid} cho ${name}`, 'ok'); return;
         }
-        const keep = el.querySelector('#wkName') === document.activeElement; draw();
+        draw();
       });
       draw();
     }
@@ -421,15 +527,72 @@ function walkModal() {
 }
 
 /* ---------- hành động ---------- */
-function start(id) { save(st => { const t = st.tickets.find(x => x.id === id); if (t) t.status = 'making'; }); render(); }
+function start(id) {
+  save(st => { const t = st.tickets.find(x => x.id === id); if (t) t.status = 'making'; });
+  render();
+  SB.toast('👨‍🍳 Bắt đầu pha chế đơn #' + id);
+}
+
+function deliver(id) {
+  let tk;
+  save(st => {
+    tk = st.tickets.find(x => x.id === id);
+    if (tk) { tk.status = 'making'; tk.arrived = true; tk.delivering = true; }
+  });
+  render();
+  if (tk) SB.toast(`🏃‍♂️ Đã cử nhân viên mang đơn #${id} ra xe ${tk.car || 'VIP'} cho ${tk.name}!`, 'ok');
+}
+
+function simArrive(id) {
+  let tk;
+  save(st => {
+    tk = id ? st.tickets.find(x => x.id === id) : st.tickets.find(x => x.src === 'app' && !x.arrived) || st.tickets.find(x => x.src === 'app');
+    if (!tk) {
+      const nid = 'M-' + st.seq.M; st.seq.M++;
+      const carObj = (SB.CARS || [])[Math.floor(Math.random() * (SB.CARS || []).length)] || { label: 'Mercedes C300 Trắng · 51K-888.88' };
+      tk = {
+        id: nid, src: 'app', name: st.customer || 'Võ Minh', vip: true,
+        stars: 1280, tier: 'Reserve VIP', car: carObj.label, spot: 'Làn dừng VIP trước sảnh chính',
+        arrived: true, arrivedAt: Date.now(), arrivedPing: 1,
+        start: Date.now() - 40000, status: 'making', where: 'Giao tận xe VIP (Curbside)',
+        store: curStore().short, storeName: curStore().name,
+        items: [{ q: 1, id: 'coldbrew', n: 'Cold Brew Kem Sữa Vani', s: 'Grande', m: ['Ít ngọt'] }, { q: 1, id: 'croissant', n: 'Bánh Sừng Bò Bơ Pháp', s: '', m: ['Hâm nóng'] }],
+        total: 135000
+      };
+      st.tickets.unshift(tk);
+    } else {
+      tk.vip = true;
+      tk.arrived = true;
+      tk.arrivedAt = Date.now();
+      tk.arrivedPing = (tk.arrivedPing || 0) + 1;
+      tk.car = tk.car || st.car || 'Mercedes C300 Trắng · 51K-888.88';
+      tk.spot = tk.spot || st.spot || 'Làn dừng VIP trước sảnh chính';
+      tk.where = 'Giao tận xe VIP (Curbside)';
+    }
+  });
+  if (tk) {
+    fresh.add(tk.id); setTimeout(() => { fresh.delete(tk.id); render(); }, 8000);
+    vipBeep();
+    render();
+    SB.toast(`👑🚘 Khách VIP ${tk.name} (#${tk.id}) báo "TÔI ĐẾN RỒI!" · Xe ${tk.car}`, 'ok');
+  }
+}
+
 function finish(id) {
+  let wasVip = false, tkName = '', tkCar = '';
   save(st => {
     const i = st.tickets.findIndex(x => x.id === id); if (i < 0) return;
+    wasVip = st.tickets[i].src === 'app';
+    tkName = st.tickets[i].name;
+    tkCar = st.tickets[i].car || '';
     st.tickets.splice(i, 1); st.done++;
     st.ready = (st.ready || []).concat(id).slice(-40);
   });
-  render(); SB.toast('Hoàn thành #' + id, 'ok'); evaluateLoad();
+  render();
+  SB.toast(wasVip ? `✨ Đã giao tận cửa xe ${tkCar} hoàn tất cho ${tkName} (#${id})` : `✓ Hoàn thành #${id}`, 'ok');
+  evaluateLoad();
 }
+
 const WALK_NAMES = ['Anh Tuấn', 'Chị Thảo', 'Minh Khôi', 'Bảo Ngọc', 'Hoàng Yến', 'Thanh Tùng', 'Thùy Dương', 'Quang Huy', 'Phương Linh', 'Đình Khoa', 'Ngọc Trâm', 'Trung Hiếu', 'Khánh Vy', 'Tuấn Anh'];
 const WALK_WHERE = ['Tại quầy', 'Dùng tại chỗ', 'Mang đi'];
 const WALK_SIZES = ['Tall', 'Grande', 'Venti'];
@@ -451,7 +614,7 @@ function spawnWalkIn(silent) {
   const where = WALK_WHERE[Math.floor(Math.random() * WALK_WHERE.length)];
   let id;
   save(st => {
-    /* luân chuyển tự nhiên: nếu quầy đã có >= 4 đơn walk-in, hoàn thành đơn walk-in lâu nhất và chuyển đơn kế sang ĐANG LÀM */
+    /* luân chuyển tự nhiên: nếu quầy đã có >= 5 đơn walk-in, hoàn thành đơn walk-in lâu nhất và chuyển đơn kế sang ĐANG LÀM */
     const ws = st.tickets.filter(t => t.src === 'walk').sort((a, b) => a.start - b.start);
     if (ws.length >= 5) {
       const oldest = ws[0];
@@ -476,12 +639,21 @@ function randomOrder() {
 
 document.addEventListener('click', e => {
   const act = e.target.closest('[data-act]');
-  if (act && !e.target.closest('#sb-modal')) { e.stopPropagation(); act.dataset.act === 'done' ? finish(act.dataset.id) : start(act.dataset.id); return; }
+  if (act && !e.target.closest('#sb-modal')) {
+    e.stopPropagation();
+    const a = act.dataset.act, id = act.dataset.id;
+    if (a === 'done') finish(id);
+    else if (a === 'deliver') deliver(id);
+    else if (a === 'simArrive') simArrive(id);
+    else start(id);
+    return;
+  }
   const t = e.target.closest('[data-t]'); if (t && !e.target.closest('#sb-modal')) { ticketModal(t.dataset.t); return; }
   const s = e.target.closest('[data-stat]'); if (s) statModal(s.dataset.stat);
 });
 document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-t]')) { e.preventDefault(); ticketModal(e.target.dataset.t); } });
 document.getElementById('btnStore').addEventListener('click', storeKdsModal);
+document.getElementById('btnSimVip').addEventListener('click', () => simArrive());
 document.getElementById('btnLoad').addEventListener('click', loadModal);
 document.getElementById('btnStock').addEventListener('click', stockModal);
 document.getElementById('btnWalk').addEventListener('click', walkModal);
@@ -491,16 +663,22 @@ document.getElementById('btnAutoWalk').addEventListener('click', () => {
 });
 document.getElementById('btnNew').addEventListener('click', () => { randomOrder(); });
 document.getElementById('btnLegend').addEventListener('click', () => SB.modal({
-  dark: true, icon: '🎨', title: 'Chú thích màu bộ đếm',
-  html: `<div class="space-y-2">${Object.values(TONE).map(k => `<div class="flex items-center gap-3 p-3 rounded-xl bg-white/10"><span class="w-3 h-8 rounded ${k.bar}"></span><b>${k.name}</b></div>`).join('')}</div>
-  <p class="mt-3 text-white/70">Làm đơn đỏ trước, rồi vàng. Đơn Walk-in luôn có khách đứng chờ; đơn App có giờ hẹn nên ưu tiên theo giờ.</p>`
+  dark: true, icon: '🎨', title: 'Chú thích màu bộ đếm & Ưu tiên VIP',
+  html: `<div class="space-y-2">
+    <div class="flex items-center gap-3 p-3 rounded-xl bg-amber-400/20 border border-amber-400"><span class="w-3 h-8 rounded bg-amber-400"></span><b>👑 Viền vàng phát sáng: Khách VIP đã bấm "Tôi đến rồi!" — ưu tiên mang ra tận xe ngay</b></div>
+    ${Object.values(TONE).map(k => `<div class="flex items-center gap-3 p-3 rounded-xl bg-white/10"><span class="w-3 h-8 rounded ${k.bar}"></span><b>${k.name}</b></div>`).join('')}
+  </div>
+  <p class="mt-3 text-white/70">Đơn khách VIP đã báo tới sảnh tự động nhảy lên đầu cột phải kèm biển số xe để Barista giao tận cửa xe.</p>`
 }));
 
 /* ---------- đồng bộ từ App ---------- */
 function onExternal() {
-  const before = new Set(ST.tickets.map(t => t.id));
+  const beforeIds = new Set(ST.tickets.map(t => t.id));
+  const beforeArrived = {};
+  ST.tickets.forEach(t => { beforeArrived[t.id] = t.arrived ? (t.arrivedPing || 1) : 0; });
   const prevStore = curStore().id;
   ST = SB.state.get();
+
   if (curStore().id !== prevStore) {
     const bs = document.getElementById('btnStore');
     if (bs) { bs.classList.remove('sb-flash'); void bs.offsetWidth; bs.classList.add('sb-flash'); }
@@ -508,11 +686,33 @@ function onExternal() {
     spawnWalkIn(true);
     SB.toast(`📍 KDS chuyển sang ${curStore().name} · Đang nhận đơn tại quầy`, 'ok');
   }
-  const added = ST.tickets.filter(t => !before.has(t.id) && t.src === 'app');
+
+  /* Phát hiện đơn mới từ App */
+  const added = ST.tickets.filter(t => !beforeIds.has(t.id) && t.src === 'app');
   added.forEach(t => {
     fresh.add(t.id); setTimeout(() => { fresh.delete(t.id); render(); }, 8000);
-    SB.toast(`📱 Đơn mới #${t.id} từ App · ${t.name} (${curStore().short})`, 'ok'); beep();
+    if (t.arrived) {
+      vipBeep();
+      SB.toast(`👑🚘 Khách VIP ${t.name} (#${t.id}) báo "TÔI ĐẾN RỒI!" · Xe ${t.car || 'VIP'}`, 'ok');
+    } else {
+      beep();
+      SB.toast(`👑 Đơn đặt trước VIP #${t.id} · ${t.name} (${t.car || curStore().short})`, 'ok');
+    }
   });
+
+  /* Phát hiện khách VIP bấm nút "🚘 Tôi đến rồi!" trên điện thoại */
+  ST.tickets.forEach(t => {
+    if (t.src === 'app' && t.arrived) {
+      const prevPing = beforeArrived[t.id] || 0;
+      const curPing = t.arrivedPing || 1;
+      if (beforeIds.has(t.id) && curPing > prevPing) {
+        fresh.add(t.id); setTimeout(() => { fresh.delete(t.id); render(); }, 8000);
+        vipBeep();
+        SB.toast(`👑🚘 KHÁCH VIP ${t.name} (#${t.id}) VỪA BẤM "TÔI ĐẾN RỒI!" · Mang ra xe ${t.car || ''}`, 'ok');
+      }
+    }
+  });
+
   render();
 }
 mute = SB.state.subscribe(onExternal);
